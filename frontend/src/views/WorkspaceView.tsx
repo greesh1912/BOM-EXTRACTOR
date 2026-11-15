@@ -195,16 +195,9 @@ export const WorkspaceView: React.FC<WorkspaceViewProps> = ({ drawingId, onBack 
     if (!drawing) return;
     const newStatus = !drawing.metadata.verified;
     try {
-      const approvedTitleBlock = newStatus && editableResult
-        ? Object.fromEntries(Object.entries(editableResult.title_block).map(([key, field]) => [
-            key, { ...field, needs_review: false, source: field.source === 'manual' ? 'manual_approved' : field.source },
-          ]))
-        : undefined;
-      await api.updateDrawing(drawingId, { verified: newStatus, ...(approvedTitleBlock ? { title_block: approvedTitleBlock } : {}) });
-      if (approvedTitleBlock && editableResult) {
-        setEditableResult({ ...editableResult, title_block: approvedTitleBlock });
-        setHasUnsavedChanges(false);
-      }
+      // Verification is a document-level status. It must not erase unresolved
+      // field review flags; those remain visible until explicitly corrected.
+      await api.updateDrawing(drawingId, { verified: newStatus });
       setDrawing({
         ...drawing,
         metadata: { ...drawing.metadata, verified: newStatus },

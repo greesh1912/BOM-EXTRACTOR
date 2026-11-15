@@ -5,6 +5,7 @@ import json
 import os
 import shutil
 import uuid
+import logging
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, List, Optional
@@ -18,6 +19,7 @@ RESULTS_DIR = STORAGE_DIR / "results"
 PREVIEWS_DIR = STORAGE_DIR / "previews"
 EXPORTS_DIR = STORAGE_DIR / "exports"
 DB_FILE = STORAGE_DIR / "db.json"
+log = logging.getLogger(__name__)
 
 
 def ensure_storage_dirs():
@@ -192,7 +194,8 @@ class StorageManager:
         # status, completeness, and exported findings do not remain stale.
         try:
             from bomx.config import DEFAULT_CONFIG
-            from bomx.models import DrawingResult, FieldValue, BomRow, RevisionRow
+            from bomx.models import DrawingResult, FieldValue, BomRow, RevisionRow, Measurement
+            from bomx.extract import normalise_title_fields, parse_mass_measurement, parse_quantity_measurement
             from bomx.validate import validate_result
             model = DrawingResult(source_file=res.get("source_file", ""),
                                   bom_columns=res.get("bom_columns", []),
@@ -203,17 +206,49 @@ class StorageManager:
                     if isinstance(v, dict) else FieldValue(str(v), 0.0))
                 for k, v in (res.get("title_block") or {}).items()
             }
-            model.bom = [BomRow(**{name: value for name, value in row.items()
-                                   if name in {"item", "part_number", "description", "quantity", "material", "mass", "remarks", "extra", "quantity_value", "mass_kg", "confidence", "structural_confidence", "bbox", "page", "flags", "mass_verified", "mass_candidate", "table", "row_index"}})
-                         for row in (res.get("bom") or [])]
+            bom_rows = []
+            for row in (res.get("bom") or []):
+                data = {name: value for name, value in row.items()
+                        if name in {"item", "part_number", "description", "quantity", "material", "mass", "remarks", "extra", "quantity_value", "mass_kg", "confidence", "structural_confidence", "bbox", "page", "flags", "mass_verified", "mass_candidate", "table", "row_index", "field_confidence", "field_bbox"}}
+                for key in ("quantity_measurement", "mass_measurement"):
+                    if isinstance(row.get(key), dict):
+                        data[key] = Measurement(**{k: v for k, v in row[key].items()
+                                                   if k in {"raw", "nominal", "unit", "canonical_value", "canonical_unit", "measurement_type", "tolerance", "confidence"}})
+                if data.get("quantity"):
+                    q, qm, qflags = parse_quantity_measurement(data["quantity"], conf=float(data.get("confidence") or 0.0))
+                    data["quantity_value"], data["quantity_measurement"] = q, qm
+                    data.setdefault("flags", []).extend(f for f in qflags if f not in data["flags"])
+                if data.get("mass"):
+                    mv, mm, mflags = parse_mass_measurement(data["mass"], conf=float(data.get("confidence") or 0.0))
+                    data["mass_kg"], data["mass_measurement"] = mv, mm
+                    data["mass_verified"] = False
+                    data.setdefault("flags", []).extend(f for f in mflags if f not in data["flags"])
+                bom_rows.append(BomRow(**data))
+            model.bom = bom_rows
             model.revisions = [RevisionRow(**{name: value for name, value in row.items()
                                               if name in {"rev", "description", "date", "approved", "extra", "confidence", "bbox", "page", "flags"}})
                                for row in (res.get("revisions") or [])]
-            res["validation"] = validate_result(model, DEFAULT_CONFIG)
-        except Exception:
-            # Content edits should still persist if a legacy result cannot be
-            # reconstructed for validation.
-            pass
+            normalise_title_fields(model.title_block, DEFAULT_CONFIG["date_order"])
+            report = validate_result(model, DEFAULT_CONFIG)
+            res["validation"] = report
+            summary = res.setdefault("summary", {})
+            summary["validation_errors"] = report["counts"]["error"]
+            summary["validation_warnings"] = report["counts"]["warning"]
+            summary["review_required"] = report["review_required"]
+            summary["title_block_completeness"] = report["completeness"]["title_block"]
+            summary["bom_completeness"] = report["completeness"]["bom"]
+            summary["review_reasons"] = [i["message"] for i in report["issues"]
+                                          if i["severity"] in ("error", "warning")]
+        except Exception as exc:
+            log.exception("Validation refresh failed for edited drawing %s", drawing_id)
+            res["validation"] = {"issues": [{"severity": "error", "category": "validation_failure",
+                                               "section": "validation", "field": None, "page": None,
+                                               "row": None, "message": f"Validation refresh failed: {exc}",
+                                               "value": None}],
+                                  "counts": {"error": 1, "warning": 0, "info": 0},
+                                  "review_required": True, "review_fields": {"bom": {}, "title_block": []},
+                                  "completeness": {"bom": None, "title_block": None}}
+            res.setdefault("summary", {})["review_required"] = True
 
         self.save_result(drawing_id, res)
         return res
