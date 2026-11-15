@@ -393,20 +393,28 @@ def _extract_page_content(pa: PageAnalysis, raw: RawPage, cfg: dict, page_no: in
                       and (title_box is None or
                            title_box[0] - pad <= w.cx <= title_box[2] + pad and
                            title_box[1] - pad <= w.cy <= title_box[3] + pad)]
+        unit_candidates = []
         for line in group_lines(unit_words):
             match = unit_rx.search(line.text)
             if match:
-                tb["units"] = FieldValue(match.group(0), round(line.conf, 3), line.bbox,
-                                          raw=line.text, source="page_text", page=page_no)
-                break
+                unit_candidates.append((match.group(0), round(line.conf, 3), line.bbox, line.text))
             for seg in split_segments(line, 2.0):
                 match = unit_rx.search(seg.text)
                 if match:
-                    tb["units"] = FieldValue(match.group(0), round(seg.conf, 3), seg.bbox,
-                                              raw=seg.text, source="page_text", page=page_no)
-                    break
-            if tb.get("units") and tb["units"].value:
-                break
+                    unit_candidates.append((match.group(0), round(seg.conf, 3), seg.bbox, seg.text))
+        if unit_candidates:
+            def unit_score(item):
+                _, conf, bbox, _ = item
+                inside = bool(title_box and title_box[0] <= bbox[0] and bbox[2] <= title_box[2] and
+                              title_box[1] <= bbox[1] and bbox[3] <= title_box[3])
+                return (1 if inside else 0, conf)
+            chosen = max(unit_candidates, key=unit_score)
+            values = {item[0].upper().replace(" ", "") for item in unit_candidates}
+            tb["units"] = FieldValue(chosen[0], chosen[1], chosen[2], raw=chosen[3],
+                                      source="page_text", page=page_no,
+                                      candidates=[{"value": v, "bbox": b, "confidence": c}
+                                                  for v, c, b, _ in unit_candidates],
+                                      needs_review=len(values) > 1)
     # Dates physically inside a detected revision-history table are history
     # entries, not the drawing's title-block date. Preserve them as candidates
     # but require review if region selection has included the integrated box.
@@ -416,7 +424,8 @@ def _extract_page_content(pa: PageAnalysis, raw: RawPage, cfg: dict, page_no: in
             continue
         x = (fv.bbox[0] + fv.bbox[2]) / 2
         y = (fv.bbox[1] + fv.bbox[3]) / 2
-        if any(t.bbox[0] <= x <= t.bbox[2] and t.bbox[1] <= y <= t.bbox[3]
+        if any(t.bbox[0] <= fv.bbox[0] and fv.bbox[2] <= t.bbox[2] and
+               t.bbox[1] <= fv.bbox[1] and fv.bbox[3] <= t.bbox[3]
                for t in pa.rev_tables):
             fv.candidates.append(fv.to_dict())
             fv.needs_review = True
@@ -680,9 +689,11 @@ def build_summary(res: DrawingResult, cfg: dict) -> dict:
     }
     s["author_date"] = " / ".join(x for x in (s["drawn_by"], s["date"]) if x) or None
     if "author_date" not in tb and s["author_date"]:
-        auth_conf = min([tb[k].confidence for k in ("drawn_by", "date") if k in tb] or [1.0])
-        tb["author_date"] = FieldValue(s["author_date"], auth_conf, None, raw=s["author_date"],
-                                       source="derived")
+        auth_values = [tb[k].confidence for k in ("drawn_by", "date")
+                       if k in tb and tb[k].value]
+        if auth_values:
+            tb["author_date"] = FieldValue(s["author_date"], min(auth_values), None,
+                                            raw=s["author_date"], source="derived")
     s.update(summarise(res.specs))
     # A note or title-block field that is explicitly labelled MATERIAL /
     # SURFACE FINISH / HEAT TREATMENT is the drawing's own callout: report it

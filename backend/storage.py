@@ -188,6 +188,33 @@ class StorageManager:
         if "notes" in updates and updates["notes"] is not None:
             res["notes"] = updates["notes"]
 
+        # Re-run validation against the edited structured values so review
+        # status, completeness, and exported findings do not remain stale.
+        try:
+            from bomx.config import DEFAULT_CONFIG
+            from bomx.models import DrawingResult, FieldValue, BomRow, RevisionRow
+            from bomx.validate import validate_result
+            model = DrawingResult(source_file=res.get("source_file", ""),
+                                  bom_columns=res.get("bom_columns", []),
+                                  notes=res.get("notes", []))
+            model.title_block = {
+                k: (FieldValue(**{name: value for name, value in v.items()
+                                  if name in {"value", "confidence", "bbox", "raw", "normalized", "source", "page", "candidates", "needs_review"}})
+                    if isinstance(v, dict) else FieldValue(str(v), 0.0))
+                for k, v in (res.get("title_block") or {}).items()
+            }
+            model.bom = [BomRow(**{name: value for name, value in row.items()
+                                   if name in {"item", "part_number", "description", "quantity", "material", "mass", "remarks", "extra", "quantity_value", "mass_kg", "confidence", "structural_confidence", "bbox", "page", "flags", "mass_verified", "mass_candidate", "table", "row_index"}})
+                         for row in (res.get("bom") or [])]
+            model.revisions = [RevisionRow(**{name: value for name, value in row.items()
+                                              if name in {"rev", "description", "date", "approved", "extra", "confidence", "bbox", "page", "flags"}})
+                               for row in (res.get("revisions") or [])]
+            res["validation"] = validate_result(model, DEFAULT_CONFIG)
+        except Exception:
+            # Content edits should still persist if a legacy result cannot be
+            # reconstructed for validation.
+            pass
+
         self.save_result(drawing_id, res)
         return res
 

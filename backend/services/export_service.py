@@ -177,7 +177,7 @@ def generate_excel_export(drawing_id: str) -> Path:
             r.get("description", ""),
             r.get("date", ""),
             r.get("approved", ""),
-            f"{round((r.get('confidence') or 1.0) * 100, 1)}%",
+            f"{round(((r.get('confidence') if r.get('confidence') is not None else 0.0) * 100), 1)}%",
             "; ".join(r.get("flags") or []),
             (r.get("extra") or {}).get("raw_revision_text", ""),
             (r.get("extra") or {}).get("raw_date_text", ""),

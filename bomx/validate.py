@@ -330,11 +330,19 @@ def _cross_checks(res: DrawingResult, vcfg: dict, rep: _Report) -> None:
     w = tb.get("weight")
     if w and isinstance(w.normalized, (int, float)) and res.bom and \
             all(r.mass_kg is not None for r in res.bom):
-        total = sum(r.mass_kg * (1 if r.extra.get("mass_basis") == "total"
-                                 else (r.quantity_value or 1)) for r in res.bom)
-        if total > 0 and abs(total - w.normalized) / max(total, w.normalized) > float(vcfg["mass_tolerance"]):
-            rep.add("warning", "cross_check", "cross_check", f"title-block weight {w.normalized:g} kg "
-                    f"differs from BOM total {total:.3g} kg", field="weight", value=w.normalized)
+        missing_qty = [i for i, r in enumerate(res.bom)
+                       if r.extra.get("mass_basis") != "total" and
+                       (r.quantity_value is None or r.quantity_value <= 0)]
+        if missing_qty:
+            rep.add("warning", "incomplete_calculation", "cross_check",
+                    "BOM total weight was not calculated because unit-mass rows have missing or zero quantities",
+                    field="quantity", value=missing_qty)
+        else:
+            total = sum(r.mass_kg * (1 if r.extra.get("mass_basis") == "total"
+                                     else r.quantity_value) for r in res.bom)
+            if total > 0 and abs(total - w.normalized) / max(total, w.normalized) > float(vcfg["mass_tolerance"]):
+                rep.add("warning", "cross_check", "cross_check", f"title-block weight {w.normalized:g} kg "
+                        f"differs from BOM total {total:.3g} kg", field="weight", value=w.normalized)
 
     # single-part drawing: title-block material vs BOM material
     m = tb.get("material")

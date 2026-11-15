@@ -1192,13 +1192,21 @@ def split_numbered_notes(lines: list[TextLine]) -> list[dict]:
     inline_num = re.compile(r"(?<!\S)(\d{1,2}\s*[.)\]])\s+")
     records = []
     for line in lines:
-        marks = list(inline_num.finditer(line.text))
-        if len(marks) > 1:
-            for i, mark in enumerate(marks):
-                end = marks[i + 1].start() if i + 1 < len(marks) else len(line.text)
-                txt = line.text[mark.start():end].strip()
-                if txt:
-                    records.append((txt, line.bbox, line.conf, line.words))
+        marker_idx = [i for i, word in enumerate(line.words)
+                      if re.fullmatch(r"\d{1,2}[.)\]]", word.text)]
+        # Inline splitting is accepted only for separate marker tokens with
+        # clear horizontal spacing. A number in ordinary technical prose is
+        # therefore left as part of the current note.
+        valid_inline = len(marker_idx) > 1 and all(
+            line.words[b].x0 - line.words[a].x1 >= 1.25 * max(line.words[a].h, line.words[b].h)
+            for a, b in zip(marker_idx, marker_idx[1:]))
+        if valid_inline:
+            for i, start in enumerate(marker_idx):
+                end = marker_idx[i + 1] if i + 1 < len(marker_idx) else len(line.words)
+                chunk = line.words[start:end]
+                if chunk:
+                    records.append((TextLine(chunk).text, TextLine(chunk).bbox,
+                                    TextLine(chunk).conf, chunk))
         else:
             records.append((line.text, line.bbox, line.conf, line.words))
     numbered = any(_NUM.match(text) for text, *_ in records)

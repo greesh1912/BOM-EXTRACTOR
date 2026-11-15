@@ -180,6 +180,9 @@ export const WorkspaceView: React.FC<WorkspaceViewProps> = ({ drawingId, onBack 
       // Refresh drawing metadata
       const updatedDetail = await api.getDrawingDetail(drawingId);
       setDrawing(updatedDetail);
+      if (updatedDetail.result) {
+        setEditableResult(JSON.parse(JSON.stringify(updatedDetail.result)));
+      }
     } catch (err: any) {
       alert(`Save failed: ${err.message}`);
     } finally {
@@ -192,7 +195,16 @@ export const WorkspaceView: React.FC<WorkspaceViewProps> = ({ drawingId, onBack 
     if (!drawing) return;
     const newStatus = !drawing.metadata.verified;
     try {
-      await api.updateDrawing(drawingId, { verified: newStatus });
+      const approvedTitleBlock = newStatus && editableResult
+        ? Object.fromEntries(Object.entries(editableResult.title_block).map(([key, field]) => [
+            key, { ...field, needs_review: false, source: field.source === 'manual' ? 'manual_approved' : field.source },
+          ]))
+        : undefined;
+      await api.updateDrawing(drawingId, { verified: newStatus, ...(approvedTitleBlock ? { title_block: approvedTitleBlock } : {}) });
+      if (approvedTitleBlock && editableResult) {
+        setEditableResult({ ...editableResult, title_block: approvedTitleBlock });
+        setHasUnsavedChanges(false);
+      }
       setDrawing({
         ...drawing,
         metadata: { ...drawing.metadata, verified: newStatus },

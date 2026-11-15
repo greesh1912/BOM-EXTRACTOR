@@ -925,13 +925,15 @@ def table_to_bom(t: Table, page: int, low_conf: float, table_index: int = 0,
         if r.item and r.item.isdigit():
             nums.append(int(r.item))
     if nums and len(nums) == len(rows):
-        rows.sort(key=lambda r: int(r.item))
+        # Keep physical reading order and row_index/source bbox intact. Use a
+        # sorted copy only for sequence diagnostics.
+        ordered_nums = sorted(nums)
         seen = set()
         for r in rows:
             if int(r.item) in seen:
                 r.flags.append("duplicate_item")
             seen.add(int(r.item))
-        exp = set(range(min(nums), max(nums) + 1))
+        exp = set(range(min(ordered_nums), max(ordered_nums) + 1))
         missing = sorted(exp - set(nums))
         if missing:
             warnings.append(f"BOM item numbers missing from sequence: {missing}")
@@ -988,6 +990,8 @@ def table_to_revisions(t: Table, page: int, date_order: str) -> list[RevisionRow
                     candidate = clean_value(cell.text) if cell else ""
                     if candidate and re.fullmatch(r"[A-Z0-9][A-Z0-9._/-]{0,7}", candidate, re.I):
                         r.rev = candidate
+                        if cell:
+                            r.extra["raw_revision_text"] = clean_value(getattr(cell, "raw_text", None) or cell.text)
                         break
         if r.date:
             iso = parse_date(r.date, date_order)
@@ -1003,7 +1007,9 @@ def table_to_revisions(t: Table, page: int, date_order: str) -> list[RevisionRow
         ))
         if not valid_rev and r.rev:
             original = r.rev
-            cleaned = re.sub(r"[\s.,:;\-]+$", "", original).strip()
+            # Strip only punctuation separated from the identifier by OCR
+            # whitespace. A contiguous trailing '-' may be meaningful.
+            cleaned = re.sub(r"\s+[-.,:;]+\s*$", "", original).strip()
             rev_col = next((col for col in t.columns if col.key == "rev" or
                             re.search(r"\b(?:REV|REVISION|CHANGE\s+LEVEL)\b", col.header, re.I)), None)
             source_cell = vals.get(rev_col.key) if rev_col else None
@@ -1030,7 +1036,10 @@ def table_to_revisions(t: Table, page: int, date_order: str) -> list[RevisionRow
 
 
 def latest_revision(revs: list[RevisionRow]) -> Optional[RevisionRow]:
-    revs = [r for r in revs if r.rev]
+    # Tentative identifiers remain visible in the table, but must not drive
+    # current-revision fallback or cross-checks until reviewed.
+    revs = [r for r in revs if r.rev and
+            "revision_identifier_needs_review" not in getattr(r, "flags", [])]
     if not revs:
         return None
     dated = [r for r in revs if r.extra.get("date_iso")]
