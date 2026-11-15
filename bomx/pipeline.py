@@ -30,11 +30,13 @@ def _rotate_word_frame(word: Word, rotation: int, width: int, height: int) -> Wo
     """Map a vertical OCR word into a horizontal table-analysis frame."""
     x0, y0, x1, y1 = word.bbox
     if rotation == 90:
-        pts = [(y0, height - x0), (y1, height - x0),
-               (y0, height - x1), (y1, height - x1)]
+        # cv2 ROTATE_90_CLOCKWISE: (x, y) -> (H - y, x)
+        pts = [(height - y0, x0), (height - y1, x0),
+               (height - y0, x1), (height - y1, x1)]
     elif rotation == 270:
-        pts = [(width - y0, x0), (width - y1, x0),
-               (width - y0, x1), (width - y1, x1)]
+        # cv2 ROTATE_90_COUNTERCLOCKWISE: (x, y) -> (y, W - x)
+        pts = [(y0, width - x0), (y1, width - x0),
+               (y0, width - x1), (y1, width - x1)]
     else:  # 180 degrees
         pts = [(width - x0, height - y0), (width - x1, height - y0),
                (width - x0, height - y1), (width - x1, height - y1)]
@@ -48,11 +50,11 @@ def _map_rotated_bbox(bbox, rotation: int, width: int, height: int):
         return bbox
     x0, y0, x1, y1 = bbox
     if rotation == 90:
-        # inverse of x'=y, y'=H-x
-        pts = [(height - y0, x0), (height - y1, x0), (height - y0, x1), (height - y1, x1)]
+        # inverse of x'=H-y, y'=x
+        pts = [(y0, height - x0), (y1, height - x0), (y0, height - x1), (y1, height - x1)]
     elif rotation == 270:
-        # inverse of x'=W-y, y'=x
-        pts = [(y0, width - x0), (y1, width - x0), (y0, width - x1), (y1, width - x1)]
+        # inverse of x'=y, y'=W-x
+        pts = [(width - y0, x0), (width - y1, x0), (width - y0, x1), (width - y1, x1)]
     else:
         pts = [(width - x0, height - y0), (width - x1, height - y0),
                (width - x0, height - y1), (width - x1, height - y1)]
@@ -72,7 +74,10 @@ def _restore_rotated_table(table, rotation: int, width: int, height: int) -> Non
         normalized_height = width if rotation in (90, 270) else height
         bb = _map_rotated_bbox((col.x0, 0, col.x1, normalized_height),
                                rotation, width, height)
-        col.x0, col.x1 = bb[0], bb[2]
+        # Keep x0/x1 in the normalized frame for any downstream table logic;
+        # source geometry is explicitly stored because sideways columns map to
+        # source Y-ranges rather than source X-ranges.
+        col.source_bbox = bb
     table.bbox = _map_rotated_bbox(table.bbox, rotation, width, height)
     table.header_bbox = _map_rotated_bbox(table.header_bbox, rotation, width, height)
     table.row_bboxes = [_map_rotated_bbox(bb, rotation, width, height) for bb in table.row_bboxes]
