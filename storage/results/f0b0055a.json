@@ -1,0 +1,2375 @@
+{
+  "source_file": "C:\\Users\\A30165\\Documents\\BOM-EXTRACTOR\\storage\\uploads\\f0b0055a\\6.dxf",
+  "summary": {
+    "file": "6.dxf",
+    "pages": 1,
+    "input_type": "ocr",
+    "file_format": "DXF",
+    "page_kinds": "dxf-traced",
+    "drawing_number": "FCA-ASSY-001",
+    "drawing_title": "FLANGE COUPLING ASSEMRLY",
+    "revision": "B",
+    "drawn_by": "J. Smith",
+    "date": "2023-10-15",
+    "scale": "1:2",
+    "projection": "FIRST ANGLE",
+    "sheet": null,
+    "checked_by": "A. Lee",
+    "approved_by": "R. Patel",
+    "revision_source": "page_text",
+    "author_date": "J. Smith / 2023-10-15",
+    "material_callout": "As indicated in BOM",
+    "surface_finish": "Natural / rust-preventative oil applied to machined mating surfaces, external non-mating surfaces painted blue",
+    "heat_treatment": null,
+    "standards": null,
+    "bom_items": 9,
+    "bom_total_quantity": 25,
+    "revisions": 2,
+    "notes": 7,
+    "text_confidence": 0.868,
+    "structural_confidence": 0.987,
+    "mean_confidence": 0.886,
+    "min_structural_confidence": 0.974,
+    "min_text_confidence": 0.45,
+    "review_required": true,
+    "review_reasons": "low-confidence title fields: revision; 9 BOM row(s) flagged; low text OCR confidence on row (min 0.45); validation: 2 error(s), 18 warning(s)",
+    "validation_errors": 2,
+    "validation_warnings": 18,
+    "bom_completeness": 1.0,
+    "title_block_completeness": 1.0
+  },
+  "title_block": {
+    "drawn_by": {
+      "value": "J. Smith",
+      "confidence": 0.906,
+      "bbox": [
+        3135.0,
+        2426.0,
+        3527.0,
+        2463.0
+      ],
+      "raw": "J. Smith",
+      "normalized": null,
+      "source": "title_block",
+      "page": 1,
+      "candidates": [
+        {
+          "value": "J. Smith",
+          "confidence": 0.906,
+          "bbox": [
+            3135.0,
+            2426.0,
+            3527.0,
+            2463.0
+          ],
+          "raw": "J. Smith",
+          "normalized": null,
+          "source": "title_block",
+          "page": null,
+          "candidates": [],
+          "needs_review": false
+        }
+      ],
+      "needs_review": false
+    },
+    "drawing_title": {
+      "value": "FLANGE COUPLING ASSEMRLY",
+      "confidence": 0.85,
+      "bbox": [
+        4029.0,
+        2416.0,
+        4839.0,
+        2531.0
+      ],
+      "raw": "FLANGE COUPLING ASSEMRLY",
+      "normalized": null,
+      "source": "title_block",
+      "page": 1,
+      "candidates": [
+        {
+          "value": "FLANGE COUPLING ASSEMRLY",
+          "confidence": 0.85,
+          "bbox": [
+            4029.0,
+            2416.0,
+            4839.0,
+            2531.0
+          ],
+          "raw": "FLANGE COUPLING ASSEMRLY",
+          "normalized": null,
+          "source": "title_block",
+          "page": null,
+          "candidates": [],
+          "needs_review": false
+        }
+      ],
+      "needs_review": false
+    },
+    "checked_by": {
+      "value": "A. Lee",
+      "confidence": 0.894,
+      "bbox": [
+        3134.0,
+        2500.0,
+        3498.0,
+        2539.0
+      ],
+      "raw": "A. Lee",
+      "normalized": null,
+      "source": "title_block",
+      "page": 1,
+      "candidates": [
+        {
+          "value": "A. Lee",
+          "confidence": 0.894,
+          "bbox": [
+            3134.0,
+            2500.0,
+            3498.0,
+            2539.0
+          ],
+          "raw": "A. Lee",
+          "normalized": null,
+          "source": "title_block",
+          "page": null,
+          "candidates": [],
+          "needs_review": false
+        }
+      ],
+      "needs_review": false
+    },
+    "approved_by": {
+      "value": "R. Patel",
+      "confidence": 0.924,
+      "bbox": [
+        3133.0,
+        2574.0,
+        3520.0,
+        2613.0
+      ],
+      "raw": "R. Patel",
+      "normalized": null,
+      "source": "title_block",
+      "page": 1,
+      "candidates": [
+        {
+          "value": "R. Patel",
+          "confidence": 0.924,
+          "bbox": [
+            3133.0,
+            2574.0,
+            3520.0,
+            2613.0
+          ],
+          "raw": "R. Patel",
+          "normalized": null,
+          "source": "title_block",
+          "page": null,
+          "candidates": [],
+          "needs_review": false
+        }
+      ],
+      "needs_review": false
+    },
+    "scale": {
+      "value": "1:2",
+      "confidence": 0.67,
+      "bbox": [
+        3655.0,
+        2577.0,
+        3868.0,
+        2676.0
+      ],
+      "raw": "1:2",
+      "normalized": "1:2",
+      "source": "title_block",
+      "page": 1,
+      "candidates": [
+        {
+          "value": "1:2",
+          "confidence": 0.67,
+          "bbox": [
+            3655.0,
+            2577.0,
+            3868.0,
+            2676.0
+          ],
+          "raw": "1:2",
+          "normalized": null,
+          "source": "title_block",
+          "page": null,
+          "candidates": [],
+          "needs_review": false
+        }
+      ],
+      "needs_review": false
+    },
+    "drawing_number": {
+      "value": "FCA-ASSY-001",
+      "confidence": 0.913,
+      "bbox": [
+        4029.0,
+        2576.0,
+        4504.0,
+        2680.0
+      ],
+      "raw": "FCA-ASSY-001",
+      "normalized": "FCA-ASSY-001",
+      "source": "title_block",
+      "page": 1,
+      "candidates": [
+        {
+          "value": "FCA-ASSY-001",
+          "confidence": 0.913,
+          "bbox": [
+            4029.0,
+            2576.0,
+            4504.0,
+            2680.0
+          ],
+          "raw": "FCA-ASSY-001",
+          "normalized": null,
+          "source": "title_block",
+          "page": null,
+          "candidates": [],
+          "needs_review": false
+        }
+      ],
+      "needs_review": false
+    },
+    "date": {
+      "value": "REV. B 2023-10-15",
+      "confidence": 0.927,
+      "bbox": [
+        3171.0,
+        2634.0,
+        3586.0,
+        2689.0
+      ],
+      "raw": "REV. B 2023-10-15",
+      "normalized": "2023-10-15",
+      "source": "title_block",
+      "page": 1,
+      "candidates": [],
+      "needs_review": false
+    },
+    "revision": {
+      "value": "B",
+      "confidence": 0.6,
+      "bbox": null,
+      "raw": "REV. B",
+      "normalized": "B",
+      "source": "page_text",
+      "page": 1,
+      "candidates": [],
+      "needs_review": false
+    },
+    "projection": {
+      "value": "FIRST ANGLE PROJECTION",
+      "confidence": 0.9,
+      "bbox": null,
+      "raw": "First Angle Projection",
+      "normalized": "FIRST ANGLE",
+      "source": "page_text",
+      "page": 1,
+      "candidates": [],
+      "needs_review": false
+    },
+    "units": {
+      "value": "Metric (mm)",
+      "confidence": 0.917,
+      "bbox": [
+        3721.0,
+        2320.0,
+        4696.0,
+        2382.0
+      ],
+      "raw": "Metric (mm) Third Angle Projection",
+      "normalized": null,
+      "source": "page_text",
+      "page": 1,
+      "candidates": [
+        {
+          "value": "Metric (mm)",
+          "bbox": [
+            3721.0,
+            2320.0,
+            4696.0,
+            2382.0
+          ],
+          "confidence": 0.917
+        },
+        {
+          "value": "Metric (mm)",
+          "bbox": [
+            3721.0,
+            2321.0,
+            3943.0,
+            2372.0
+          ],
+          "confidence": 0.902
+        }
+      ],
+      "needs_review": false
+    },
+    "author_date": {
+      "value": "J. Smith / 2023-10-15",
+      "confidence": 0.906,
+      "bbox": null,
+      "raw": "J. Smith / 2023-10-15",
+      "normalized": null,
+      "source": "derived",
+      "page": null,
+      "candidates": [],
+      "needs_review": false
+    }
+  },
+  "bom_columns": [
+    "item",
+    "part_number",
+    "description",
+    "quantity",
+    "material",
+    "mass",
+    "remarks"
+  ],
+  "bom": [
+    {
+      "item": "1",
+      "part_number": "FCA-DRIV-101",
+      "description": "Driver Flange",
+      "quantity": "1",
+      "material": "Cast Iron FG260",
+      "mass": "8.5 kg",
+      "remarks": "Keyed",
+      "extra": {
+        "mass_basis": "unit"
+      },
+      "quantity_value": 1,
+      "mass_kg": 8.5,
+      "confidence": 0.904,
+      "structural_confidence": 1.0,
+      "bbox": [
+        3127.0,
+        1774.0,
+        4863.0,
+        1823.0
+      ],
+      "page": 1,
+      "flags": [
+        "needs_review"
+      ],
+      "quantity_measurement": {
+        "raw": "1",
+        "nominal": 1.0,
+        "unit": null,
+        "canonical_value": 1.0,
+        "canonical_unit": "count",
+        "measurement_type": "quantity",
+        "tolerance": null,
+        "confidence": 0.904
+      },
+      "mass_measurement": {
+        "raw": "8.5 kg",
+        "nominal": 8.5,
+        "unit": "kg",
+        "canonical_value": 8.5,
+        "canonical_unit": "kg",
+        "measurement_type": "mass",
+        "tolerance": null,
+        "confidence": 0.904
+      },
+      "mass_verified": false,
+      "mass_candidate": null,
+      "table": 0,
+      "row_index": 0,
+      "field_confidence": {
+        "item": 0.95,
+        "part_number": 0.92,
+        "description": 0.92,
+        "quantity": 0.95,
+        "material": 0.904,
+        "mass": 0.924,
+        "remarks": 0.91
+      },
+      "field_bbox": {
+        "item": [
+          3127.0,
+          1774.0,
+          3281.0,
+          1822.0
+        ],
+        "part_number": [
+          3289.0,
+          1774.0,
+          3590.0,
+          1822.0
+        ],
+        "description": [
+          3597.0,
+          1774.0,
+          4014.0,
+          1822.0
+        ],
+        "quantity": [
+          4021.0,
+          1774.0,
+          4098.0,
+          1822.0
+        ],
+        "material": [
+          4104.0,
+          1774.0,
+          4457.0,
+          1822.0
+        ],
+        "mass": [
+          4464.0,
+          1774.0,
+          4624.0,
+          1823.0
+        ],
+        "remarks": [
+          4633.0,
+          1774.0,
+          4863.0,
+          1823.0
+        ]
+      }
+    },
+    {
+      "item": "2",
+      "part_number": "FCA-DRIV-101",
+      "description": "Driver Flange",
+      "quantity": "1",
+      "material": "Cast Iron FG260",
+      "mass": "8.5 ka",
+      "remarks": "Keved",
+      "extra": {
+        "mass_basis": "unit"
+      },
+      "quantity_value": 1,
+      "mass_kg": null,
+      "confidence": 0.854,
+      "structural_confidence": 0.996,
+      "bbox": [
+        3127.0,
+        1828.0,
+        4864.0,
+        1875.0
+      ],
+      "page": 1,
+      "flags": [
+        "unsupported_mass_unit",
+        "malformed_mass_value",
+        "needs_review"
+      ],
+      "quantity_measurement": {
+        "raw": "1",
+        "nominal": 1.0,
+        "unit": null,
+        "canonical_value": 1.0,
+        "canonical_unit": "count",
+        "measurement_type": "quantity",
+        "tolerance": null,
+        "confidence": 0.854
+      },
+      "mass_measurement": null,
+      "mass_verified": false,
+      "mass_candidate": null,
+      "table": 0,
+      "row_index": 1,
+      "field_confidence": {
+        "item": 0.96,
+        "part_number": 0.91,
+        "description": 0.91,
+        "quantity": 0.95,
+        "material": 0.913,
+        "mass": 0.854,
+        "remarks": 0.9
+      },
+      "field_bbox": {
+        "item": [
+          3127.0,
+          1828.0,
+          3281.0,
+          1875.0
+        ],
+        "part_number": [
+          3289.0,
+          1828.0,
+          3590.0,
+          1875.0
+        ],
+        "description": [
+          3597.0,
+          1828.0,
+          4014.0,
+          1875.0
+        ],
+        "quantity": [
+          4021.0,
+          1828.0,
+          4097.0,
+          1875.0
+        ],
+        "material": [
+          4104.0,
+          1828.0,
+          4456.0,
+          1875.0
+        ],
+        "mass": [
+          4464.0,
+          1828.0,
+          4624.0,
+          1875.0
+        ],
+        "remarks": [
+          4633.0,
+          1828.0,
+          4864.0,
+          1875.0
+        ]
+      }
+    },
+    {
+      "item": "3",
+      "part_number": "FCA-DRVN-102",
+      "description": "Driven Flange",
+      "quantity": "1",
+      "material": "Cast Iron FG260",
+      "mass": "8.5 ka",
+      "remarks": "Keved",
+      "extra": {
+        "mass_basis": "unit"
+      },
+      "quantity_value": 1,
+      "mass_kg": null,
+      "confidence": 0.905,
+      "structural_confidence": 0.987,
+      "bbox": [
+        3127.0,
+        1881.0,
+        4864.0,
+        1929.0
+      ],
+      "page": 1,
+      "flags": [
+        "unsupported_mass_unit",
+        "malformed_mass_value",
+        "needs_review"
+      ],
+      "quantity_measurement": {
+        "raw": "1",
+        "nominal": 1.0,
+        "unit": null,
+        "canonical_value": 1.0,
+        "canonical_unit": "count",
+        "measurement_type": "quantity",
+        "tolerance": null,
+        "confidence": 0.905
+      },
+      "mass_measurement": null,
+      "mass_verified": false,
+      "mass_candidate": null,
+      "table": 0,
+      "row_index": 2,
+      "field_confidence": {
+        "item": 0.96,
+        "part_number": 0.93,
+        "description": 0.905,
+        "quantity": 0.95,
+        "material": 0.913,
+        "mass": 0.918,
+        "remarks": 0.92
+      },
+      "field_bbox": {
+        "item": [
+          3127.0,
+          1881.0,
+          3281.0,
+          1929.0
+        ],
+        "part_number": [
+          3289.0,
+          1881.0,
+          3590.0,
+          1929.0
+        ],
+        "description": [
+          3597.0,
+          1881.0,
+          4014.0,
+          1929.0
+        ],
+        "quantity": [
+          4020.0,
+          1881.0,
+          4097.0,
+          1929.0
+        ],
+        "material": [
+          4104.0,
+          1881.0,
+          4456.0,
+          1929.0
+        ],
+        "mass": [
+          4464.0,
+          1881.0,
+          4624.0,
+          1929.0
+        ],
+        "remarks": [
+          4633.0,
+          1881.0,
+          4864.0,
+          1929.0
+        ]
+      }
+    },
+    {
+      "item": "3",
+      "part_number": "ISO-4014-M16",
+      "description": "Hex Bolt M16 x 60",
+      "quantity": "6",
+      "material": "Carbon Steel EN8",
+      "mass": "0.18 ka",
+      "remarks": "Grade 8.8",
+      "extra": {
+        "mass_basis": "unit"
+      },
+      "quantity_value": 6,
+      "mass_kg": null,
+      "confidence": 0.45,
+      "structural_confidence": 0.974,
+      "bbox": [
+        3127.0,
+        1935.0,
+        4864.0,
+        1984.0
+      ],
+      "page": 1,
+      "flags": [
+        "unsupported_mass_unit",
+        "malformed_mass_value",
+        "low_confidence",
+        "duplicate_item",
+        "needs_review"
+      ],
+      "quantity_measurement": {
+        "raw": "6",
+        "nominal": 6.0,
+        "unit": null,
+        "canonical_value": 6.0,
+        "canonical_unit": "count",
+        "measurement_type": "quantity",
+        "tolerance": null,
+        "confidence": 0.45
+      },
+      "mass_measurement": null,
+      "mass_verified": false,
+      "mass_candidate": null,
+      "table": 0,
+      "row_index": 3,
+      "field_confidence": {
+        "item": 0.96,
+        "part_number": 0.45,
+        "description": 0.928,
+        "quantity": 0.94,
+        "material": 0.88,
+        "mass": 0.917,
+        "remarks": 0.941
+      },
+      "field_bbox": {
+        "item": [
+          3127.0,
+          1935.0,
+          3281.0,
+          1984.0
+        ],
+        "part_number": [
+          3289.0,
+          1935.0,
+          3590.0,
+          1983.0
+        ],
+        "description": [
+          3597.0,
+          1935.0,
+          4014.0,
+          1983.0
+        ],
+        "quantity": [
+          4019.0,
+          1935.0,
+          4097.0,
+          1983.0
+        ],
+        "material": [
+          4104.0,
+          1935.0,
+          4456.0,
+          1983.0
+        ],
+        "mass": [
+          4465.0,
+          1935.0,
+          4624.0,
+          1982.0
+        ],
+        "remarks": [
+          4633.0,
+          1935.0,
+          4864.0,
+          1983.0
+        ]
+      }
+    },
+    {
+      "item": "4",
+      "part_number": "ISO-4032-M16 000",
+      "description": "Hex Nut M16",
+      "quantity": "6",
+      "material": "Carbon Steel EN8",
+      "mass": "0.05",
+      "remarks": "Grade 8",
+      "extra": {
+        "mass_basis": "unit"
+      },
+      "quantity_value": 6,
+      "mass_kg": null,
+      "confidence": 0.628,
+      "structural_confidence": 0.987,
+      "bbox": [
+        3127.0,
+        1989.0,
+        4864.0,
+        2038.0
+      ],
+      "page": 1,
+      "flags": [
+        "mass_unit_assumed_kg",
+        "low_confidence",
+        "needs_review"
+      ],
+      "quantity_measurement": {
+        "raw": "6",
+        "nominal": 6.0,
+        "unit": null,
+        "canonical_value": 6.0,
+        "canonical_unit": "count",
+        "measurement_type": "quantity",
+        "tolerance": null,
+        "confidence": 0.628
+      },
+      "mass_measurement": {
+        "raw": "0.05",
+        "nominal": 0.05,
+        "unit": null,
+        "canonical_value": null,
+        "canonical_unit": null,
+        "measurement_type": "mass",
+        "tolerance": null,
+        "confidence": 0.628
+      },
+      "mass_verified": false,
+      "mass_candidate": null,
+      "table": 0,
+      "row_index": 4,
+      "field_confidence": {
+        "item": 0.96,
+        "part_number": 0.628,
+        "description": 0.923,
+        "quantity": 0.96,
+        "material": 0.889,
+        "mass": 0.91,
+        "remarks": 0.927
+      },
+      "field_bbox": {
+        "item": [
+          3127.0,
+          1989.0,
+          3281.0,
+          2038.0
+        ],
+        "part_number": [
+          3289.0,
+          1989.0,
+          3590.0,
+          2038.0
+        ],
+        "description": [
+          3597.0,
+          1989.0,
+          4014.0,
+          2038.0
+        ],
+        "quantity": [
+          4020.0,
+          1989.0,
+          4097.0,
+          2038.0
+        ],
+        "material": [
+          4104.0,
+          1989.0,
+          4456.0,
+          2038.0
+        ],
+        "mass": [
+          4465.0,
+          1989.0,
+          4624.0,
+          2038.0
+        ],
+        "remarks": [
+          4633.0,
+          1989.0,
+          4864.0,
+          2038.0
+        ]
+      }
+    },
+    {
+      "item": "5",
+      "part_number": "ISO-7089-16",
+      "description": "Plain Washer M16",
+      "quantity": "6",
+      "material": "Spring Steel",
+      "mass": "0.01 kg",
+      "remarks": null,
+      "extra": {
+        "mass_basis": "unit"
+      },
+      "quantity_value": 6,
+      "mass_kg": 0.01,
+      "confidence": 0.88,
+      "structural_confidence": 0.987,
+      "bbox": [
+        3127.0,
+        2043.0,
+        4864.0,
+        2092.0
+      ],
+      "page": 1,
+      "flags": [
+        "needs_review"
+      ],
+      "quantity_measurement": {
+        "raw": "6",
+        "nominal": 6.0,
+        "unit": null,
+        "canonical_value": 6.0,
+        "canonical_unit": "count",
+        "measurement_type": "quantity",
+        "tolerance": null,
+        "confidence": 0.88
+      },
+      "mass_measurement": {
+        "raw": "0.01 kg",
+        "nominal": 0.01,
+        "unit": "kg",
+        "canonical_value": 0.01,
+        "canonical_unit": "kg",
+        "measurement_type": "mass",
+        "tolerance": null,
+        "confidence": 0.88
+      },
+      "mass_verified": false,
+      "mass_candidate": null,
+      "table": 0,
+      "row_index": 5,
+      "field_confidence": {
+        "item": 0.92,
+        "part_number": 0.88,
+        "description": 0.899,
+        "quantity": 0.96,
+        "material": 0.915,
+        "mass": 0.9
+      },
+      "field_bbox": {
+        "item": [
+          3127.0,
+          2043.0,
+          3281.0,
+          2091.0
+        ],
+        "part_number": [
+          3289.0,
+          2043.0,
+          3590.0,
+          2092.0
+        ],
+        "description": [
+          3597.0,
+          2043.0,
+          4014.0,
+          2092.0
+        ],
+        "quantity": [
+          4020.0,
+          2043.0,
+          4098.0,
+          2091.0
+        ],
+        "material": [
+          4103.0,
+          2043.0,
+          4456.0,
+          2092.0
+        ],
+        "mass": [
+          4465.0,
+          2043.0,
+          4624.0,
+          2092.0
+        ]
+      }
+    },
+    {
+      "item": "6",
+      "part_number": "FCA-SHA-103",
+      "description": "Drive Shaft A",
+      "quantity": "1",
+      "material": "Alloy Steel EN19",
+      "mass": "15.2 kg",
+      "remarks": null,
+      "extra": {
+        "mass_basis": "unit"
+      },
+      "quantity_value": 1,
+      "mass_kg": 15.2,
+      "confidence": 0.88,
+      "structural_confidence": 0.987,
+      "bbox": [
+        3127.0,
+        2096.0,
+        4864.0,
+        2145.0
+      ],
+      "page": 1,
+      "flags": [
+        "needs_review"
+      ],
+      "quantity_measurement": {
+        "raw": "1",
+        "nominal": 1.0,
+        "unit": null,
+        "canonical_value": 1.0,
+        "canonical_unit": "count",
+        "measurement_type": "quantity",
+        "tolerance": null,
+        "confidence": 0.88
+      },
+      "mass_measurement": {
+        "raw": "15.2 kg",
+        "nominal": 15.2,
+        "unit": "kg",
+        "canonical_value": 15.2,
+        "canonical_unit": "kg",
+        "measurement_type": "mass",
+        "tolerance": null,
+        "confidence": 0.88
+      },
+      "mass_verified": false,
+      "mass_candidate": null,
+      "table": 0,
+      "row_index": 6,
+      "field_confidence": {
+        "item": 0.95,
+        "part_number": 0.91,
+        "description": 0.925,
+        "quantity": 0.96,
+        "material": 0.913,
+        "mass": 0.88
+      },
+      "field_bbox": {
+        "item": [
+          3127.0,
+          2097.0,
+          3281.0,
+          2145.0
+        ],
+        "part_number": [
+          3289.0,
+          2096.0,
+          3590.0,
+          2145.0
+        ],
+        "description": [
+          3597.0,
+          2096.0,
+          4014.0,
+          2145.0
+        ],
+        "quantity": [
+          4020.0,
+          2097.0,
+          4098.0,
+          2145.0
+        ],
+        "material": [
+          4103.0,
+          2096.0,
+          4456.0,
+          2145.0
+        ],
+        "mass": [
+          4465.0,
+          2096.0,
+          4624.0,
+          2145.0
+        ]
+      }
+    },
+    {
+      "item": "7",
+      "part_number": "FCA-SHB-104",
+      "description": "Driven Shaft B",
+      "quantity": "1",
+      "material": "Alloy Steel EN19",
+      "mass": "15.2 kg",
+      "remarks": null,
+      "extra": {
+        "mass_basis": "unit"
+      },
+      "quantity_value": 1,
+      "mass_kg": 15.2,
+      "confidence": 0.85,
+      "structural_confidence": 0.975,
+      "bbox": [
+        3127.0,
+        2150.0,
+        4863.0,
+        2199.0
+      ],
+      "page": 1,
+      "flags": [
+        "needs_review"
+      ],
+      "quantity_measurement": {
+        "raw": "1",
+        "nominal": 1.0,
+        "unit": null,
+        "canonical_value": 1.0,
+        "canonical_unit": "count",
+        "measurement_type": "quantity",
+        "tolerance": null,
+        "confidence": 0.85
+      },
+      "mass_measurement": {
+        "raw": "15.2 kg",
+        "nominal": 15.2,
+        "unit": "kg",
+        "canonical_value": 15.2,
+        "canonical_unit": "kg",
+        "measurement_type": "mass",
+        "tolerance": null,
+        "confidence": 0.85
+      },
+      "mass_verified": false,
+      "mass_candidate": null,
+      "table": 0,
+      "row_index": 7,
+      "field_confidence": {
+        "item": 0.96,
+        "part_number": 0.9,
+        "description": 0.91,
+        "quantity": 0.96,
+        "material": 0.909,
+        "mass": 0.85
+      },
+      "field_bbox": {
+        "item": [
+          3127.0,
+          2150.0,
+          3282.0,
+          2199.0
+        ],
+        "part_number": [
+          3289.0,
+          2150.0,
+          3590.0,
+          2199.0
+        ],
+        "description": [
+          3597.0,
+          2150.0,
+          4014.0,
+          2199.0
+        ],
+        "quantity": [
+          4019.0,
+          2151.0,
+          4098.0,
+          2199.0
+        ],
+        "material": [
+          4103.0,
+          2150.0,
+          4456.0,
+          2199.0
+        ],
+        "mass": [
+          4465.0,
+          2150.0,
+          4624.0,
+          2199.0
+        ]
+      }
+    },
+    {
+      "item": "8",
+      "part_number": "FCA-KEY-105",
+      "description": "Parallel Key",
+      "quantity": "2",
+      "material": "Carbon Steel EN8",
+      "mass": "0.15 ka",
+      "remarks": null,
+      "extra": {
+        "mass_basis": "unit"
+      },
+      "quantity_value": 2,
+      "mass_kg": null,
+      "confidence": 0.81,
+      "structural_confidence": 0.987,
+      "bbox": [
+        3127.0,
+        2206.0,
+        4863.0,
+        2253.0
+      ],
+      "page": 1,
+      "flags": [
+        "unsupported_mass_unit",
+        "malformed_mass_value",
+        "needs_review"
+      ],
+      "quantity_measurement": {
+        "raw": "2",
+        "nominal": 2.0,
+        "unit": null,
+        "canonical_value": 2.0,
+        "canonical_unit": "count",
+        "measurement_type": "quantity",
+        "tolerance": null,
+        "confidence": 0.81
+      },
+      "mass_measurement": null,
+      "mass_verified": false,
+      "mass_candidate": null,
+      "table": 0,
+      "row_index": 8,
+      "field_confidence": {
+        "item": 0.96,
+        "part_number": 0.92,
+        "description": 0.891,
+        "quantity": 0.96,
+        "material": 0.863,
+        "mass": 0.81
+      },
+      "field_bbox": {
+        "item": [
+          3127.0,
+          2206.0,
+          3282.0,
+          2253.0
+        ],
+        "part_number": [
+          3289.0,
+          2206.0,
+          3590.0,
+          2253.0
+        ],
+        "description": [
+          3597.0,
+          2206.0,
+          4014.0,
+          2253.0
+        ],
+        "quantity": [
+          4020.0,
+          2206.0,
+          4098.0,
+          2253.0
+        ],
+        "material": [
+          4103.0,
+          2206.0,
+          4457.0,
+          2253.0
+        ],
+        "mass": [
+          4462.0,
+          2206.0,
+          4624.0,
+          2253.0
+        ]
+      }
+    }
+  ],
+  "revisions": [
+    {
+      "rev": "A",
+      "description": "Initial Release",
+      "date": "2023-09-01",
+      "approved": "J. Smith",
+      "extra": {
+        "raw_revision_text": "A",
+        "raw_date_text": "2023-09-01",
+        "approved_4": "R. Patel",
+        "date_iso": "2023-09-01"
+      },
+      "confidence": 0.873,
+      "bbox": [
+        1630.0,
+        252.0,
+        3364.0,
+        313.0
+      ],
+      "page": 1,
+      "flags": []
+    },
+    {
+      "rev": "B",
+      "description": "Updated mating face tolerance",
+      "date": "2023-10-15",
+      "approved": "J. Smith",
+      "extra": {
+        "raw_revision_text": "B",
+        "raw_date_text": "2023-10-15",
+        "approved_4": "R. Patel",
+        "date_iso": "2023-10-15"
+      },
+      "confidence": 0.777,
+      "bbox": [
+        1630.0,
+        318.0,
+        3365.0,
+        378.0
+      ],
+      "page": 1,
+      "flags": []
+    }
+  ],
+  "notes": [
+    {
+      "page": 1,
+      "number": "1",
+      "text": "All dimensions are in mm unless otherwise specified.",
+      "confidence": 0.915,
+      "bbox": [
+        156.0,
+        194.0,
+        1240.0,
+        244.0
+      ]
+    },
+    {
+      "page": 1,
+      "number": "2",
+      "text": "Material: As indicated in BOM.",
+      "confidence": 0.91,
+      "bbox": [
+        154.0,
+        246.0,
+        799.0,
+        287.0
+      ]
+    },
+    {
+      "page": 1,
+      "number": "3",
+      "text": "First Angle Projection applied.",
+      "confidence": 0.914,
+      "bbox": [
+        154.0,
+        300.0,
+        795.0,
+        351.0
+      ]
+    },
+    {
+      "page": 1,
+      "number": "4",
+      "text": "Finish: Natural / rust-preventative oil applied to machined mating surfaces, external non-mating surfaces painted blue.",
+      "confidence": 0.911,
+      "bbox": [
+        152.0,
+        352.0,
+        1488.0,
+        454.0
+      ]
+    },
+    {
+      "page": 1,
+      "number": "5",
+      "text": "Keys to be fitted tightly into shaft keyways before assembly.",
+      "confidence": 0.912,
+      "bbox": [
+        154.0,
+        454.0,
+        1387.0,
+        505.0
+      ]
+    },
+    {
+      "page": 1,
+      "number": "6",
+      "text": "Fasteners to be torqued to 120 Nm in a star pattern.",
+      "confidence": 0.893,
+      "bbox": [
+        154.0,
+        506.0,
+        1237.0,
+        556.0
+      ]
+    },
+    {
+      "page": 1,
+      "number": "7",
+      "text": "All sharp edges to be broken, max 0.5mm x 45°.",
+      "confidence": 0.885,
+      "bbox": [
+        154.0,
+        558.0,
+        1162.0,
+        608.0
+      ]
+    }
+  ],
+  "specs": [
+    {
+      "category": "surface_finish",
+      "value": "PAINTED BLUE",
+      "context": "Finish: Natural / rust-preventative oil applied to machined mating surfaces, external non-mating surfaces painted blue",
+      "source": "notes",
+      "subtype": "coating",
+      "confidence": 0.9112,
+      "bbox": [
+        152.0,
+        352.0,
+        1488.0,
+        454.0
+      ],
+      "page": 1
+    },
+    {
+      "category": "material",
+      "value": "CAST IRON",
+      "context": "Cast Iron FG260",
+      "source": "bom",
+      "subtype": "cast_iron",
+      "confidence": 0.904,
+      "bbox": [
+        3127.0,
+        1774.0,
+        4863.0,
+        1823.0
+      ],
+      "page": 1
+    },
+    {
+      "category": "material",
+      "value": "FG260",
+      "context": "Cast Iron FG260",
+      "source": "bom",
+      "subtype": "cast_iron",
+      "confidence": 0.904,
+      "bbox": [
+        3127.0,
+        1774.0,
+        4863.0,
+        1823.0
+      ],
+      "page": 1
+    },
+    {
+      "category": "material",
+      "value": "EN8",
+      "context": "Carbon Steel EN8",
+      "source": "bom",
+      "subtype": "carbon_steel",
+      "confidence": 0.45,
+      "bbox": [
+        3127.0,
+        1935.0,
+        4864.0,
+        1984.0
+      ],
+      "page": 1
+    },
+    {
+      "category": "material",
+      "value": "SPRING STEEL",
+      "context": "Spring Steel",
+      "source": "bom",
+      "subtype": "custom",
+      "confidence": 0.88,
+      "bbox": [
+        3127.0,
+        2043.0,
+        4864.0,
+        2092.0
+      ],
+      "page": 1
+    },
+    {
+      "category": "material",
+      "value": "EN19",
+      "context": "Alloy Steel EN19",
+      "source": "bom",
+      "subtype": "carbon_steel",
+      "confidence": 0.88,
+      "bbox": [
+        3127.0,
+        2096.0,
+        4864.0,
+        2145.0
+      ],
+      "page": 1
+    },
+    {
+      "category": "surface_finish",
+      "value": "Ra 3.2 µm",
+      "context": "Ra 3.2 ym Z",
+      "source": "page_text",
+      "subtype": "roughness",
+      "confidence": 0.835,
+      "bbox": [
+        2314.0,
+        755.0,
+        2663.0,
+        853.0
+      ],
+      "page": 1
+    },
+    {
+      "category": "surface_finish",
+      "value": "Ra 1.6 µm",
+      "context": "Ra 1.6 (8)",
+      "source": "page_text",
+      "subtype": "roughness",
+      "confidence": 0.8275,
+      "bbox": [
+        3391.0,
+        649.0,
+        3607.0,
+        898.0
+      ],
+      "page": 1
+    },
+    {
+      "category": "surface_finish",
+      "value": "Ra 3.6 µm",
+      "context": "Ra 3.6 ym",
+      "source": "page_text",
+      "subtype": "roughness",
+      "confidence": 0.8686,
+      "bbox": [
+        2778.0,
+        1734.0,
+        2948.0,
+        1784.0
+      ],
+      "page": 1
+    }
+  ],
+  "dimensions": [
+    {
+      "text": "1",
+      "nominal": 1.0,
+      "tolerance": null,
+      "prefix": null,
+      "suffix": null,
+      "dim_type": "linear",
+      "raw": "1",
+      "bbox": [
+        321.0,
+        57.0,
+        338.0,
+        93.0
+      ],
+      "page": 1,
+      "confidence": 0.96,
+      "measurement": {
+        "raw": "1",
+        "nominal": 1.0,
+        "unit": "mm",
+        "canonical_value": 1.0,
+        "canonical_unit": "mm",
+        "measurement_type": "linear",
+        "tolerance": null,
+        "confidence": 0.96
+      }
+    },
+    {
+      "text": "2",
+      "nominal": 2.0,
+      "tolerance": null,
+      "prefix": null,
+      "suffix": null,
+      "dim_type": "linear",
+      "raw": "2",
+      "bbox": [
+        936.0,
+        56.0,
+        956.0,
+        93.0
+      ],
+      "page": 1,
+      "confidence": 0.96,
+      "measurement": {
+        "raw": "2",
+        "nominal": 2.0,
+        "unit": "mm",
+        "canonical_value": 2.0,
+        "canonical_unit": "mm",
+        "measurement_type": "linear",
+        "tolerance": null,
+        "confidence": 0.96
+      }
+    },
+    {
+      "text": "4",
+      "nominal": 4.0,
+      "tolerance": null,
+      "prefix": null,
+      "suffix": null,
+      "dim_type": "linear",
+      "raw": "4",
+      "bbox": [
+        2169.0,
+        56.0,
+        2193.0,
+        93.0
+      ],
+      "page": 1,
+      "confidence": 0.96,
+      "measurement": {
+        "raw": "4",
+        "nominal": 4.0,
+        "unit": "mm",
+        "canonical_value": 4.0,
+        "canonical_unit": "mm",
+        "measurement_type": "linear",
+        "tolerance": null,
+        "confidence": 0.96
+      }
+    },
+    {
+      "text": "5",
+      "nominal": 5.0,
+      "tolerance": null,
+      "prefix": null,
+      "suffix": null,
+      "dim_type": "linear",
+      "raw": "5",
+      "bbox": [
+        2787.0,
+        56.0,
+        2807.0,
+        93.0
+      ],
+      "page": 1,
+      "confidence": 0.96,
+      "measurement": {
+        "raw": "5",
+        "nominal": 5.0,
+        "unit": "mm",
+        "canonical_value": 5.0,
+        "canonical_unit": "mm",
+        "measurement_type": "linear",
+        "tolerance": null,
+        "confidence": 0.96
+      }
+    },
+    {
+      "text": "6",
+      "nominal": 6.0,
+      "tolerance": null,
+      "prefix": null,
+      "suffix": null,
+      "dim_type": "linear",
+      "raw": "6",
+      "bbox": [
+        3402.0,
+        55.0,
+        3425.0,
+        93.0
+      ],
+      "page": 1,
+      "confidence": 0.96,
+      "measurement": {
+        "raw": "6",
+        "nominal": 6.0,
+        "unit": "mm",
+        "canonical_value": 6.0,
+        "canonical_unit": "mm",
+        "measurement_type": "linear",
+        "tolerance": null,
+        "confidence": 0.96
+      }
+    },
+    {
+      "text": "7",
+      "nominal": 7.0,
+      "tolerance": null,
+      "prefix": null,
+      "suffix": null,
+      "dim_type": "linear",
+      "raw": "7",
+      "bbox": [
+        4022.0,
+        56.0,
+        4043.0,
+        93.0
+      ],
+      "page": 1,
+      "confidence": 0.96,
+      "measurement": {
+        "raw": "7",
+        "nominal": 7.0,
+        "unit": "mm",
+        "canonical_value": 7.0,
+        "canonical_unit": "mm",
+        "measurement_type": "linear",
+        "tolerance": null,
+        "confidence": 0.96
+      }
+    },
+    {
+      "text": "8",
+      "nominal": 8.0,
+      "tolerance": null,
+      "prefix": null,
+      "suffix": null,
+      "dim_type": "linear",
+      "raw": "8",
+      "bbox": [
+        4637.0,
+        55.0,
+        4660.0,
+        93.0
+      ],
+      "page": 1,
+      "confidence": 0.95,
+      "measurement": {
+        "raw": "8",
+        "nominal": 8.0,
+        "unit": "mm",
+        "canonical_value": 8.0,
+        "canonical_unit": "mm",
+        "measurement_type": "linear",
+        "tolerance": null,
+        "confidence": 0.95
+      }
+    },
+    {
+      "text": "350",
+      "nominal": 350.0,
+      "tolerance": null,
+      "prefix": null,
+      "suffix": null,
+      "dim_type": "linear",
+      "raw": "350",
+      "bbox": [
+        1968.0,
+        651.0,
+        2032.0,
+        687.0
+      ],
+      "page": 1,
+      "confidence": 0.96,
+      "measurement": {
+        "raw": "350",
+        "nominal": 350.0,
+        "unit": "mm",
+        "canonical_value": 350.0,
+        "canonical_unit": "mm",
+        "measurement_type": "linear",
+        "tolerance": null,
+        "confidence": 0.96
+      }
+    },
+    {
+      "text": "30",
+      "nominal": 30.0,
+      "tolerance": null,
+      "prefix": null,
+      "suffix": null,
+      "dim_type": "linear",
+      "raw": "30",
+      "bbox": [
+        2663.0,
+        1575.0,
+        2704.0,
+        1609.0
+      ],
+      "page": 1,
+      "confidence": 0.96,
+      "measurement": {
+        "raw": "30",
+        "nominal": 30.0,
+        "unit": "mm",
+        "canonical_value": 30.0,
+        "canonical_unit": "mm",
+        "measurement_type": "linear",
+        "tolerance": null,
+        "confidence": 0.96
+      }
+    },
+    {
+      "text": "1.5",
+      "nominal": 1.5,
+      "tolerance": null,
+      "prefix": null,
+      "suffix": null,
+      "dim_type": "linear",
+      "raw": "1.5",
+      "bbox": [
+        2878.0,
+        1575.0,
+        2929.0,
+        1610.0
+      ],
+      "page": 1,
+      "confidence": 0.93,
+      "measurement": {
+        "raw": "1.5",
+        "nominal": 1.5,
+        "unit": "mm",
+        "canonical_value": 1.5,
+        "canonical_unit": "mm",
+        "measurement_type": "linear",
+        "tolerance": null,
+        "confidence": 0.93
+      }
+    },
+    {
+      "text": "1SO-4032-M16 000",
+      "nominal": 16.0,
+      "tolerance": null,
+      "prefix": "M",
+      "suffix": null,
+      "dim_type": "thread",
+      "raw": "1SO-4032-M16 000",
+      "bbox": [
+        3296.0,
+        1940.0,
+        3575.0,
+        2086.0
+      ],
+      "page": 1,
+      "confidence": 0.628,
+      "measurement": {
+        "raw": "1SO-4032-M16 000",
+        "nominal": 16.0,
+        "unit": null,
+        "canonical_value": 16.0,
+        "canonical_unit": null,
+        "measurement_type": "thread",
+        "tolerance": null,
+        "confidence": 0.628
+      }
+    },
+    {
+      "text": "Hex Nut M16",
+      "nominal": 16.0,
+      "tolerance": null,
+      "prefix": "M",
+      "suffix": null,
+      "dim_type": "thread",
+      "raw": "Hex Nut M16",
+      "bbox": [
+        3604.0,
+        1994.0,
+        3855.0,
+        2033.0
+      ],
+      "page": 1,
+      "confidence": 0.9233,
+      "measurement": {
+        "raw": "Hex Nut M16",
+        "nominal": 16.0,
+        "unit": null,
+        "canonical_value": 16.0,
+        "canonical_unit": null,
+        "measurement_type": "thread",
+        "tolerance": null,
+        "confidence": 0.9233
+      }
+    },
+    {
+      "text": "5v—lv—1v-1°v-1v-1N Carbon Steel EN8",
+      "nominal": 1.0,
+      "tolerance": null,
+      "prefix": null,
+      "suffix": "°",
+      "dim_type": "angle",
+      "raw": "5v—lv—1v-1\\olot°v-1v-1N Carbon Steel EN8",
+      "bbox": [
+        4026.0,
+        1723.0,
+        4448.0,
+        2248.0
+      ],
+      "page": 1,
+      "confidence": 0.7278,
+      "measurement": {
+        "raw": "5v—lv—1v-1\\olot°v-1v-1N Carbon Steel EN8",
+        "nominal": 1.0,
+        "unit": "°",
+        "canonical_value": 1.0,
+        "canonical_unit": "deg",
+        "measurement_type": "angle",
+        "tolerance": null,
+        "confidence": 0.7278
+      }
+    },
+    {
+      "text": "3",
+      "nominal": 3.0,
+      "tolerance": null,
+      "prefix": null,
+      "suffix": null,
+      "dim_type": "linear",
+      "raw": "3",
+      "bbox": [
+        3192.0,
+        1887.0,
+        3213.0,
+        1923.0
+      ],
+      "page": 1,
+      "confidence": 0.96,
+      "measurement": {
+        "raw": "3",
+        "nominal": 3.0,
+        "unit": "mm",
+        "canonical_value": 3.0,
+        "canonical_unit": "mm",
+        "measurement_type": "linear",
+        "tolerance": null,
+        "confidence": 0.96
+      }
+    },
+    {
+      "text": "1SO-4014-M16 Hex Bolt M16 x 60",
+      "nominal": 16.0,
+      "tolerance": null,
+      "prefix": "M",
+      "suffix": null,
+      "dim_type": "thread",
+      "raw": "1SO-4014-M16 Hex Bolt M16 x 60",
+      "bbox": [
+        3296.0,
+        1938.0,
+        3958.0,
+        1977.0
+      ],
+      "page": 1,
+      "confidence": 0.6988,
+      "measurement": {
+        "raw": "1SO-4014-M16 Hex Bolt M16 x 60",
+        "nominal": 16.0,
+        "unit": null,
+        "canonical_value": 16.0,
+        "canonical_unit": null,
+        "measurement_type": "thread",
+        "tolerance": null,
+        "confidence": 0.6988
+      }
+    },
+    {
+      "text": "ISO-7089-16 Plain Washer M16",
+      "nominal": 16.0,
+      "tolerance": null,
+      "prefix": "M",
+      "suffix": null,
+      "dim_type": "thread",
+      "raw": "ISO-7089-16 Plain Washer M16",
+      "bbox": [
+        3296.0,
+        2046.0,
+        3949.0,
+        2086.0
+      ],
+      "page": 1,
+      "confidence": 0.8904,
+      "measurement": {
+        "raw": "ISO-7089-16 Plain Washer M16",
+        "nominal": 16.0,
+        "unit": null,
+        "canonical_value": 16.0,
+        "canonical_unit": null,
+        "measurement_type": "thread",
+        "tolerance": null,
+        "confidence": 0.8904
+      }
+    },
+    {
+      "text": "0.05",
+      "nominal": 0.05,
+      "tolerance": null,
+      "prefix": null,
+      "suffix": null,
+      "dim_type": "linear",
+      "raw": "0.05",
+      "bbox": [
+        4474.0,
+        1994.0,
+        4556.0,
+        2033.0
+      ],
+      "page": 1,
+      "confidence": 0.91,
+      "measurement": {
+        "raw": "0.05",
+        "nominal": 0.05,
+        "unit": "mm",
+        "canonical_value": 0.05,
+        "canonical_unit": "mm",
+        "measurement_type": "linear",
+        "tolerance": null,
+        "confidence": 0.91
+      }
+    },
+    {
+      "text": "1300",
+      "nominal": 1300.0,
+      "tolerance": null,
+      "prefix": null,
+      "suffix": null,
+      "dim_type": "linear",
+      "raw": "1300",
+      "bbox": [
+        1977.0,
+        2591.0,
+        2057.0,
+        2628.0
+      ],
+      "page": 1,
+      "confidence": 0.96,
+      "measurement": {
+        "raw": "1300",
+        "nominal": 1300.0,
+        "unit": "mm",
+        "canonical_value": 1300.0,
+        "canonical_unit": "mm",
+        "measurement_type": "linear",
+        "tolerance": null,
+        "confidence": 0.96
+      }
+    },
+    {
+      "text": "10f1",
+      "nominal": 10.0,
+      "tolerance": "F1",
+      "prefix": null,
+      "suffix": null,
+      "dim_type": "linear",
+      "raw": "10f1",
+      "bbox": [
+        4694.0,
+        2630.0,
+        4822.0,
+        2680.0
+      ],
+      "page": 1,
+      "confidence": 0.83,
+      "measurement": {
+        "raw": "10f1",
+        "nominal": 10.0,
+        "unit": "mm",
+        "canonical_value": 10.0,
+        "canonical_unit": "mm",
+        "measurement_type": "linear",
+        "tolerance": "F1",
+        "confidence": 0.83
+      }
+    }
+  ],
+  "pages": [
+    {
+      "index": 0,
+      "source": "ocr",
+      "width": 4978,
+      "height": 2802,
+      "dpi": 400.0,
+      "skew_deg": -0.0,
+      "rotation_deg": 0,
+      "overlay_path": "C:\\Users\\A30165\\Documents\\BOM-EXTRACTOR\\storage\\previews\\f0b0055a\\overlays\\6_p1_overlay.png",
+      "kind": "dxf-traced",
+      "layout": "Model",
+      "source_format": "dxf",
+      "status": "complete",
+      "page_size": [
+        4978.0,
+        2802.0
+      ],
+      "source_width": 4978,
+      "source_height": 2802,
+      "regions": [
+        {
+          "kind": "title_block",
+          "bbox": [
+            3133.0,
+            2416.0,
+            4839.0,
+            2689.0
+          ],
+          "page": 0,
+          "confidence": 0.869
+        },
+        {
+          "kind": "bom",
+          "bbox": [
+            3126.0,
+            1716.0,
+            4864.0,
+            2253.0
+          ],
+          "page": 0,
+          "confidence": 0.91
+        },
+        {
+          "kind": "revision",
+          "bbox": [
+            1630.0,
+            116.0,
+            3365.0,
+            378.0
+          ],
+          "page": 0,
+          "confidence": 0.905
+        },
+        {
+          "kind": "notes",
+          "bbox": [
+            152.0,
+            143.0,
+            1488.0,
+            608.0
+          ],
+          "page": 0,
+          "confidence": 0.907
+        }
+      ],
+      "page_number": 1,
+      "image_url": "/api/drawings/f0b0055a/pages/1/image",
+      "preview_status": "available",
+      "overlay_url": "/api/drawings/f0b0055a/pages/1/overlay"
+    }
+  ],
+  "warnings": [
+    "page 1: empty paper-space layout(s) ignored: Layout1",
+    "page 1: no CAD text, attribute or dimension entities found - text may be exploded to lines",
+    "page 1: no CAD text entities - drawing is traced vector outlines; rendered filled and read with OCR",
+    "page 1: 16 vertical (rotated) text line(s) read"
+  ],
+  "validation": {
+    "issues": [
+      {
+        "severity": "warning",
+        "category": "unverified_value",
+        "section": "bom",
+        "field": "mass",
+        "page": 1,
+        "row": 0,
+        "message": "parsed mass has not been reviewed",
+        "value": "8.5 kg"
+      },
+      {
+        "severity": "warning",
+        "category": "ambiguous_value",
+        "section": "bom",
+        "field": "mass",
+        "page": 1,
+        "row": 1,
+        "message": "unsupported mass unit",
+        "value": "8.5 ka"
+      },
+      {
+        "severity": "warning",
+        "category": "ambiguous_value",
+        "section": "bom",
+        "field": "mass",
+        "page": 1,
+        "row": 1,
+        "message": "mass contains trailing or malformed text",
+        "value": "8.5 ka"
+      },
+      {
+        "severity": "warning",
+        "category": "ambiguous_value",
+        "section": "bom",
+        "field": "mass",
+        "page": 1,
+        "row": 2,
+        "message": "unsupported mass unit",
+        "value": "8.5 ka"
+      },
+      {
+        "severity": "warning",
+        "category": "ambiguous_value",
+        "section": "bom",
+        "field": "mass",
+        "page": 1,
+        "row": 2,
+        "message": "mass contains trailing or malformed text",
+        "value": "8.5 ka"
+      },
+      {
+        "severity": "warning",
+        "category": "low_confidence",
+        "section": "bom",
+        "field": null,
+        "page": 1,
+        "row": 3,
+        "message": "low OCR confidence (0.45)",
+        "value": 0.45
+      },
+      {
+        "severity": "warning",
+        "category": "ambiguous_value",
+        "section": "bom",
+        "field": "mass",
+        "page": 1,
+        "row": 3,
+        "message": "unsupported mass unit",
+        "value": "0.18 ka"
+      },
+      {
+        "severity": "warning",
+        "category": "ambiguous_value",
+        "section": "bom",
+        "field": "mass",
+        "page": 1,
+        "row": 3,
+        "message": "mass contains trailing or malformed text",
+        "value": "0.18 ka"
+      },
+      {
+        "severity": "warning",
+        "category": "low_confidence",
+        "section": "bom",
+        "field": null,
+        "page": 1,
+        "row": 4,
+        "message": "low OCR confidence (0.63)",
+        "value": 0.628
+      },
+      {
+        "severity": "warning",
+        "category": "ambiguous_value",
+        "section": "bom",
+        "field": "mass",
+        "page": 1,
+        "row": 4,
+        "message": "mass unit is missing or assumed",
+        "value": "0.05"
+      },
+      {
+        "severity": "info",
+        "category": "unrecognised_value",
+        "section": "bom",
+        "field": "material",
+        "page": 1,
+        "row": 5,
+        "message": "material 'Spring Steel' not in the material library",
+        "value": "Spring Steel"
+      },
+      {
+        "severity": "warning",
+        "category": "unverified_value",
+        "section": "bom",
+        "field": "mass",
+        "page": 1,
+        "row": 5,
+        "message": "parsed mass has not been reviewed",
+        "value": "0.01 kg"
+      },
+      {
+        "severity": "warning",
+        "category": "unverified_value",
+        "section": "bom",
+        "field": "mass",
+        "page": 1,
+        "row": 6,
+        "message": "parsed mass has not been reviewed",
+        "value": "15.2 kg"
+      },
+      {
+        "severity": "warning",
+        "category": "unverified_value",
+        "section": "bom",
+        "field": "mass",
+        "page": 1,
+        "row": 7,
+        "message": "parsed mass has not been reviewed",
+        "value": "15.2 kg"
+      },
+      {
+        "severity": "warning",
+        "category": "ambiguous_value",
+        "section": "bom",
+        "field": "mass",
+        "page": 1,
+        "row": 8,
+        "message": "unsupported mass unit",
+        "value": "0.15 ka"
+      },
+      {
+        "severity": "warning",
+        "category": "ambiguous_value",
+        "section": "bom",
+        "field": "mass",
+        "page": 1,
+        "row": 8,
+        "message": "mass contains trailing or malformed text",
+        "value": "0.15 ka"
+      },
+      {
+        "severity": "error",
+        "category": "duplicate",
+        "section": "bom",
+        "field": "item",
+        "page": 1,
+        "row": 2,
+        "message": "item number 3 appears 2 times for different parts",
+        "value": "3"
+      },
+      {
+        "severity": "error",
+        "category": "duplicate",
+        "section": "bom",
+        "field": "item",
+        "page": 1,
+        "row": 3,
+        "message": "item number 3 appears 2 times for different parts",
+        "value": "3"
+      },
+      {
+        "severity": "info",
+        "category": "repeated_part",
+        "section": "bom",
+        "field": "part_number",
+        "page": 1,
+        "row": 0,
+        "message": "part FCA-DRIV-101 listed under 2 item numbers (legitimate repeat?)",
+        "value": null
+      },
+      {
+        "severity": "warning",
+        "category": "low_confidence",
+        "section": "title_block",
+        "field": "scale",
+        "page": null,
+        "row": null,
+        "message": "'scale' read with low confidence (0.67)",
+        "value": "1:2"
+      },
+      {
+        "severity": "warning",
+        "category": "low_confidence",
+        "section": "title_block",
+        "field": "revision",
+        "page": null,
+        "row": null,
+        "message": "'revision' read with low confidence (0.60)",
+        "value": "B"
+      },
+      {
+        "severity": "warning",
+        "category": "weak_source",
+        "section": "title_block",
+        "field": "revision",
+        "page": null,
+        "row": null,
+        "message": "'revision' was not read from a labelled title-block cell (source: page_text)",
+        "value": "B"
+      },
+      {
+        "severity": "info",
+        "category": "weak_source",
+        "section": "title_block",
+        "field": "projection",
+        "page": null,
+        "row": null,
+        "message": "'projection' was not read from a labelled title-block cell (source: page_text)",
+        "value": "FIRST ANGLE PROJECTION"
+      },
+      {
+        "severity": "info",
+        "category": "weak_source",
+        "section": "title_block",
+        "field": "units",
+        "page": null,
+        "row": null,
+        "message": "'units' was not read from a labelled title-block cell (source: page_text)",
+        "value": "Metric (mm)"
+      }
+    ],
+    "counts": {
+      "error": 2,
+      "warning": 18,
+      "info": 4
+    },
+    "review_required": true,
+    "completeness": {
+      "bom": 1.0,
+      "title_block": 1.0
+    },
+    "review_fields": {
+      "bom": {
+        "0": [
+          "mass"
+        ],
+        "1": [
+          "mass"
+        ],
+        "2": [
+          "item",
+          "mass"
+        ],
+        "3": [
+          "item",
+          "mass",
+          "row"
+        ],
+        "4": [
+          "mass",
+          "row"
+        ],
+        "5": [
+          "mass"
+        ],
+        "6": [
+          "mass"
+        ],
+        "7": [
+          "mass"
+        ],
+        "8": [
+          "mass"
+        ]
+      },
+      "title_block": [
+        "revision",
+        "scale"
+      ]
+    }
+  },
+  "processing_seconds": 74.38,
+  "source_format": "dxf",
+  "processing_status": "complete",
+  "processing_warnings": [
+    "page 1: empty paper-space layout(s) ignored: Layout1",
+    "page 1: no CAD text, attribute or dimension entities found - text may be exploded to lines",
+    "page 1: no CAD text entities - drawing is traced vector outlines; rendered filled and read with OCR",
+    "page 1: 16 vertical (rotated) text line(s) read"
+  ]
+}

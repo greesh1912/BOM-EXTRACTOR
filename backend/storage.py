@@ -150,6 +150,11 @@ class StorageManager:
 
     def update_drawing_verification(self, drawing_id: str, verified: bool):
         if drawing_id in self.db["drawings"]:
+            if verified:
+                result = self.get_result(drawing_id) or {}
+                validation = result.get("validation") or {}
+                if not validation or validation.get("review_required") or (validation.get("counts") or {}).get("error", 0) or (validation.get("counts") or {}).get("warning", 0):
+                    raise ValueError("Drawing has unresolved validation findings")
             self.db["drawings"][drawing_id]["verified"] = verified
             self._save_db()
 
@@ -222,7 +227,8 @@ class StorageManager:
                     data["mass_measurement"] = None
                     data["mass_verified"] = False
                 for key in ("quantity_measurement", "mass_measurement"):
-                    if isinstance(row.get(key), dict):
+                    text_key = "quantity" if key == "quantity_measurement" else "mass"
+                    if row.get(text_key) and isinstance(row.get(key), dict):
                         data[key] = Measurement(**{k: v for k, v in row[key].items()
                                                    if k in {"raw", "nominal", "unit", "canonical_value", "canonical_unit", "measurement_type", "tolerance", "confidence"}})
                 if data.get("quantity"):

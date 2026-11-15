@@ -41,9 +41,6 @@ async def update_drawing(drawing_id: str, payload: UpdateDrawingPayload):
     if not meta:
         raise HTTPException(status_code=404, detail="Drawing not found.")
 
-    if payload.verified is not None:
-        storage.update_drawing_verification(drawing_id, payload.verified)
-
     updates = {}
     if payload.title_block is not None:
         updates["title_block"] = payload.title_block
@@ -56,6 +53,12 @@ async def update_drawing(drawing_id: str, payload: UpdateDrawingPayload):
 
     if updates:
         storage.update_result_content(drawing_id, updates)
+
+    if payload.verified is not None:
+        try:
+            storage.update_drawing_verification(drawing_id, payload.verified)
+        except ValueError as exc:
+            raise HTTPException(status_code=409, detail=str(exc)) from exc
 
     updated_meta = storage.get_metadata(drawing_id)
     updated_res = storage.get_result(drawing_id)
