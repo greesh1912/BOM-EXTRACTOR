@@ -21,6 +21,28 @@
       "processing_seconds": 95.45,
       "error_message": null,
       "source_path": "C:\\Users\\A30165\\Documents\\BOM-EXTRACTOR\\storage\\uploads\\2245d6f7\\8.dxf"
+    },
+    "179eec64": {
+      "id": "179eec64",
+      "filename": "10.dwg",
+      "file_format": "DWG",
+      "file_size_bytes": 2003779,
+      "uploaded_at": "2026-11-15T18:08:11.746032+00:00",
+      "status": "completed",
+      "verified": false,
+      "review_required": true,
+      "review_reasons": "low-confidence title fields: revision; 9 BOM row(s) flagged; low text OCR confidence on row (min 0.29); validation: 1 error(s), 13 warning(s)",
+      "mean_confidence": 0.913,
+      "text_confidence": 0.898,
+      "structural_confidence": 0.996,
+      "drawing_number": "GHA-ASSY-001",
+      "drawing_title": "GEARBOX HOUSING ASSEMRLY",
+      "revision": "B",
+      "bom_items_count": 9,
+      "page_count": 1,
+      "processing_seconds": 68.68,
+      "error_message": null,
+      "source_path": "C:\\Users\\A30165\\Documents\\BOM-EXTRACTOR\\storage\\uploads\\179eec64\\10.dwg"
     }
   }
 }

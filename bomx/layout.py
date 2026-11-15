@@ -1188,27 +1188,39 @@ def find_notes(words: list[Word], dpi: float) -> list[tuple[list[TextLine], tupl
 
 def split_numbered_notes(lines: list[TextLine]) -> list[dict]:
     items: list[dict] = []
-    numbered = any(_NUM.match(l.text) for l in lines)
-    num_x = min((l.bbox[0] for l in lines if _NUM.match(l.text)), default=None)
-    prev = None
-    for l in lines:
-        m = _NUM.match(l.text)
-        lh = statistics.median([w.h for w in l.words]) if l.words else 1
+    inline_num = re.compile(r"(?<!\S)(\d{1,2}\s*[.)\]])\s+")
+    records = []
+    for line in lines:
+        marks = list(inline_num.finditer(line.text))
+        if len(marks) > 1:
+            for i, mark in enumerate(marks):
+                end = marks[i + 1].start() if i + 1 < len(marks) else len(line.text)
+                txt = line.text[mark.start():end].strip()
+                if txt:
+                    records.append((txt, line.bbox, line.conf, line.words))
+        else:
+            records.append((line.text, line.bbox, line.conf, line.words))
+    numbered = any(_NUM.match(text) for text, *_ in records)
+    num_x = min((bb[0] for text, bb, _, _ in records if _NUM.match(text)), default=None)
+    prev_bbox = None
+    for text, bbox, confidence, words in records:
+        m = _NUM.match(text)
+        lh = statistics.median([w.h for w in words]) if words else 1
         new_unnumbered = False
-        if not m and items and numbered and prev is not None:
+        if not m and items and numbered and prev_bbox is not None:
             # a continuation line is indented past the number and follows closely;
             # an unnumbered line at the number column after a gap is its own note
-            at_num_col = num_x is not None and l.bbox[0] <= num_x + 0.6 * lh
-            gap = l.bbox[1] - prev.bbox[3]
+            at_num_col = num_x is not None and bbox[0] <= num_x + 0.6 * lh
+            gap = bbox[1] - prev_bbox[3]
             new_unnumbered = at_num_col and (gap > 0.3 * lh or items[-1].get("standalone"))
-        prev = l
+        prev_bbox = bbox
         if m or not items or new_unnumbered:
             num = m.group(1) if m else None
-            text = _NUM.sub("", l.text, count=1) if m else l.text
-            items.append({"number": num, "text": text.strip(), "conf": l.conf, "bbox": l.bbox,
+            body = _NUM.sub("", text, count=1) if m else text
+            items.append({"number": num, "text": body.strip(), "conf": confidence, "bbox": bbox,
                           "standalone": bool(new_unnumbered)})
         else:
-            items[-1]["text"] = (items[-1]["text"] + " " + l.text).strip()
-            items[-1]["conf"] = min(items[-1]["conf"], l.conf)
-            items[-1]["bbox"] = union_bbox([items[-1]["bbox"], l.bbox])
+            items[-1]["text"] = (items[-1]["text"] + " " + text).strip()
+            items[-1]["conf"] = min(items[-1]["conf"], confidence)
+            items[-1]["bbox"] = union_bbox([items[-1]["bbox"], bbox])
     return items

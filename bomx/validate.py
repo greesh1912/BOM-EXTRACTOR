@@ -182,6 +182,7 @@ def _check_bom_rows(res: DrawingResult, vcfg: dict, rep: _Report, review_conf: f
                     "separator", field="mass", value=r.mass, **loc)
         for flag, message in (("unsupported_mass_unit", "unsupported mass unit"),
                               ("mass_unit_assumed_kg", "mass unit is missing or assumed"),
+                              ("malformed_mass_value", "mass contains trailing or malformed text"),
                               ("uncertain_column_assignment", "one or more columns have uncertain meaning"),
                               ("possible_continuation", "text row may continue the preceding row")):
             if flag in r.flags:

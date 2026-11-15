@@ -379,6 +379,20 @@ def _extract_page_content(pa: PageAnalysis, raw: RawPage, cfg: dict, page_no: in
     page_text = "\n".join(l.text for l in group_lines(
         [w for w in pa.words if not any(_inside(w, b) for b in tbl_boxes)]))
     tb = parse_title_block(pa.tb_cells, cfg["title_labels"], raw.dpi, page_text, cfg["date_order"])
+    # Unit declarations are also commonly printed just outside the title
+    # block. Keep the matched word segment's bbox so the value remains locatable.
+    if not (tb.get("units") and tb["units"].value):
+        unit_rx = re.compile(r"\b(?:METRIC|IMPERIAL)\s*\(\s*(?:MM|CM|M|INCH(?:ES)?|IN)\s*\)|"
+                             r"\bDIMENSIONS?\s+IN\s+(?:MM|CM|M|INCH(?:ES)?|IN)\b", re.I)
+        for line in group_lines(pa.free_words):
+            for seg in split_segments(line, 2.0):
+                match = unit_rx.search(seg.text)
+                if match:
+                    tb["units"] = FieldValue(match.group(0), round(seg.conf, 3), seg.bbox,
+                                              raw=seg.text, source="page_text", page=page_no)
+                    break
+            if tb.get("units") and tb["units"].value:
+                break
     # Dates physically inside a detected revision-history table are history
     # entries, not the drawing's title-block date. Preserve them as candidates
     # but require review if region selection has included the integrated box.
@@ -461,8 +475,6 @@ def _extract_page_content(pa: PageAnalysis, raw: RawPage, cfg: dict, page_no: in
     # ---------------- notes & specs
     for lines, bb in pa.notes_blocks:
         for item in split_numbered_notes(lines):
-            if pr.source == "ocr":
-                item["text"] = fix_ocr_confusions(item["text"])
             res.notes.append({"page": page_no, "number": item["number"], "text": item["text"],
                               "confidence": round(item["conf"], 3),
                               "bbox": [round(v, 1) for v in item["bbox"]]})

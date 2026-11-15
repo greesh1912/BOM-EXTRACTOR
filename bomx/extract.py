@@ -624,9 +624,17 @@ def parse_mass_measurement(text: str, default_unit: Optional[str] = None, conf: 
     if not text:
         return None, None, []
     raw = text.strip()
-    m = _MASS_RX.search(raw)
+    # Require the whole field to be a mass token. A valid numeric prefix must
+    # not hide trailing OCR debris such as "4.2kg x X".
+    m = _MASS_RX.fullmatch(raw)
     if not m:
-        flags = ["unsupported_mass_unit"] if re.search(r"[A-Za-z]{2,}", raw) else ["mass_not_numeric"]
+        prefix = _MASS_RX.match(raw)
+        trailing = bool(prefix and raw[prefix.end():].strip())
+        flags = (["malformed_mass_value"] if trailing and prefix.group(2)
+                 else (["unsupported_mass_unit"] if re.search(r"[A-Za-z]{2,}", raw)
+                       else ["mass_not_numeric"]))
+        if re.search(r"\d", raw) and "malformed_mass_value" not in flags:
+            flags.append("malformed_mass_value")
         return None, None, flags
 
     v = _parse_num_str(m.group(1), is_quantity=False)

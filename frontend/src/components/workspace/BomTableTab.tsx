@@ -207,8 +207,9 @@ export const BomTableTab: React.FC<BomTableTabProps> = ({
           const massNeedsReview = row.flags?.some((f) => f.includes('mass') || f === 'uncertain_column_assignment') ||
             (row.mass_kg != null && !row.mass_verified);
           const massStatus = row.mass_verified ? 'Verified' : row.flags?.includes('unsupported_mass_unit')
-            ? 'Unsupported unit' : row.flags?.includes('mass_unit_assumed_kg')
-              ? 'Unit assumed' : 'Unverified';
+            ? 'Unsupported unit' : row.flags?.includes('malformed_mass_value')
+              ? 'Malformed' : row.flags?.includes('mass_unit_assumed_kg')
+                ? 'Unit assumed' : 'Unverified';
           return (
             <div className="flex items-center gap-1">
               <input
