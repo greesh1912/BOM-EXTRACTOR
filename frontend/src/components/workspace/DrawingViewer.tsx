@@ -247,6 +247,7 @@ export const DrawingViewer: React.FC<DrawingViewerProps> = ({
                 const [nx, ny, nw, nh] = box.norm;
                 const isHighlighted = box.id === highlightedOverlayId;
                 const isHovered = hoveredOverlay?.id === box.id;
+                const isDetailOverlay = box.type !== 'region';
 
                 const isTitleSection =
                   box.category === 'title_block' || box.type === 'title_field' || box.id.includes('tb_');
@@ -278,19 +279,21 @@ export const DrawingViewer: React.FC<DrawingViewerProps> = ({
                       top: `${ny * 100}%`,
                       width: `${nw * 100}%`,
                       height: `${nh * 100}%`,
-                      borderColor: isHighlighted ? '#F59E0B' : color,
+                      // Keep field hit-targets available for click/hover, but do not
+                      // draw every OCR box on top of the section region by default.
+                      borderColor: isHighlighted || isHovered ? (isHighlighted ? '#F59E0B' : color) : 'transparent',
                       backgroundColor: isHighlighted
                         ? 'rgba(245, 158, 11, 0.28)'
                         : isHovered
                           ? 'rgba(37, 99, 235, 0.16)'
-                          : 'rgba(37, 99, 235, 0.04)',
-                      borderWidth: isHighlighted ? '3px' : '2px',
+                          : isDetailOverlay ? 'transparent' : 'rgba(37, 99, 235, 0.04)',
+                      borderWidth: isHighlighted ? '3px' : isHovered ? '2px' : isDetailOverlay ? '0px' : '2px',
                     }}
                     className={`absolute cursor-pointer rounded-xs border transition-all duration-150 ${isHighlighted
                         ? 'ring-4 ring-amber-400/60 shadow-lg z-30 animate-pulse'
                         : isHovered
                           ? 'z-20 shadow-md ring-2 ring-blue-300'
-                          : 'z-10 hover:border-blue-600'
+                        : isDetailOverlay ? 'z-20' : 'z-10 hover:border-blue-600'
                       }`}
                   >
                     {/* Badge Pill pinned on region */}
