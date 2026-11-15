@@ -31,6 +31,7 @@ class Column:
     x1: float
     unit: Optional[str] = None
     inferred: bool = False
+    uncertain: bool = False
 
 
 @dataclass
@@ -638,16 +639,15 @@ def _infer_columns(t: "Table", vocab) -> None:
 
         if "material" not in have and (is_mat_data or (re.search(r"\bMATERIAL\b", head_upper) and not frac(_MASS_NUM_RX) >= 0.8)):
             guess = "material"
-        elif "mass" not in have and not is_mat_data and (
-            ((has_mass_header or has_unit_header) and frac(_MASS_NUM_RX) >= 0.5) or
-            (frac(_MASS_NUM_RX) >= 0.80 and (any("." in v or "," in v for v in vals) or any(re.search(r"\b(?:kg|lbs?|gms?)\b", v, re.I) for v in vals)))
-        ):
+        elif "mass" not in have and not is_mat_data and (has_mass_header or has_unit_header) and frac(_MASS_NUM_RX) >= 0.5:
             guess = "mass"
         elif frac(_INT_RX) >= 0.85 and "item" not in have and col is t.columns[0] and \
                 _mostly_sequential(vals):
             guess = "item"  # unlabelled / misread first column numbered 1, 2, 3 ...
         elif frac(_INT_RX) >= 0.85 and "quantity" not in have and "item" in have:
-            guess = "quantity"
+            # Integer-only values are not enough to distinguish quantity from
+            # another numeric field. Leave this column unmapped for review.
+            col.uncertain = True
         elif "part_number" not in have and frac(_PN_RX) >= 0.75:
             guess = "part_number"
         if guess:
@@ -736,6 +736,8 @@ def _band_to_values(band: list[Cell], cols: list[Column]) -> dict[str, TableCell
         struct_conf = round(0.85 if c.parent >= 0 else ov_frac, 3)
         if getattr(best, "inferred", False):
             struct_conf = round(min(struct_conf, 0.80), 3)
+        if getattr(best, "uncertain", False):
+            struct_conf = min(struct_conf, 0.55)
         vals[best.key] = TableCellValue(txt.strip(), c.conf if c.words else 1.0, c.bbox,
                                         "split" if c.parent >= 0 else "cell", struct_conf=struct_conf,
                                         group=c.parent)
@@ -931,7 +933,11 @@ def title_block_cells(groups: list[list[Cell]], used: set[int],
         n, rem, flds = item
         has_id = 10 if bool(flds & {"drawing_number", "drawing_title"}) else 0
         avg_y = sum(c.y0 for c in rem) / max(len(rem), 1)
-        return (has_id, n, avg_y)
+        # Revision labels are common in integrated boxes; count them as
+        # supporting structure, but never let them outweigh title fields.
+        revision_only = {"revision", "zone", "ecn"}
+        title_evidence = len(flds - revision_only)
+        return (has_id, title_evidence, n, avg_y)
 
     # Primary selection: groups with >= 2 fields including a key title field
     for n, rem, flds in sorted(scored, key=_tb_score, reverse=True):

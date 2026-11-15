@@ -180,6 +180,17 @@ def _check_bom_rows(res: DrawingResult, vcfg: dict, rep: _Report, review_conf: f
         if "mass_decimal_ambiguous" in r.flags:
             rep.add("warning", "ambiguous_value", "bom", f"mass '{r.mass}' has an ambiguous decimal "
                     "separator", field="mass", value=r.mass, **loc)
+        for flag, message in (("unsupported_mass_unit", "unsupported mass unit"),
+                              ("mass_unit_assumed_kg", "mass unit is missing or assumed"),
+                              ("uncertain_column_assignment", "one or more columns have uncertain meaning"),
+                              ("possible_continuation", "text row may continue the preceding row")):
+            if flag in r.flags:
+                rep.add("warning", "ambiguous_value", "bom", message,
+                        field="mass" if "mass" in flag else None,
+                        value=r.mass if "mass" in flag else None, **loc)
+        if r.mass_kg is not None and not r.mass_verified:
+            rep.add("warning", "unverified_value", "bom", "parsed mass has not been reviewed",
+                    field="mass", value=r.mass, **loc)
 
 
 def _check_bom_duplicates(res: DrawingResult, rep: _Report) -> None:
@@ -271,6 +282,10 @@ def _check_title(res: DrawingResult, vcfg: dict, rep: _Report, review_conf: floa
         if f == "drawing_number" and _OCR_JUNK.search(fv.value):
             rep.add("warning", "suspicious_value", "title_block", f"drawing number '{fv.value}' "
                     "contains OCR-suspicious characters", field=f, value=fv.value)
+        if getattr(fv, "needs_review", False):
+            rep.add("warning", "ambiguous_value", "title_block",
+                    f"'{f}' has conflicting page candidates", field=f,
+                    page=getattr(fv, "page", None), value=fv.value)
 
 
 # ---------------------------------------------------------------- cross checks
@@ -303,8 +318,8 @@ def _cross_checks(res: DrawingResult, vcfg: dict, rep: _Report) -> None:
     w = tb.get("weight")
     if w and isinstance(w.normalized, (int, float)) and res.bom and \
             all(r.mass_kg is not None for r in res.bom):
-        is_total = any(r.extra.get("mass_basis") == "total" for r in res.bom)
-        total = sum(r.mass_kg * (1 if is_total else (r.quantity_value or 1)) for r in res.bom)
+        total = sum(r.mass_kg * (1 if r.extra.get("mass_basis") == "total"
+                                 else (r.quantity_value or 1)) for r in res.bom)
         if total > 0 and abs(total - w.normalized) / max(total, w.normalized) > float(vcfg["mass_tolerance"]):
             rep.add("warning", "cross_check", "cross_check", f"title-block weight {w.normalized:g} kg "
                     f"differs from BOM total {total:.3g} kg", field="weight", value=w.normalized)

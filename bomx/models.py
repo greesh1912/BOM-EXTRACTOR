@@ -105,6 +105,9 @@ class FieldValue:
     normalized: Any = None
     # where the value came from: title_block | page_text | revision_table | cad_attribute
     source: Optional[str] = None
+    page: Optional[int] = None
+    candidates: list[dict[str, Any]] = field(default_factory=list)
+    needs_review: bool = False
 
     def to_dict(self) -> dict:
         return {k: v for k, v in asdict(self).items()}
@@ -159,8 +162,6 @@ class BomRow:
             self.mass_kg = None
             self.mass_measurement = None
             self.mass_verified = False
-        elif self.mass_kg is not None:
-            self.mass_verified = True
 
         if self.quantity_measurement is None and (self.quantity_value is not None or self.quantity):
             raw = self.quantity or (str(self.quantity_value) if self.quantity_value is not None else "")
@@ -333,6 +334,8 @@ class PageResult:
     source_format: str = ""  # validated input format: pdf | png | jpg | tif | bmp | webp | dxf | dwg
     status: str = "complete"  # complete | partial (content known to be incomplete) | failed
     page_size: tuple = (0.0, 0.0)  # original page size (PDF points / CAD units / pixels)
+    source_width: Optional[int] = None
+    source_height: Optional[int] = None
 
 
 @dataclass

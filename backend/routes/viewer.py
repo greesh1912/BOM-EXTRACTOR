@@ -3,6 +3,7 @@ from __future__ import annotations
 
 from pathlib import Path
 from typing import Any, Dict, List
+import math
 from fastapi import APIRouter, HTTPException
 from fastapi.responses import FileResponse
 from PIL import Image
@@ -62,39 +63,41 @@ async def get_drawing_overlays(drawing_id: str):
     pages = res.get("pages", [])
     overlays_by_page: Dict[int, List[Dict[str, Any]]] = {}
 
-    def _contains(outer, inner, pad=5.0) -> bool:
-        return (outer[0] - pad <= inner[0] and inner[2] <= outer[2] + pad and
-                outer[1] - pad <= inner[1] and inner[3] <= outer[3] + pad)
-
-    # Title-block values carry no page number: place each on the page whose
-    # title-block region contains it (else the first page with a title block,
-    # else page 1) - never on every page.
-    tb_pages = [int(pg.get("index", i)) + 1 for i, pg in enumerate(pages)
-                if any(r.get("kind") == "title_block" for r in pg.get("regions", []))]
-    field_page: Dict[str, int] = {}
-    for fname, fv in (res.get("title_block") or {}).items():
-        bb = fv.get("bbox") if isinstance(fv, dict) else None
-        if not bb or len(bb) != 4:
-            continue
-        pg_hit = None
-        for i, pg in enumerate(pages):
-            for r in pg.get("regions", []):
-                if r.get("kind") == "title_block" and r.get("bbox") and _contains(r["bbox"], bb):
-                    pg_hit = int(pg.get("index", i)) + 1
-                    break
-            if pg_hit:
-                break
-        field_page[fname] = pg_hit or (tb_pages[0] if tb_pages else 1)
+    field_page = {fname: fv.get("page") for fname, fv in (res.get("title_block") or {}).items()
+                  if isinstance(fv, dict) and isinstance(fv.get("page"), int)}
+    unlocated_fields = [fname for fname, fv in (res.get("title_block") or {}).items()
+                        if isinstance(fv, dict) and fv.get("value") and fname not in field_page]
 
     for p_idx, page in enumerate(pages):
         page_num = int(page.get("index", p_idx)) + 1  # the document's own page number
-        page_w = page.get("width") or 2000
-        page_h = page.get("height") or 1400
+        page_w = page.get("source_width") or page.get("width") or 2000
+        page_h = page.get("source_height") or page.get("height") or 1400
+        def source_bbox(bb):
+            if not bb or len(bb) != 4:
+                return bb
+            x0, y0, x1, y1 = map(float, bb)
+            pts = [(x0, y0), (x1, y0), (x0, y1), (x1, y1)]
+            skew = float(page.get("skew_deg") or 0.0)
+            if abs(skew) >= 0.05:
+                a = math.radians(skew)
+                c, s = math.cos(a), math.sin(a)
+                cx, cy = (page.get("width") or page_w) / 2, (page.get("height") or page_h) / 2
+                pts = [(c * (x-cx) - s * (y-cy) + cx,
+                        s * (x-cx) + c * (y-cy) + cy) for x, y in pts]
+            rot = int(page.get("rotation_deg") or 0) % 360
+            if rot == 90:
+                pts = [(y, page_h-x) for x, y in pts]
+            elif rot == 180:
+                pts = [(page_w-x, page_h-y) for x, y in pts]
+            elif rot == 270:
+                pts = [(page_w-y, x) for x, y in pts]
+            return [max(0, min(x for x, y in pts)), max(0, min(y for x, y in pts)),
+                    min(page_w, max(x for x, y in pts)), min(page_h, max(y for x, y in pts))]
         page_overlays = []
 
         # 1. Macro Regions (Title block, BOM table, Revisions, Notes)
         for r in page.get("regions", []):
-            bb = r.get("bbox")
+            bb = source_bbox(r.get("bbox"))
             if bb and len(bb) == 4:
                 x0, y0, x1, y1 = bb
                 page_overlays.append({
@@ -113,7 +116,7 @@ async def get_drawing_overlays(drawing_id: str):
             if field_page.get(field_name) != page_num:
                 continue
             if isinstance(f_val, dict):
-                bb = f_val.get("bbox")
+                bb = source_bbox(f_val.get("bbox"))
                 if bb and len(bb) == 4:
                     x0, y0, x1, y1 = bb
                     page_overlays.append({
@@ -131,7 +134,7 @@ async def get_drawing_overlays(drawing_id: str):
         # 3. BOM Rows
         for r_idx, row in enumerate(res.get("bom", [])):
             if row.get("page", 1) == page_num:
-                bb = row.get("bbox")
+                bb = source_bbox(row.get("bbox"))
                 if bb and len(bb) == 4:
                     x0, y0, x1, y1 = bb
                     page_overlays.append({
@@ -149,7 +152,7 @@ async def get_drawing_overlays(drawing_id: str):
         # 4. Specifications & Notes
         for s_idx, spec in enumerate(res.get("specs", [])):
             if spec.get("page", 1) == page_num:
-                bb = spec.get("bbox")
+                bb = source_bbox(spec.get("bbox"))
                 if bb and len(bb) == 4:
                     x0, y0, x1, y1 = bb
                     page_overlays.append({
@@ -166,7 +169,7 @@ async def get_drawing_overlays(drawing_id: str):
         # 5. Revision history rows
         for v_idx, rev in enumerate(res.get("revisions", [])):
             if rev.get("page", 1) == page_num:
-                bb = rev.get("bbox")
+                bb = source_bbox(rev.get("bbox"))
                 if bb and len(bb) == 4:
                     x0, y0, x1, y1 = bb
                     page_overlays.append({
@@ -185,7 +188,7 @@ async def get_drawing_overlays(drawing_id: str):
         # 6. Technical notes
         for n_idx, note in enumerate(res.get("notes", [])):
             if note.get("page", 1) == page_num:
-                bb = note.get("bbox")
+                bb = source_bbox(note.get("bbox"))
                 if bb and len(bb) == 4:
                     x0, y0, x1, y1 = bb
                     page_overlays.append({
@@ -207,6 +210,8 @@ async def get_drawing_overlays(drawing_id: str):
         "drawing_id": drawing_id,
         "page_count": len(pages),
         "overlays": overlays_by_page,
+        "warnings": [f"Title field '{name}' has no source page; highlight omitted and review required."
+                     for name in unlocated_fields],
     }
 
 

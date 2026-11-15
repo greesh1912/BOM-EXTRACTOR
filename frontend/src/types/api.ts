@@ -27,6 +27,9 @@ export interface FieldValue {
   raw?: string | null;
   normalized?: any;
   source?: 'title_block' | 'page_text' | 'revision_table' | 'cad_attribute' | 'derived' | string | null;
+  page?: number | null;
+  candidates?: Array<Record<string, any>>;
+  needs_review?: boolean;
 }
 
 export interface BomRow {
@@ -220,6 +223,7 @@ export interface DrawingOverlaysResponse {
   drawing_id: string;
   page_count: number;
   overlays: Record<number, OverlayBox[]>;
+  warnings?: string[];
 }
 
 export interface DashboardStats {

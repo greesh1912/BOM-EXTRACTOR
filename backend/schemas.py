@@ -27,6 +27,10 @@ class FieldValueSchema(BaseModel):
     bbox: Optional[List[float]] = None
     raw: Optional[str] = None
     normalized: Any = None
+    source: Optional[str] = None
+    page: Optional[int] = None
+    candidates: List[Dict[str, Any]] = Field(default_factory=list)
+    needs_review: bool = False
 
 
 class BomRowSchema(BaseModel):
@@ -49,6 +53,10 @@ class BomRowSchema(BaseModel):
     mass_measurement: Optional[MeasurementSchema] = None
     mass_verified: bool = False
     mass_candidate: Optional[float] = None
+    table: int = 0
+    row_index: int = 0
+    field_confidence: Dict[str, float] = Field(default_factory=dict)
+    field_bbox: Dict[str, Any] = Field(default_factory=dict)
 
 
 class RevisionRowSchema(BaseModel):
@@ -107,6 +115,9 @@ class PageResultSchema(BaseModel):
     kind: str = ""
     layout: str = ""
     image_url: Optional[str] = None
+    overlay_url: Optional[str] = None
+    source_width: Optional[int] = None
+    source_height: Optional[int] = None
 
 
 class DrawingResultSchema(BaseModel):
@@ -122,6 +133,7 @@ class DrawingResultSchema(BaseModel):
     pages: List[PageResultSchema] = Field(default_factory=list)
     warnings: List[str] = Field(default_factory=list)
     processing_seconds: float = 0.0
+    validation: Dict[str, Any] = Field(default_factory=dict)
 
 
 # -----------------------------------------------------------------------------

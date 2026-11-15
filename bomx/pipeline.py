@@ -260,12 +260,14 @@ def analyse_page(raw: RawPage, cfg: dict) -> PageAnalysis:
         regions.append(Region("notes", bb, raw.index, _avg([l.conf for l in lines])))
 
     h, w = img.shape[:2]
+    source_h, source_w = raw.image.shape[:2]
     source = "native" if native and not raw.ocr_regions else ("hybrid" if has_native else "ocr")
     pa.result = PageResult(index=raw.index, source=source, width=w,
                            height=h, dpi=round(dpi, 1), skew_deg=round(skew, 3),
                            rotation_deg=rotation, regions=regions, kind=raw.kind, layout=raw.label,
                            source_format=raw.fmt, status="partial" if raw.partial else "complete",
-                           page_size=tuple(round(float(v), 2) for v in raw.page_size))
+                           page_size=tuple(round(float(v), 2) for v in raw.page_size),
+                           source_width=source_w, source_height=source_h)
     pa.free_words = free_words
     return pa
 
@@ -379,8 +381,27 @@ def _extract_page_content(pa: PageAnalysis, raw: RawPage, cfg: dict, page_no: in
     tb = parse_title_block(pa.tb_cells, cfg["title_labels"], raw.dpi, page_text, cfg["date_order"])
     _merge_cad_fields(tb, raw.cad_fields, cfg, res.warnings, page_no)
     for k, v in tb.items():
-        if k not in title and v.value:
+        if not v.value:
+            continue
+        v.page = page_no
+        current = title.get(k)
+        if current is None:
             title[k] = v
+            continue
+        previous_value = current.value
+        current.candidates.append(v.to_dict())
+        # A labelled cell or CAD attribute is stronger evidence than free page
+        # text. Keep conflicts from independent title blocks visible for review.
+        priority = {"title_block": 3, "cad_attribute": 3, "page_text": 1, "revision_table": 0}
+        cur_rank = priority.get(current.source or ("title_block" if current.bbox else "page_text"), 1)
+        new_rank = priority.get(v.source or ("title_block" if v.bbox else "page_text"), 1)
+        if (new_rank, v.confidence) > (cur_rank, current.confidence):
+            v.candidates = current.candidates + v.candidates
+            title[k] = v
+            current = v
+        if previous_value and previous_value.strip().casefold() != v.value.strip().casefold():
+            current.needs_review = True
+            res.warnings.append(f"page {page_no}: conflicting title-block candidates for {k}; review required")
 
     # ---------------- BOM
     page_rows: list = []
@@ -465,7 +486,8 @@ def _consolidate_and_validate(res: DrawingResult, title: dict[str, FieldValue],
     # history. Its latest row is only a fallback, clearly marked as such.
     if "revision" not in title and latest:
         title["revision"] = FieldValue(latest.rev, round(min(latest.confidence, 0.85), 3), latest.bbox,
-                                       raw=latest.rev, normalized=latest.rev, source="revision_table")
+                                       raw=latest.rev, normalized=latest.rev, source="revision_table",
+                                       page=latest.page, needs_review=True)
         res.warnings.append("no revision in title block - current revision inferred from latest "
                             "row of revision table")
     elif "revision" in title and latest and title["revision"].normalized and \

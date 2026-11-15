@@ -23,8 +23,19 @@ CELL_BORDER = Border(left=BORDER_THIN, right=BORDER_THIN, top=BORDER_THIN, botto
 _BOM_STD = [("item", "Item"), ("part_number", "Part Number"), ("description", "Description"),
             ("quantity", "Quantity"), ("material", "Material Grade"), ("mass", "Mass / Weight"),
             ("remarks", "Remarks")]
-_BOM_EXTRA_LABELS = {"size": "Size", "supplier": "Supplier", "finish": "Finish"}
-_BOM_INTERNAL_EXTRA = {"mass_candidate", "mass_basis"}
+_BOM_EXTRA_LABELS = {"size": "Size", "supplier": "Supplier", "finish": "Finish",
+                     "mass_basis": "Mass Basis (Unit / Total)"}
+_BOM_INTERNAL_EXTRA = {"mass_candidate"}
+_VALIDATION_HEADERS = ["Severity", "Section", "Field", "Page", "Row", "Message", "Review Status", "Original Value"]
+
+
+def _validation_rows(res: Dict[str, Any]) -> List[list]:
+    issues = ((res.get("validation") or {}).get("issues") or [])
+    return [[i.get("severity", ""), i.get("section", ""), i.get("field", ""),
+             i.get("page", ""), i.get("row", ""), i.get("message", ""),
+             "Needs Review" if i.get("severity") in ("error", "warning") else "Informational",
+             json.dumps(i.get("value"), ensure_ascii=False) if i.get("value") is not None else ""]
+            for i in issues]
 
 
 def _bom_table(res: Dict[str, Any], pct: bool) -> tuple[List[str], List[list]]:
@@ -184,6 +195,20 @@ def generate_excel_export(drawing_id: str) -> Path:
     ws_rev.column_dimensions["C"].width = 15
     ws_rev.column_dimensions["D"].width = 20
 
+    # Structured validation findings retain the original extracted value.
+    ws_val = wb.create_sheet(title="Validation")
+    ws_val.append(_VALIDATION_HEADERS)
+    for c in range(1, len(_VALIDATION_HEADERS) + 1):
+        ws_val.cell(1, c).fill = HDR_FILL
+        ws_val.cell(1, c).font = HDR_FONT
+    for row in _validation_rows(res):
+        ws_val.append(row)
+    for col_idx, width in enumerate((14, 18, 22, 10, 10, 70, 18, 32), start=1):
+        ws_val.column_dimensions[get_column_letter(col_idx)].width = width
+    for row in ws_val.iter_rows(min_row=2):
+        for cell in row:
+            cell.border = CELL_BORDER
+
     wb.save(out_path)
     return out_path
 
@@ -222,6 +247,12 @@ def generate_csv_export(drawing_id: str) -> io.BytesIO:
         for r in res.get("revisions", []):
             rev_writer.writerow([r.get("rev"), r.get("description"), r.get("date"), r.get("approved"), r.get("confidence")])
         zf.writestr("revisions.csv", rev_buf.getvalue())
+
+        validation_buf = io.StringIO()
+        validation_writer = csv.writer(validation_buf)
+        validation_writer.writerow(_VALIDATION_HEADERS)
+        validation_writer.writerows(_validation_rows(res))
+        zf.writestr("validation.csv", validation_buf.getvalue())
 
     zip_buffer.seek(0)
     return zip_buffer

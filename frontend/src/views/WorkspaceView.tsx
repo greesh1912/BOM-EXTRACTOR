@@ -254,6 +254,14 @@ export const WorkspaceView: React.FC<WorkspaceViewProps> = ({ drawingId, onBack 
       <div className="flex-1 flex flex-col md:flex-row overflow-hidden">
         {/* Left Panel: Drawing Viewer */}
         <div className="w-full md:w-7/12 h-1/2 md:h-full border-r border-[#E4EAF2] relative">
+          {!!overlaysData?.warnings?.length && (
+            <div role="alert" className="absolute z-20 top-2 left-2 right-2 rounded border border-amber-300 bg-amber-50 px-3 py-2 text-[11px] text-amber-900 shadow-sm">
+              <div className="flex items-start gap-2">
+                <AlertCircle className="w-3.5 h-3.5 mt-0.5 shrink-0" />
+                <span>{overlaysData.warnings.join(' ')}</span>
+              </div>
+            </div>
+          )}
           <DrawingViewer
             imageUrl={imageUrl}
             pageCount={pageCount}

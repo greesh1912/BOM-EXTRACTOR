@@ -246,6 +246,10 @@ def parse_title_block(cells: list[Cell], vocab: dict, dpi: float, page_text: str
             pick = min(lst, key=lambda x: (rank[id(x[0])] > 1, -len(x[0].value or "")))[0]
         else:
             pick = min(lst, key=lambda x: (rank[id(x[0])], -x[0].confidence))[0]
+        pick.candidates = [candidate.to_dict() for candidate, _ in lst]
+        unique_values = {str(candidate.value).strip().casefold() for candidate, _ in lst if candidate.value}
+        if len(unique_values) > 1:
+            pick.needs_review = True
         out[f] = pick
         if rank[id(pick)] > 0:
             claimed.add(pick.bbox)
@@ -361,7 +365,12 @@ def normalise_title_fields(out: dict[str, FieldValue], date_order: str = "dmy") 
         elif k == "revision":
             fv.normalized = re.sub(r"^REV(?:ISION)?\.?\s*[:#]?\s*", "", fv.value.upper()).strip()
         elif k == "weight":
-            fv.normalized = to_kg(fv.value)
+            normalized, measurement, flags = parse_mass_measurement(fv.value)
+            fv.normalized = normalized
+            if flags or measurement is None or normalized is None:
+                fv.needs_review = True
+                fv.candidates.append({"raw": fv.value, "measurement": measurement.to_dict() if measurement else None,
+                                      "flags": flags, "page": fv.page})
 
 
 _SCALE_LABEL_RX = re.compile(r"\bSCALE\b\s*[:=]?\s*(\d+(?:\.\d+)?\s*[:/]\s*\d+(?:\.\d+)?|NTS|N\.T\.S\.?|FULL(?:\s+SIZE)?)",
@@ -577,13 +586,18 @@ def parse_mass_measurement(text: str, default_unit: Optional[str] = None, conf: 
         return None, None, flags
 
     matched_unit = m.group(2)
+    suffix = raw[m.end(1):].strip()
+    if not matched_unit and re.search(r"[A-Za-z]", suffix):
+        meas = Measurement(raw=raw, nominal=v, unit=suffix, canonical_value=None,
+                           canonical_unit=None, measurement_type="mass", confidence=conf)
+        return None, meas, ["unsupported_mass_unit"]
     unit_str = matched_unit or default_unit
     flags = []
-    if not matched_unit and not default_unit:
-        flags.append("mass_unit_assumed_kg")
-        u = "KG"
-    else:
-        u = (matched_unit or default_unit or "KG").upper()
+    if not unit_str:
+        meas = Measurement(raw=raw, nominal=v, unit=None, canonical_value=None,
+                           canonical_unit=None, measurement_type="mass", confidence=conf)
+        return None, meas, ["mass_unit_assumed_kg"]
+    u = unit_str.upper()
 
     if u.startswith("KG"):
         canonical_val = v
@@ -600,13 +614,13 @@ def parse_mass_measurement(text: str, default_unit: Optional[str] = None, conf: 
     elif u == "MG":
         canonical_val = v / 1_000_000.0
         canonical_unit = "kg"
-    elif u.startswith("T"):
+    elif u in ("T", "TONNE", "TONNES"):
         canonical_val = v * 1000.0
         canonical_unit = "kg"
     else:
-        canonical_val = v
-        canonical_unit = "kg"
-        flags.append("unsupported_mass_unit")
+        meas = Measurement(raw=raw, nominal=v, unit=unit_str, canonical_value=None,
+                           canonical_unit=None, measurement_type="mass", confidence=conf)
+        return None, meas, ["unsupported_mass_unit"]
 
     meas = Measurement(
         raw=raw,
@@ -699,27 +713,14 @@ def table_to_bom(t: Table, page: int, low_conf: float, table_index: int = 0,
                 skipped[why] = skipped.get(why, 0) + 1
             continue
         own = [k for k, v in vals.items() if v.text and v.text.strip() and k not in merged.get(ri, [])]
-        if item_driven and rows and own and \
+        continuation_candidate = bool(item_driven and rows and own and \
                 not any(k.split("_")[0] in ("item", "part", "quantity", "mass") for k in own) and \
-                all(k.split("_")[0] in text_keys for k in own):
-            prev = rows[-1]
-            for k in own:
-                txt = clean_value(vals[k].text)
-                if not txt:
-                    continue
-                if k in std:
-                    cur = getattr(prev, k)
-                    setattr(prev, k, f"{cur} {txt}".strip() if cur else txt)
-                else:
-                    cur = prev.extra.get(k)
-                    prev.extra[k] = f"{cur} {txt}".strip() if cur else txt
-            if prev.bbox and bb:
-                prev.bbox = union_bbox([prev.bbox, bb])
-            if "wrapped_text_joined" not in prev.flags:
-                prev.flags.append("wrapped_text_joined")
-            n_joined += 1
-            continue
+                all(k.split("_")[0] in text_keys for k in own))
+        # Keep identifier-less text rows separate. They may be wrapped
+        # descriptions, but without geometric proof they remain reviewable rows.
         r = BomRow(page=page, bbox=bb, table=table_index, row_index=ri)
+        if continuation_candidate:
+            r.flags.append("possible_continuation")
         confs = []
         struct_confs = []
         for k, v in vals.items():
@@ -838,11 +839,12 @@ def table_to_bom(t: Table, page: int, low_conf: float, table_index: int = 0,
                     mass_meas.raw = raw_mass
                 r.mass_kg = mass_val
                 r.mass_measurement = mass_meas
-                r.mass_verified = (mass_val is not None)
+                # Parsing yields a candidate; approval requires human review.
+                r.mass_verified = False
                 r.mass_candidate = None
             r.flags.extend(m_flags)
-            if mass_is_total:
-                r.extra["mass_basis"] = "total"
+        if mass_col:
+            r.extra["mass_basis"] = "total" if mass_is_total else "unit"
         if not r.part_number and not r.description:
             r.flags.append("missing_part_number")
         elif not r.part_number:
@@ -935,6 +937,16 @@ def latest_revision(revs: list[RevisionRow]) -> Optional[RevisionRow]:
     revs = [r for r in revs if r.rev]
     if not revs:
         return None
-    if all("date_iso" in r.extra for r in revs):
-        return max(revs, key=lambda r: r.extra["date_iso"])
-    return revs[-1]
+    dated = [r for r in revs if r.extra.get("date_iso")]
+    if dated:
+        return max(dated, key=lambda r: (r.extra["date_iso"], _revision_key(r.rev)))
+    return max(revs, key=lambda r: _revision_key(r.rev))
+
+
+def _revision_key(value: Optional[str]) -> tuple:
+    """Natural revision ordering: A10 follows A9; numeric revisions sort numerically."""
+    text = (value or "").strip().upper()
+    parts = re.findall(r"\d+|[A-Z]+", text)
+    if not parts:
+        return (0, text)
+    return tuple((1, int(p)) if p.isdigit() else (0, p) for p in parts)

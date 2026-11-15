@@ -204,6 +204,11 @@ export const BomTableTab: React.FC<BomTableTabProps> = ({
           const idx = info.row.index;
           const row = info.row.original;
           const hasAmbiguousDecimal = row.flags && row.flags.includes('mass_decimal_ambiguous');
+          const massNeedsReview = row.flags?.some((f) => f.includes('mass') || f === 'uncertain_column_assignment') ||
+            (row.mass_kg != null && !row.mass_verified);
+          const massStatus = row.mass_verified ? 'Verified' : row.flags?.includes('unsupported_mass_unit')
+            ? 'Unsupported unit' : row.flags?.includes('mass_unit_assumed_kg')
+              ? 'Unit assumed' : 'Unverified';
           return (
             <div className="flex items-center gap-1">
               <input
@@ -213,11 +218,13 @@ export const BomTableTab: React.FC<BomTableTabProps> = ({
                 placeholder="kg..."
                 className="w-20 px-1 py-0.5 font-mono text-xs bg-transparent border-b border-transparent focus:border-blue-500 focus:bg-white focus:outline-none"
               />
-              {hasAmbiguousDecimal && (
-                <span title="Ambiguous decimal delimiter" className="text-amber-500">
+              {massNeedsReview && (
+                <span title={hasAmbiguousDecimal ? 'Ambiguous decimal delimiter' : 'Review source, units, and column assignment'} className="text-amber-600 inline-flex items-center gap-1">
                   <AlertTriangle className="w-3.5 h-3.5" />
+                  <span className="text-[10px]">{massStatus}</span>
                 </span>
               )}
+              {row.mass_verified && <span className="text-emerald-700 text-[10px] font-medium">Verified</span>}
             </div>
           );
         },
