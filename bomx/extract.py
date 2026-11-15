@@ -9,7 +9,7 @@ from typing import Optional
 
 from .layout import Table
 from .models import BomRow, Cell, FieldValue, Measurement, RevisionRow, union_bbox
-from .textutil import clean_value, match_label_prefix
+from .textutil import clean_value, fix_ocr_confusions, match_label_prefix
 
 # ======================================================================
 # dates
@@ -960,13 +960,23 @@ def table_to_revisions(t: Table, page: int, date_order: str) -> list[RevisionRow
         r = RevisionRow(page=page, bbox=bb)
         confs = []
         for k, v in vals.items():
+            raw_cell = getattr(v, "raw_text", None) or v.text
             txt = clean_value(v.text) or None
             if txt:
                 confs.append(v.conf)
             if k == desc_alias:
                 r.description = txt
             elif k in ("rev", "description", "date", "approved"):
-                setattr(r, k, txt)
+                if k == "rev":
+                    setattr(r, k, txt)
+                    if raw_cell:
+                        r.extra["raw_revision_text"] = clean_value(raw_cell)
+                elif k == "date":
+                    setattr(r, k, fix_ocr_confusions(txt) if txt else txt)
+                    if raw_cell:
+                        r.extra["raw_date_text"] = clean_value(raw_cell)
+                else:
+                    setattr(r, k, txt)
             elif txt:
                 r.extra[k] = txt
         # Recover a revision value when the column classifier missed a
@@ -991,12 +1001,26 @@ def table_to_revisions(t: Table, page: int, date_order: str) -> list[RevisionRow
             r.rev.strip(),
             re.I,
         ))
+        if not valid_rev and r.rev:
+            original = r.rev
+            cleaned = re.sub(r"[\s.,:;\-]+$", "", original).strip()
+            rev_col = next((col for col in t.columns if col.key == "rev" or
+                            re.search(r"\b(?:REV|REVISION|CHANGE\s+LEVEL)\b", col.header, re.I)), None)
+            source_cell = vals.get(rev_col.key) if rev_col else None
+            geometry_ok = bool(rev_col and source_cell and source_cell.bbox and
+                               rev_col.x0 - 2 <= (source_cell.bbox[0] + source_cell.bbox[2]) / 2 <= rev_col.x1 + 2)
+            if geometry_ok and cleaned != original.strip() and re.fullmatch(
+                    r"[A-Z0-9][A-Z0-9._/-]{0,7}", cleaned, re.I):
+                r.extra["raw_revision_candidate"] = original
+                r.rev = cleaned
+                r.flags.append("revision_identifier_needs_review")
+                valid_rev = True
         # A revision identifier alone is not enough to establish a useful row.
         has_content = any((r.rev, r.description, r.date, r.approved, *r.extra.values()))
         if not has_content:
             continue
         if not valid_rev:
-            r.extra["raw_revision_candidate"] = r.rev or ""
+            r.extra["raw_revision_candidate"] = r.extra.get("raw_revision_text", r.rev or "")
             r.rev = None
             r.flags.append("missing_or_unreadable_revision_identifier")
 

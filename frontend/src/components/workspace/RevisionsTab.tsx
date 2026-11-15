@@ -11,7 +11,7 @@ interface RevisionsTabProps {
 }
 
 // bookkeeping values kept in `extra` that are not revision columns
-const HIDDEN_EXTRA = new Set(['date_iso']);
+const HIDDEN_EXTRA = new Set(['date_iso', 'raw_revision_text', 'raw_date_text', 'raw_revision_candidate']);
 
 const prettify = (key: string) => key.replace(/_/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
 
@@ -71,14 +71,16 @@ export const RevisionsTab: React.FC<RevisionsTabProps> = ({
                   <span className="font-bold text-xs bg-purple-50 text-purple-700 px-2 py-0.5 rounded border border-purple-200">
                     REV {rev.rev || '-'}
                   </span>
-                  {rev.flags?.includes('missing_or_unreadable_revision_identifier') && (
+                  {(rev.flags?.includes('missing_or_unreadable_revision_identifier') ||
+                    rev.flags?.includes('revision_identifier_needs_review')) && (
                     <span className="text-[10px] font-medium px-1.5 rounded bg-amber-100 text-amber-800">
-                      Review identifier
+                      {rev.flags?.includes('missing_or_unreadable_revision_identifier') ? 'Identifier unreadable' : 'Candidate — review'}
                     </span>
                   )}
                   <span className="text-slate-400 font-mono text-[11px]">{rev.date || 'No date'}</span>
                 </div>
                 <div className="flex items-center gap-2">
+                  <span className="text-[9px] uppercase tracking-wide text-slate-400">Row OCR</span>
                   <ConfidenceBadge confidence={rev.confidence} size="sm" />
                   {onLocateRevision && rev.bbox && rev.bbox.length === 4 && (
                     <button
@@ -98,6 +100,17 @@ export const RevisionsTab: React.FC<RevisionsTabProps> = ({
                   </button>
                 </div>
               </div>
+
+              {rev.extra?.raw_revision_candidate && (
+                <div className="text-[10px] text-amber-800">
+                  Raw revision cell: {rev.extra.raw_revision_candidate}
+                </div>
+              )}
+              {rev.extra?.raw_revision_text && rev.extra.raw_revision_text !== rev.rev && (
+                <div className="text-[10px] text-slate-500">
+                  Source revision text: {rev.extra.raw_revision_text}
+                </div>
+              )}
 
               <div className="grid grid-cols-3 gap-2">
                 <div>

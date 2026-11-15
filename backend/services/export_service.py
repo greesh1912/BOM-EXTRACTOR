@@ -163,7 +163,8 @@ def generate_excel_export(drawing_id: str) -> Path:
     ws_rev = wb.create_sheet(title="Revisions & Notes")
     ws_rev.append(["Revision History"])
     ws_rev.cell(1, 1).font = Font(name="Arial", size=11, bold=True)
-    rev_headers = ["Rev", "Description", "Date", "Approved By", "Confidence", "Flags"]
+    rev_headers = ["Rev", "Description", "Date", "Approved By", "Confidence", "Flags",
+                   "Raw Revision Cell", "Raw Date Cell"]
     ws_rev.append(rev_headers)
     for c in range(1, len(rev_headers) + 1):
         ws_rev.cell(2, c).fill = HDR_FILL
@@ -178,6 +179,8 @@ def generate_excel_export(drawing_id: str) -> Path:
             r.get("approved", ""),
             f"{round((r.get('confidence') or 1.0) * 100, 1)}%",
             "; ".join(r.get("flags") or []),
+            (r.get("extra") or {}).get("raw_revision_text", ""),
+            (r.get("extra") or {}).get("raw_date_text", ""),
         ])
 
     notes = res.get("notes", [])
@@ -244,9 +247,13 @@ def generate_csv_export(drawing_id: str) -> io.BytesIO:
         # Revisions CSV
         rev_buf = io.StringIO()
         rev_writer = csv.writer(rev_buf)
-        rev_writer.writerow(["Rev", "Description", "Date", "Approved", "Confidence", "Flags"])
+        rev_writer.writerow(["Rev", "Description", "Date", "Approved", "Confidence", "Flags",
+                             "Raw Revision Cell", "Raw Date Cell"])
         for r in res.get("revisions", []):
-            rev_writer.writerow([r.get("rev"), r.get("description"), r.get("date"), r.get("approved"), r.get("confidence"), "; ".join(r.get("flags") or [])])
+            extra = r.get("extra") or {}
+            rev_writer.writerow([r.get("rev"), r.get("description"), r.get("date"), r.get("approved"),
+                                 r.get("confidence"), "; ".join(r.get("flags") or []),
+                                 extra.get("raw_revision_text", ""), extra.get("raw_date_text", "")])
         zf.writestr("revisions.csv", rev_buf.getvalue())
 
         validation_buf = io.StringIO()

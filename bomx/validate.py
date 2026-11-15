@@ -310,6 +310,10 @@ def _cross_checks(res: DrawingResult, vcfg: dict, rep: _Report) -> None:
                     field="revision", value=cur)
     seen: dict[str, int] = {}
     for revision_idx, r in enumerate(res.revisions):
+        if "revision_identifier_needs_review" in getattr(r, "flags", []):
+            rep.add("warning", "ambiguous_value", "revision",
+                    "revision identifier was normalized from trailing OCR punctuation; confirm against the source cell",
+                    page=r.page, row=revision_idx, value=r.extra.get("raw_revision_candidate"))
         if "missing_or_unreadable_revision_identifier" in getattr(r, "flags", []):
             rep.add("warning", "ambiguous_value", "revision",
                     "revision row was preserved but its revision identifier could not be read",

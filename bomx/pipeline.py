@@ -220,11 +220,12 @@ def analyse_page(raw: RawPage, cfg: dict) -> PageAnalysis:
                         else:
                             v.text, v.conf = got[0], max(min(v.conf, got[1]), 0.5)
 
-    if not native:  # letter/digit confusions that only make sense one way
-        for t in bom_tables + rev_tables:
+    if not native:  # preserve original revision text; correct BOM fields only
+        for t in bom_tables:
             for row in t.rows:
                 for v in row.values():
                     if v.text:
+                        v.raw_text = v.text
                         v.text = fix_ocr_confusions(v.text)
         for t in bom_tables:  # a lost leading zero: '1' among '02', '03', ...
             items = [r.get("item") for r in t.rows if r.get("item") is not None and r["item"].text]
@@ -382,9 +383,22 @@ def _extract_page_content(pa: PageAnalysis, raw: RawPage, cfg: dict, page_no: in
     # Unit declarations are also commonly printed just outside the title
     # block. Keep the matched word segment's bbox so the value remains locatable.
     if not (tb.get("units") and tb["units"].value):
-        unit_rx = re.compile(r"\b(?:METRIC|IMPERIAL)\s*\(\s*(?:MM|CM|M|INCH(?:ES)?|IN)\s*\)|"
+        unit_rx = re.compile(r"\b(?:M[E3]TR[I1L]C|IMPERIAL)\s*\(\s*(?:MM|CM|M|INCH(?:ES)?|IN)\s*\)|"
                              r"\bDIMENSIONS?\s+IN\s+(?:MM|CM|M|INCH(?:ES)?|IN)\b", re.I)
-        for line in group_lines(pa.free_words):
+        title_box = union_bbox([c.bbox for c in pa.tb_cells]) if pa.tb_cells else None
+        excluded = [t.bbox for t in pa.bom_tables + pa.rev_tables]
+        pad = max(raw.dpi * 0.5, 150.0)
+        unit_words = [w for w in pa.words
+                      if not any(_inside(w, box) for box in excluded)
+                      and (title_box is None or
+                           title_box[0] - pad <= w.cx <= title_box[2] + pad and
+                           title_box[1] - pad <= w.cy <= title_box[3] + pad)]
+        for line in group_lines(unit_words):
+            match = unit_rx.search(line.text)
+            if match:
+                tb["units"] = FieldValue(match.group(0), round(line.conf, 3), line.bbox,
+                                          raw=line.text, source="page_text", page=page_no)
+                break
             for seg in split_segments(line, 2.0):
                 match = unit_rx.search(seg.text)
                 if match:

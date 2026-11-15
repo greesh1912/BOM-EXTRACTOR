@@ -42,6 +42,7 @@ class TableCellValue:
     src: str = "cell"  # cell | split (row rule lost) | multi (column rule lost) | free (cell lost)
     struct_conf: float = 1.0  # structural / column alignment confidence
     group: int = -1  # id of the original (merged) cell this value was cut from, -1 if none
+    raw_text: Optional[str] = None
 
 
 @dataclass

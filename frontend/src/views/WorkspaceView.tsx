@@ -132,9 +132,13 @@ export const WorkspaceView: React.FC<WorkspaceViewProps> = ({ drawingId, onBack 
     if (!editableResult) return;
     const updated = { ...editableResult };
     if (!updated.title_block[key]) {
-      updated.title_block[key] = { value: val, confidence: 1.0, raw: val };
+      updated.title_block[key] = { value: val, confidence: 0, raw: val, source: 'manual', needs_review: true };
     } else {
       updated.title_block[key].value = val;
+      updated.title_block[key].confidence = 0;
+      updated.title_block[key].raw = val;
+      updated.title_block[key].source = 'manual';
+      updated.title_block[key].needs_review = true;
     }
     setEditableResult(updated);
     setHasUnsavedChanges(true);

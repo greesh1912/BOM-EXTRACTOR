@@ -130,7 +130,9 @@ export const TitleBlockTab: React.FC<TitleBlockTabProps> = ({
                   )}
                 </label>
                 <div className="flex items-center gap-2">
-                  {hasValue ? <ConfidenceBadge confidence={fieldObj.confidence} size="sm" /> : (
+                  {fieldObj.source === 'manual' ? (
+                    <span className="text-[10px] font-medium text-blue-700 border border-blue-200 bg-blue-50 rounded px-1.5 py-0.5">Manual entry · unverified</span>
+                  ) : hasValue ? <ConfidenceBadge confidence={fieldObj.confidence} size="sm" /> : (
                     <span className="text-[10px] font-medium text-slate-500 border border-slate-200 bg-slate-50 rounded px-1.5 py-0.5">Missing</span>
                   )}
                   {hasBbox && (

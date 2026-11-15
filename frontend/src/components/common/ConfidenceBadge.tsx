@@ -1,6 +1,6 @@
 import React from 'react';
 import { clsx } from 'clsx';
-import { ShieldCheck, AlertCircle, AlertTriangle } from 'lucide-react';
+import { Info, AlertCircle, AlertTriangle } from 'lucide-react';
 
 interface ConfidenceBadgeProps {
   confidence: number | null | undefined;
@@ -19,9 +19,9 @@ export const ConfidenceBadge: React.FC<ConfidenceBadgeProps> = ({
 
   const val = Math.round(confidence * 100);
 
-  let variantStyles = 'bg-emerald-50 text-emerald-700 border-emerald-200';
-  let IconComponent = ShieldCheck;
-  let title = `High confidence (${val}%)`;
+  let variantStyles = 'bg-sky-50 text-sky-700 border-sky-200';
+  let IconComponent = Info;
+  let title = `OCR confidence (${val}%); this does not indicate validation or human verification`;
 
   if (val < 65) {
     variantStyles = 'bg-rose-50 text-rose-700 border-rose-200';
