@@ -17,13 +17,68 @@ from .ingest import PARTIAL_TAG, RawPage, iter_pages
 from .layout import (Table, assign_words, complete_rows, detect_cells, find_grid_tables, find_notes,
                      find_text_tables, group_cells, split_numbered_notes, text_title_cells,
                      title_block_cells)
-from .models import (Dimension, DrawingResult, FieldValue, PageResult, Region, SpecCallout,
+from .models import (Cell, Dimension, DrawingResult, FieldValue, PageResult, Region, SpecCallout,
                      Word, mean_conf, union_bbox)
 from .specs import find_specs, summarise
 from .textutil import fix_ocr_confusions, group_lines, split_segments
 
 log = logging.getLogger(__name__)
 _NUMERIC = re.compile(r"\d+(?:[.,]\d+)?")
+
+
+def _rotate_word_frame(word: Word, rotation: int, width: int, height: int) -> Word:
+    """Map a vertical OCR word into a horizontal table-analysis frame."""
+    x0, y0, x1, y1 = word.bbox
+    if rotation == 90:
+        pts = [(y0, height - x0), (y1, height - x0),
+               (y0, height - x1), (y1, height - x1)]
+    elif rotation == 270:
+        pts = [(width - y0, x0), (width - y1, x0),
+               (width - y0, x1), (width - y1, x1)]
+    else:  # 180 degrees
+        pts = [(width - x0, height - y0), (width - x1, height - y0),
+               (width - x0, height - y1), (width - x1, height - y1)]
+    nx0, nx1 = min(p[0] for p in pts), max(p[0] for p in pts)
+    ny0, ny1 = min(p[1] for p in pts), max(p[1] for p in pts)
+    return Word(word.text, nx0, ny0, nx1, ny1, word.conf)
+
+
+def _map_rotated_bbox(bbox, rotation: int, width: int, height: int):
+    if not bbox:
+        return bbox
+    x0, y0, x1, y1 = bbox
+    if rotation == 90:
+        # inverse of x'=y, y'=H-x
+        pts = [(height - y0, x0), (height - y1, x0), (height - y0, x1), (height - y1, x1)]
+    elif rotation == 270:
+        # inverse of x'=W-y, y'=x
+        pts = [(y0, width - x0), (y1, width - x0), (y0, width - x1), (y1, width - x1)]
+    else:
+        pts = [(width - x0, height - y0), (width - x1, height - y0),
+               (width - x0, height - y1), (width - x1, height - y1)]
+    return (min(p[0] for p in pts), min(p[1] for p in pts),
+            max(p[0] for p in pts), max(p[1] for p in pts))
+
+
+def _rotate_cell_frame(cell: Cell, rotation: int, width: int, height: int) -> Cell:
+    proxy = _rotate_word_frame(Word("", *cell.bbox, 1.0), rotation, width, height)
+    bb = proxy.bbox
+    mapped_words = [_rotate_word_frame(word, rotation, width, height) for word in cell.words]
+    return Cell(*bb, words=mapped_words, id=cell.id, parent=cell.parent)
+
+
+def _restore_rotated_table(table, rotation: int, width: int, height: int) -> None:
+    for col in table.columns:
+        normalized_height = width if rotation in (90, 270) else height
+        bb = _map_rotated_bbox((col.x0, 0, col.x1, normalized_height),
+                               rotation, width, height)
+        col.x0, col.x1 = bb[0], bb[2]
+    table.bbox = _map_rotated_bbox(table.bbox, rotation, width, height)
+    table.header_bbox = _map_rotated_bbox(table.header_bbox, rotation, width, height)
+    table.row_bboxes = [_map_rotated_bbox(bb, rotation, width, height) for bb in table.row_bboxes]
+    for row in table.rows:
+        for cell in row.values():
+            cell.bbox = _map_rotated_bbox(cell.bbox, rotation, width, height)
 _AS_REQ = re.compile(r"^\s*(A/?R|AS\s+REQ\w*|REF|AR)\s*\.?$", re.I)
 
 
@@ -172,6 +227,29 @@ def analyse_page(raw: RawPage, cfg: dict) -> PageAnalysis:
         # the text table may have been swallowed by a title-block group
         tb_cells = [c for c in tb_cells
                     if not any(_box_overlap(c.bbox, t.bbox) > 0.5 for t in extra_bom)]
+    # Sideways BOM fallback: normalize vertical OCR geometry, reuse the
+    # borderless table detector, then restore source-page bounding boxes.
+    page_h, page_w = img.shape[:2]
+    existing_boxes = [t.bbox for t in bom_tables + rev_tables]
+    for rotation in (90, 180, 270):
+        vertical = ([w for w in words if w.h >= 1.2 * max(w.x1 - w.x0, 1.0)]
+                    if rotation in (90, 270) else list(words))
+        normalized = [_rotate_word_frame(w, rotation, page_w, page_h) for w in vertical]
+        normalized_cells = [_rotate_cell_frame(c, rotation, page_w, page_h) for c in cells]
+        for group in group_cells(normalized_cells, dpi):
+            for rotated_table in find_grid_tables(group, cfg["bom_headers"], "bom", dpi,
+                                                  set(), cfg["title_labels"]):
+                _restore_rotated_table(rotated_table, rotation, page_w, page_h)
+                rotated_table.method = "rotated_grid"
+                if not any(_box_overlap(rotated_table.bbox, old) > 0.3 for old in existing_boxes):
+                    bom_tables.append(rotated_table)
+                    existing_boxes.append(rotated_table.bbox)
+        for rotated_table in find_text_tables(normalized, cfg["bom_headers"], "bom", dpi):
+            _restore_rotated_table(rotated_table, rotation, page_w, page_h)
+            rotated_table.method = "rotated_text"
+            if not any(_box_overlap(rotated_table.bbox, old) > 0.3 for old in existing_boxes):
+                bom_tables.append(rotated_table)
+                existing_boxes.append(rotated_table.bbox)
     tb_box = [c.bbox for c in tb_cells]
     pool = outside([t.bbox for t in bom_tables + rev_tables] + tb_box)
     rev_tables += [t for t in find_text_tables(pool, cfg["revision_headers"], "revision", dpi)
