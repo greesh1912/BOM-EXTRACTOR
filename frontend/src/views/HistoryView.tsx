@@ -3,7 +3,6 @@ import type { DrawingSummaryItem } from '../types/api';
 import { api } from '../services/api';
 import { Card, CardHeader, CardTitle, CardContent } from '../components/ui/Card';
 import { Button } from '../components/ui/Button';
-import { ConfidenceBadge } from '../components/common/ConfidenceBadge';
 import { StatusPill } from '../components/common/StatusPill';
 import {
   History,
@@ -185,7 +184,6 @@ export const HistoryView: React.FC<HistoryViewProps> = ({
                   <th className="py-3 px-4">Format</th>
                   <th className="py-3 px-4">Uploaded At</th>
                   <th className="py-3 px-4">BOM Items</th>
-                  <th className="py-3 px-4">OCR Conf</th>
                   <th className="py-3 px-4">Status</th>
                   <th className="py-3 px-4 text-right">Actions</th>
                 </tr>
@@ -193,7 +191,7 @@ export const HistoryView: React.FC<HistoryViewProps> = ({
               <tbody className="divide-y divide-[#E4EAF2]">
                 {filtered.length === 0 ? (
                   <tr>
-                    <td colSpan={8} className="py-12 text-center text-slate-400">
+                    <td colSpan={7} className="py-12 text-center text-slate-400">
                       No matching drawing records found in history.
                     </td>
                   </tr>
@@ -250,10 +248,6 @@ export const HistoryView: React.FC<HistoryViewProps> = ({
 
                         <td className="py-3.5 px-4 font-medium text-[#172B4D]">
                           {d.bom_items_count} items
-                        </td>
-
-                        <td className="py-3.5 px-4">
-                          <ConfidenceBadge confidence={d.mean_confidence} />
                         </td>
 
                         <td className="py-3.5 px-4">

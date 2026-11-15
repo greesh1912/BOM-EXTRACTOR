@@ -1,6 +1,5 @@
 import React from 'react';
 import type { RevisionRow } from '../../types/api';
-import { ConfidenceBadge } from '../common/ConfidenceBadge';
 import { Crosshair, Plus, Trash2 } from 'lucide-react';
 import { Button } from '../ui/Button';
 
@@ -80,8 +79,6 @@ export const RevisionsTab: React.FC<RevisionsTabProps> = ({
                   <span className="text-slate-400 font-mono text-[11px]">{rev.date || 'No date'}</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <span className="text-[9px] uppercase tracking-wide text-slate-400">Row OCR</span>
-                  <ConfidenceBadge confidence={rev.confidence} size="sm" />
                   {onLocateRevision && rev.bbox && rev.bbox.length === 4 && (
                     <button
                       onClick={() => onLocateRevision(idx)}

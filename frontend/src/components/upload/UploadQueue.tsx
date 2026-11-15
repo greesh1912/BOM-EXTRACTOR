@@ -3,7 +3,6 @@ import type { DrawingSummaryItem } from '../../types/api';
 import { Card, CardHeader, CardTitle, CardContent } from '../ui/Card';
 import { Button } from '../ui/Button';
 import { StatusPill } from '../common/StatusPill';
-import { ConfidenceBadge } from '../common/ConfidenceBadge';
 import { FileText, ArrowRight, CheckCircle2, AlertCircle, RefreshCw } from 'lucide-react';
 
 interface UploadQueueProps {
@@ -89,10 +88,6 @@ export const UploadQueue: React.FC<UploadQueueProps> = ({
                 </div>
 
                 <div className="flex items-center gap-3 shrink-0 self-end sm:self-center">
-                  {isCompleted && (
-                    <ConfidenceBadge confidence={item.mean_confidence} />
-                  )}
-
                   <StatusPill
                     status={item.status}
                     verified={item.verified}

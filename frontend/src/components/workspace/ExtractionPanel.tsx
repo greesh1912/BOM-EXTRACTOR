@@ -6,7 +6,6 @@ import { SpecsTab } from './SpecsTab';
 import { RevisionsTab } from './RevisionsTab';
 import { NotesTab } from './NotesTab';
 import { DimensionsTab } from './DimensionsTab';
-import { ConfidenceTab } from './ConfidenceTab';
 import { ValidationTab } from './ValidationTab';
 import {
   ShieldCheck,
@@ -16,7 +15,6 @@ import {
   GitCommit,
   StickyNote,
   Ruler,
-  Activity,
 } from 'lucide-react';
 
 export type WorkspaceTabType =
@@ -26,7 +24,6 @@ export type WorkspaceTabType =
   | 'revisions'
   | 'notes'
   | 'dimensions'
-  | 'confidence'
   | 'validation';
 
 interface ExtractionPanelProps {
@@ -68,7 +65,6 @@ export const ExtractionPanel: React.FC<ExtractionPanelProps> = ({
     { id: 'revisions', label: 'Revisions', icon: GitCommit, count: result.revisions?.length ?? 0 },
     { id: 'notes', label: 'Notes', icon: StickyNote, count: result.notes?.length ?? 0 },
     { id: 'dimensions', label: 'Dimensions', icon: Ruler, count: result.dimensions?.length ?? 0 },
-    { id: 'confidence', label: 'Quality', icon: Activity },
     {
       id: 'validation',
       label: 'Review',
@@ -151,8 +147,6 @@ export const ExtractionPanel: React.FC<ExtractionPanelProps> = ({
         {activeTab === 'dimensions' && (
           <DimensionsTab dimensions={result.dimensions || []} />
         )}
-
-        {activeTab === 'confidence' && <ConfidenceTab result={result} />}
 
         {activeTab === 'validation' && (
           <ValidationTab

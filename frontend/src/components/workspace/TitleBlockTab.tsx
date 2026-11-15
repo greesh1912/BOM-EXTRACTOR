@@ -1,6 +1,5 @@
 import React from 'react';
 import type { FieldValue } from '../../types/api';
-import { ConfidenceBadge } from '../common/ConfidenceBadge';
 import { Crosshair, Edit3 } from 'lucide-react';
 
 interface TitleBlockTabProps {
@@ -88,7 +87,7 @@ export const TitleBlockTab: React.FC<TitleBlockTabProps> = ({
         <div>
           <h4 className="font-semibold text-sm text-[#172B4D]">Title Block Metadata</h4>
           <p className="text-[#64748B] text-[11px]">
-            Extracted drawing header attributes with confidence scores
+            Extracted drawing header attributes
           </p>
         </div>
         <span className="text-[11px] text-[#64748B] font-mono">
@@ -132,9 +131,9 @@ export const TitleBlockTab: React.FC<TitleBlockTabProps> = ({
                 <div className="flex items-center gap-2">
                   {fieldObj.source === 'manual' ? (
                     <span className="text-[10px] font-medium text-blue-700 border border-blue-200 bg-blue-50 rounded px-1.5 py-0.5">Manual entry · unverified</span>
-                  ) : hasValue ? <ConfidenceBadge confidence={fieldObj.confidence} size="sm" /> : (
+                  ) : !hasValue ? (
                     <span className="text-[10px] font-medium text-slate-500 border border-slate-200 bg-slate-50 rounded px-1.5 py-0.5">Missing</span>
-                  )}
+                  ) : null}
                   {hasBbox && (
                     <button
                       type="button"

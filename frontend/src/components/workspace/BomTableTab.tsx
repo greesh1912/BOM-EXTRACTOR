@@ -9,7 +9,6 @@ import {
   createColumnHelper,
   type SortingState,
 } from '@tanstack/react-table';
-import { ConfidenceBadge } from '../common/ConfidenceBadge';
 import { Button } from '../ui/Button';
 import {
   Plus,
@@ -264,18 +263,6 @@ export const BomTableTab: React.FC<BomTableTabProps> = ({
           },
         })
       ),
-
-      columnHelper.accessor('confidence', {
-        header: 'Conf',
-        cell: (info) => {
-          const flags = info.row.original.flags || [];
-          return (
-            <span title={flags.length ? flags.join('\n') : undefined}>
-              <ConfidenceBadge confidence={info.getValue()} size="sm" showIcon={false} />
-            </span>
-          );
-        },
-      }),
 
       columnHelper.display({
         id: 'actions',

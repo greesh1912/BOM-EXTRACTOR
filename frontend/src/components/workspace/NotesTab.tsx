@@ -1,5 +1,4 @@
 import React from 'react';
-import { ConfidenceBadge } from '../common/ConfidenceBadge';
 import { FileText, Plus, Trash2 } from 'lucide-react';
 import { Button } from '../ui/Button';
 
@@ -68,7 +67,6 @@ export const NotesTab: React.FC<NotesTabProps> = ({ notes, onChangeNotes }) => {
                   NOTE {note.number || idx + 1}
                 </span>
                 <div className="flex items-center gap-2">
-                  <ConfidenceBadge confidence={note.confidence} size="sm" />
                   <button
                     onClick={() => handleDelete(idx)}
                     className="p-1 text-slate-400 hover:text-rose-600 rounded"

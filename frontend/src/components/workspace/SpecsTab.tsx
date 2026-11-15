@@ -1,6 +1,5 @@
 import React from 'react';
 import type { SpecCallout } from '../../types/api';
-import { ConfidenceBadge } from '../common/ConfidenceBadge';
 import { Layers, ShieldCheck, Tag } from 'lucide-react';
 
 interface SpecsTabProps {
@@ -50,7 +49,6 @@ export const SpecsTab: React.FC<SpecsTabProps> = ({ specs }) => {
                     <span className="font-semibold text-[#172B4D] font-mono text-sm">
                       {item.value}
                     </span>
-                    <ConfidenceBadge confidence={item.confidence} size="sm" />
                   </div>
 
                   <p className="text-[11px] text-slate-600 bg-slate-50 p-2 rounded border border-slate-100 font-mono">

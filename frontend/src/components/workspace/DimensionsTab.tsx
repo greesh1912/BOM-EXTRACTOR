@@ -1,6 +1,5 @@
 import React from 'react';
 import type { Dimension } from '../../types/api';
-import { ConfidenceBadge } from '../common/ConfidenceBadge';
 import { Ruler } from 'lucide-react';
 
 interface DimensionsTabProps {
@@ -33,7 +32,6 @@ export const DimensionsTab: React.FC<DimensionsTabProps> = ({ dimensions }) => {
                 <th className="py-2 px-3">Type</th>
                 <th className="py-2 px-3">Nominal</th>
                 <th className="py-2 px-3">Tolerance</th>
-                <th className="py-2 px-3">Confidence</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-[#E4EAF2]">
@@ -47,9 +45,6 @@ export const DimensionsTab: React.FC<DimensionsTabProps> = ({ dimensions }) => {
                   </td>
                   <td className="py-2 px-3">{dim.nominal ?? '-'}</td>
                   <td className="py-2 px-3 text-slate-500">{dim.tolerance ?? '-'}</td>
-                  <td className="py-2 px-3">
-                    <ConfidenceBadge confidence={dim.confidence} size="sm" showIcon={false} />
-                  </td>
                 </tr>
               ))}
             </tbody>

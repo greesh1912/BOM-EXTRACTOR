@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import type { DrawingDetailResponse } from '../../types/api';
 import { Button } from '../ui/Button';
 import { StatusPill } from '../common/StatusPill';
-import { ConfidenceBadge } from '../common/ConfidenceBadge';
 import {
   ArrowLeft,
   CheckCircle2,
@@ -88,14 +87,13 @@ export const WorkspaceHeader: React.FC<WorkspaceHeaderProps> = ({
           </div>
         </div>
 
-        {/* Verification Status & Confidence Badges */}
+        {/* Verification Status */}
         <div className="hidden lg:flex items-center gap-2 ml-4 pl-4 border-l border-[#E4EAF2]">
           <StatusPill
             status={meta.status}
             verified={meta.verified}
             reviewRequired={meta.review_required}
           />
-          <ConfidenceBadge confidence={meta.mean_confidence} />
         </div>
       </div>
 

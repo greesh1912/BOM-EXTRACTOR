@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import type { DrawingSummaryItem } from '../../types/api';
 import { Card, CardHeader, CardTitle, CardContent } from '../ui/Card';
 import { Button } from '../ui/Button';
-import { ConfidenceBadge } from '../common/ConfidenceBadge';
 import { StatusPill } from '../common/StatusPill';
 import {
   FileText,
@@ -91,7 +90,6 @@ export const RecentDrawingsTable: React.FC<RecentDrawingsTableProps> = ({
                 <th className="py-3 px-4">Drawing Info</th>
                 <th className="py-3 px-4">Format</th>
                 <th className="py-3 px-4">BOM Items</th>
-                <th className="py-3 px-4">Confidence</th>
                 <th className="py-3 px-4">Status</th>
                 <th className="py-3 px-4 text-right">Actions</th>
               </tr>
@@ -99,7 +97,7 @@ export const RecentDrawingsTable: React.FC<RecentDrawingsTableProps> = ({
             <tbody className="divide-y divide-[#E4EAF2]">
               {filtered.length === 0 ? (
                 <tr>
-                  <td colSpan={6} className="py-8 text-center text-slate-400 text-xs">
+                  <td colSpan={5} className="py-8 text-center text-slate-400 text-xs">
                     {drawings.length === 0
                       ? 'No drawings uploaded yet. Upload a drawing or sample to begin.'
                       : 'No matching drawings found.'}
@@ -147,10 +145,6 @@ export const RecentDrawingsTable: React.FC<RecentDrawingsTableProps> = ({
                       <div className="text-[11px] text-[#64748B]">
                         {d.page_count} {d.page_count === 1 ? 'page' : 'pages'}
                       </div>
-                    </td>
-
-                    <td className="py-3.5 px-4">
-                      <ConfidenceBadge confidence={d.mean_confidence} />
                     </td>
 
                     <td className="py-3.5 px-4">
