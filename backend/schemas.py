@@ -68,6 +68,7 @@ class RevisionRowSchema(BaseModel):
     confidence: float = 1.0
     bbox: Optional[List[float]] = None
     page: int = 0
+    flags: List[str] = Field(default_factory=list)
 
 
 class SpecCalloutSchema(BaseModel):

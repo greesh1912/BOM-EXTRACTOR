@@ -266,6 +266,7 @@ class RevisionRow:
     confidence: float = 1.0
     bbox: Optional[BBox] = None
     page: int = 0
+    flags: list[str] = field(default_factory=list)
 
 
 @dataclass

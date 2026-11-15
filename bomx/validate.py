@@ -260,7 +260,13 @@ def _check_title(res: DrawingResult, vcfg: dict, rep: _Report, review_conf: floa
         if not (tb.get(f) and tb[f].value):
             rep.add("warning", "missing_value", "title_block", f"title block '{f}' not found", field=f)
     for f, fv in tb.items():
-        if f == "author_date" or not fv.value:
+        if f == "author_date":
+            continue
+        if getattr(fv, "needs_review", False):
+            rep.add("warning", "ambiguous_value", "title_block",
+                    f"'{f}' has conflicting or ambiguous candidates", field=f,
+                    page=getattr(fv, "page", None), value=fv.value)
+        if not fv.value:
             continue
         if fv.confidence < review_conf:
             rep.add("warning", "low_confidence", "title_block", f"'{f}' read with low confidence "
@@ -282,10 +288,6 @@ def _check_title(res: DrawingResult, vcfg: dict, rep: _Report, review_conf: floa
         if f == "drawing_number" and _OCR_JUNK.search(fv.value):
             rep.add("warning", "suspicious_value", "title_block", f"drawing number '{fv.value}' "
                     "contains OCR-suspicious characters", field=f, value=fv.value)
-        if getattr(fv, "needs_review", False):
-            rep.add("warning", "ambiguous_value", "title_block",
-                    f"'{f}' has conflicting page candidates", field=f,
-                    page=getattr(fv, "page", None), value=fv.value)
 
 
 # ---------------------------------------------------------------- cross checks
@@ -306,7 +308,12 @@ def _cross_checks(res: DrawingResult, vcfg: dict, rep: _Report) -> None:
                     f"'{latest.rev}'" + ("" if cur in known else " and is not in the history"),
                     field="revision", value=cur)
     seen: dict[str, int] = {}
-    for r in res.revisions:
+    for revision_idx, r in enumerate(res.revisions):
+        if "missing_or_unreadable_revision_identifier" in getattr(r, "flags", []):
+            rep.add("warning", "ambiguous_value", "revision",
+                    "revision row was preserved but its revision identifier could not be read",
+                    page=r.page, row=revision_idx,
+                    value=r.extra.get("raw_revision_candidate") or r.description)
         if r.rev:
             seen[r.rev.upper()] = seen.get(r.rev.upper(), 0) + 1
     for k, n in seen.items():

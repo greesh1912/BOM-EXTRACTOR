@@ -1,48 +1,26 @@
 {
   "drawings": {
-    "70cf445e": {
-      "id": "70cf445e",
+    "2245d6f7": {
+      "id": "2245d6f7",
       "filename": "8.dxf",
       "file_format": "DXF",
       "file_size_bytes": 5180803,
-      "uploaded_at": "2026-11-15T16:59:22.626788+00:00",
+      "uploaded_at": "2026-11-15T17:28:41.213555+00:00",
       "status": "completed",
       "verified": false,
       "review_required": true,
-      "review_reasons": "missing drawing_number; low-confidence title fields: revision; 9 BOM row(s) flagged; low text OCR confidence on row (min 0.55); validation: 0 error(s), 15 warning(s)",
-      "mean_confidence": 0.893,
-      "text_confidence": 0.874,
+      "review_reasons": "missing drawing_number; low-confidence title fields: revision; 9 BOM row(s) flagged; low text OCR confidence on row (min 0.55); validation: 0 error(s), 14 warning(s)",
+      "mean_confidence": 0.894,
+      "text_confidence": 0.875,
       "structural_confidence": 0.994,
       "drawing_number": null,
       "drawing_title": "MOUNTING BRACKET ASSEMSLY",
       "revision": "B",
       "bom_items_count": 9,
       "page_count": 1,
-      "processing_seconds": 117.82,
+      "processing_seconds": 95.45,
       "error_message": null,
-      "source_path": "C:\\Users\\A30165\\Documents\\BOM-EXTRACTOR\\storage\\uploads\\70cf445e\\8.dxf"
-    },
-    "aafc9db7": {
-      "id": "aafc9db7",
-      "filename": "10.dwg",
-      "file_format": "DWG",
-      "file_size_bytes": 2003779,
-      "uploaded_at": "2026-11-15T16:59:46.992908+00:00",
-      "status": "completed",
-      "verified": false,
-      "review_required": true,
-      "review_reasons": "low-confidence title fields: revision; 9 BOM row(s) flagged; low text OCR confidence on row (min 0.29); validation: 1 error(s), 13 warning(s)",
-      "mean_confidence": 0.915,
-      "text_confidence": 0.898,
-      "structural_confidence": 0.996,
-      "drawing_number": "GHA-ASSY-001",
-      "drawing_title": "GEARBOX HOUSING ASSEMRLY",
-      "revision": "B",
-      "bom_items_count": 9,
-      "page_count": 1,
-      "processing_seconds": 96.53,
-      "error_message": null,
-      "source_path": "C:\\Users\\A30165\\Documents\\BOM-EXTRACTOR\\storage\\uploads\\aafc9db7\\10.dwg"
+      "source_path": "C:\\Users\\A30165\\Documents\\BOM-EXTRACTOR\\storage\\uploads\\2245d6f7\\8.dxf"
     }
   }
 }

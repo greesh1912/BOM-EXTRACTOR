@@ -135,7 +135,7 @@ DEFAULT_CONFIG: dict[str, Any] = {
         "weight": ["WEIGHT", "MASS", "WT", "TOTAL WEIGHT", "NET WT", "GEWICHT", "MASSE", "POIDS", "PESO"],
         "tolerance": ["GENERAL TOLERANCE", "TOLERANCES", "TOLERANCE", "UNLESS OTHERWISE SPECIFIED",
                       "ALLGEMEINTOLERANZEN", "TOLERANZEN", "TOLERANCES GENERALES"],
-        "units": ["UNITS", "UNIT", "DIMENSIONS IN", "MASSEINHEIT", "UNITE"],
+        "units": ["UNITS", "UNIT", "DIMENSIONS IN", "UNIT SYSTEM", "MASSEINHEIT", "UNITE"],
         "company": ["COMPANY", "CUSTOMER", "CLIENT", "FIRMA", "HERSTELLER", "SOCIETE"],
         "part_number": ["PART NO", "PART NUMBER", "P/N", "SACHNUMMER", "TEILENUMMER"],
     },

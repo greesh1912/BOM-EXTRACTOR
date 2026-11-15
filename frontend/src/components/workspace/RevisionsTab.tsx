@@ -71,6 +71,11 @@ export const RevisionsTab: React.FC<RevisionsTabProps> = ({
                   <span className="font-bold text-xs bg-purple-50 text-purple-700 px-2 py-0.5 rounded border border-purple-200">
                     REV {rev.rev || '-'}
                   </span>
+                  {rev.flags?.includes('missing_or_unreadable_revision_identifier') && (
+                    <span className="text-[10px] font-medium px-1.5 rounded bg-amber-100 text-amber-800">
+                      Review identifier
+                    </span>
+                  )}
                   <span className="text-slate-400 font-mono text-[11px]">{rev.date || 'No date'}</span>
                 </div>
                 <div className="flex items-center gap-2">

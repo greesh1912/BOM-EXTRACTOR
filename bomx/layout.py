@@ -797,7 +797,10 @@ def find_text_tables(words: list[Word], vocab: dict[str, list[str]], kind: str,
                     break
                 vals = _words_to_columns(ws, cols, bounds)
                 filled = [k for k, v in vals.items() if v.text]
-                cont = not vals[first].text and len(filled) <= 2
+                # Do not collapse physical lines during table detection. A
+                # missing first-column OCR token can be a real revision/item.
+                # The extraction stage can flag likely continuations for review.
+                cont = False
                 taken.append(lj)
                 edge = ln.bbox[3] if down else ln.bbox[1]
                 if cont and down and rows:

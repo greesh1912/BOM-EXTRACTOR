@@ -70,6 +70,7 @@ _SCALE_RX = re.compile(r"\b(\d+(?:\.\d+)?\s*[:/]\s*\d+(?:\.\d+)?|NTS|N\.T\.S\.?|
 _PROJ_RX = re.compile(r"\b(FIRST|THIRD|1ST|3RD)[\s-]+ANGLE(?:\s+PROJECTION)?\b", re.I)
 _DWG_RX = re.compile(r"\b(?:DWG|DRAWING|DRG)\.?\s*(?:NO|NUMBER|#)\.?\s*[:#]?\s*([A-Z0-9][A-Z0-9\-_./]{2,})", re.I)
 _REV_RX = re.compile(r"\b(?:REV|REVISION)\b\.?\s*[:#]?\s*([A-Z0-9]{1,3})\b", re.I)
+_UNITS_DECL_RX = re.compile(r"\b(?:METRIC|IMPERIAL)\s*\(\s*(?:MM|CM|M|INCH(?:ES)?|IN)\s*\)|\bDIMENSIONS?\s+IN\s+(?:MM|CM|M|INCH(?:ES)?|IN)\b", re.I)
 _PERSON_FIELDS = ("drawn_by", "checked_by", "approved_by")
 
 
@@ -200,10 +201,23 @@ def parse_title_block(cells: list[Cell], vocab: dict, dpi: float, page_text: str
         if c.words:
             labelled[c.id] = _split_labels(c.text, vocab)
     label_ids = {cid for cid, ch in labelled.items() if any(f for f, _ in ch)}
+    rank: dict[int, int] = {}
+
+    # Unit declarations are often printed as a compact stamp ("Metric (mm)")
+    # without a separate UNITS label. Read only explicit unit-system phrases.
+    if "units" not in cands:
+        for c in cells:
+            m = _UNITS_DECL_RX.search(c.text) if c.words else None
+            if m:
+                value = clean_value(m.group(0))
+                unit_field = FieldValue(value, round(c.conf, 3), c.bbox,
+                                        raw=c.text, source="title_block")
+                rank[id(unit_field)] = 0
+                cands["units"].append((unit_field, c))
+                break
 
     # rank of a candidate: how directly the value is tied to its label
     # 0 = same cell ('SCALE 1:2'), 1 = right neighbour, 2 = below, 3 = spatial guess
-    rank: dict[int, int] = {}
     for c in cells:
         for f, val in labelled.get(c.id, []):
             if not f:
@@ -250,6 +264,8 @@ def parse_title_block(cells: list[Cell], vocab: dict, dpi: float, page_text: str
         unique_values = {str(candidate.value).strip().casefold() for candidate, _ in lst if candidate.value}
         if len(unique_values) > 1:
             pick.needs_review = True
+            pick.value = None
+            pick.normalized = None
         out[f] = pick
         if rank[id(pick)] > 0:
             claimed.add(pick.bbox)
@@ -300,12 +316,45 @@ def parse_title_block(cells: list[Cell], vocab: dict, dpi: float, page_text: str
     # resolve the generic DATE: drawn date > date label nearest DRAWN > first
     if "drawn_date" in out and "date" not in out:
         out["date"] = out["drawn_date"]
-    elif len(cands.get("date", [])) > 1 and "drawn_by" in out:
-        db = out["drawn_by"].bbox
-        best = min((x for x in cands["date"] if _valid("date", x[0].value)),
-                   key=lambda x: _dist(x[0].bbox, db), default=None)
-        if best:
-            out["date"] = best[0]
+    elif len(cands.get("date", [])) > 1:
+        valid_dates = [x for x in cands["date"] if _valid("date", x[0].value)]
+        unique_dates = {str(x[0].value).strip().casefold() for x in valid_dates}
+        if len(unique_dates) > 1:
+            # Without an explicit DRAWN DATE label or clear same-row ownership,
+            # preserve candidates for review instead of guessing by distance.
+            explicit_drawn = out.get("drawn_date")
+            if explicit_drawn and _valid("drawn_date", explicit_drawn.value):
+                out["date"] = explicit_drawn
+            else:
+                ambiguous = out.get("date") or valid_dates[0][0]
+                ambiguous.candidates = [x[0].to_dict() for x in valid_dates]
+                ambiguous.needs_review = True
+                ambiguous.value = None
+                ambiguous.normalized = None
+                out["date"] = ambiguous
+
+    # Some title blocks print the date as a bare ISO value in a dedicated
+    # cell with no readable label. Recover it only when the title region has a
+    # single distinct date; multiple dates remain explicit review candidates.
+    date_cells = []
+    for c in cells:
+        if not c.words:
+            continue
+        found_date = parse_date(clean_value(c.text), date_order)
+        if found_date:
+            date_cells.append((found_date, c))
+    distinct_dates = {d for d, _ in date_cells}
+    if date_cells and ("date" not in out or out["date"].value is None):
+        if len(distinct_dates) == 1:
+            iso, cell = max(date_cells, key=lambda item: item[1].conf)
+            out["date"] = FieldValue(clean_value(cell.text), round(cell.conf, 3), cell.bbox,
+                                     raw=cell.text, normalized=iso, source="title_block")
+        else:
+            candidates = [FieldValue(clean_value(cell.text), round(cell.conf, 3), cell.bbox,
+                                     raw=cell.text, normalized=iso, source="title_block").to_dict()
+                          for iso, cell in date_cells]
+            out["date"] = FieldValue(None, 0.0, None, raw=None, source="title_block",
+                                     candidates=candidates, needs_review=True)
 
     # ---- fallbacks from free page text
     if "drawing_number" not in out and page_text:
@@ -898,7 +947,8 @@ def table_to_revisions(t: Table, page: int, date_order: str) -> list[RevisionRow
             if avg > best_len and avg >= 8:
                 best, best_len = k, avg
         desc_alias = best
-    for vals, bb in zip(t.rows, t.row_bboxes):
+    for row_idx, vals in enumerate(t.rows):
+        bb = t.row_bboxes[row_idx] if row_idx < len(t.row_bboxes) else None
         r = RevisionRow(page=page, bbox=bb)
         confs = []
         for k, v in vals.items():
@@ -911,6 +961,16 @@ def table_to_revisions(t: Table, page: int, date_order: str) -> list[RevisionRow
                 setattr(r, k, txt)
             elif txt:
                 r.extra[k] = txt
+        # Recover a revision value when the column classifier missed a
+        # nonstandard revision header but the column geometry is intact.
+        if not r.rev:
+            for col in t.columns:
+                if re.search(r"\b(?:REV|REVISION|CHANGE\s+LEVEL)\b", col.header, re.I):
+                    cell = vals.get(col.key)
+                    candidate = clean_value(cell.text) if cell else ""
+                    if candidate and re.fullmatch(r"[A-Z0-9][A-Z0-9._/-]{0,7}", candidate, re.I):
+                        r.rev = candidate
+                        break
         if r.date:
             iso = parse_date(r.date, date_order)
             if iso:
@@ -918,15 +978,19 @@ def table_to_revisions(t: Table, page: int, date_order: str) -> list[RevisionRow
 
         # A revision entry must have an actual revision identifier.
         # Do not export title-block author/date text as a revision row.
-        if not r.rev or not re.fullmatch(
+        valid_rev = bool(r.rev and re.fullmatch(
             r"[A-Z0-9][A-Z0-9._/-]{0,7}",
             r.rev.strip(),
             re.I,
-        ):
-            continue
+        ))
         # A revision identifier alone is not enough to establish a useful row.
-        if not any((r.description, r.date, r.approved, r.extra.get("ecn"))):
+        has_content = any((r.rev, r.description, r.date, r.approved, *r.extra.values()))
+        if not has_content:
             continue
+        if not valid_rev:
+            r.extra["raw_revision_candidate"] = r.rev or ""
+            r.rev = None
+            r.flags.append("missing_or_unreadable_revision_identifier")
 
         r.confidence = round(min(confs) if confs else 0.0, 3)
         out.append(r)

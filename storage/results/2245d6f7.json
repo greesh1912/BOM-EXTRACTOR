@@ -1,5 +1,5 @@
 {
-  "source_file": "C:\\Users\\A30165\\Documents\\BOM-EXTRACTOR\\storage\\uploads\\70cf445e\\8.dxf",
+  "source_file": "C:\\Users\\A30165\\Documents\\BOM-EXTRACTOR\\storage\\uploads\\2245d6f7\\8.dxf",
   "summary": {
     "file": "8.dxf",
     "pages": 1,
@@ -10,33 +10,33 @@
     "drawing_title": "MOUNTING BRACKET ASSEMSLY",
     "revision": "B",
     "drawn_by": "J. Smith",
-    "date": null,
+    "date": "2023-10-15",
     "scale": "1:5",
     "projection": "THIRD ANGLE",
     "sheet": null,
     "checked_by": "A. Lee",
     "approved_by": "R. Patel",
     "revision_source": "page_text",
-    "author_date": "J. Smith",
+    "author_date": "J. Smith / 2023-10-15",
     "material_callout": "As indicated in BOM",
     "surface_finish": "Sandblast Sa 2.5, then primer and powder coated (Black). Boss face and ID to be masked before coating",
-    "heat_treatment": "Stress relieve fabrication after welding, before final machining. Welding to be performed by qualified welders per AWS D1.1. Weld size 6mm fillet",
+    "heat_treatment": "Stress relieve fabrication after welding, before final machining. S. Welding to be performed by qualified welders per AWS D1.1. Weld size 6mm fillet",
     "standards": "AWS D1.1, IS 2062, ASTM A36",
     "bom_items": 9,
     "bom_total_quantity": null,
     "revisions": 2,
     "notes": 6,
-    "text_confidence": 0.874,
+    "text_confidence": 0.875,
     "structural_confidence": 0.994,
-    "mean_confidence": 0.893,
+    "mean_confidence": 0.894,
     "min_structural_confidence": 0.99,
     "min_text_confidence": 0.51,
     "review_required": true,
-    "review_reasons": "missing drawing_number; low-confidence title fields: revision; 9 BOM row(s) flagged; low text OCR confidence on row (min 0.55); validation: 0 error(s), 15 warning(s)",
+    "review_reasons": "missing drawing_number; low-confidence title fields: revision; 9 BOM row(s) flagged; low text OCR confidence on row (min 0.55); validation: 0 error(s), 14 warning(s)",
     "validation_errors": 0,
-    "validation_warnings": 15,
+    "validation_warnings": 14,
     "bom_completeness": 1.0,
-    "title_block_completeness": 0.5
+    "title_block_completeness": 0.75
   },
   "title_block": {
     "drawn_by": {
@@ -204,6 +204,22 @@
       ],
       "needs_review": false
     },
+    "date": {
+      "value": "REV. B 2023-10-15",
+      "confidence": 0.915,
+      "bbox": [
+        3316.0,
+        2753.0,
+        3751.0,
+        2809.0
+      ],
+      "raw": "REV. B 2023-10-15",
+      "normalized": "2023-10-15",
+      "source": "title_block",
+      "page": 1,
+      "candidates": [],
+      "needs_review": false
+    },
     "revision": {
       "value": "B",
       "confidence": 0.6,
@@ -227,10 +243,10 @@
       "needs_review": false
     },
     "author_date": {
-      "value": "J. Smith",
+      "value": "J. Smith / 2023-10-15",
       "confidence": 0.894,
       "bbox": null,
-      "raw": "J. Smith",
+      "raw": "J. Smith / 2023-10-15",
       "normalized": null,
       "source": "derived",
       "page": null,
@@ -1122,7 +1138,8 @@
         3520.0,
         307.0
       ],
-      "page": 1
+      "page": 1,
+      "flags": []
     },
     {
       "rev": "B",
@@ -1140,20 +1157,21 @@
         3520.0,
         376.0
       ],
-      "page": 1
+      "page": 1,
+      "flags": []
     }
   ],
   "notes": [
     {
       "page": 1,
-      "number": null,
-      "text": "DJNHG) All dimensions are in mm unless otherwise specified",
-      "confidence": 0.874,
+      "number": "1",
+      "text": "All dimensions are in mm unless otherwise specified.",
+      "confidence": 0.909,
       "bbox": [
-        159.0,
-        133.0,
-        1284.0,
-        347.0
+        163.0,
+        190.0,
+        1295.0,
+        243.0
       ]
     },
     {
@@ -1171,7 +1189,7 @@
     {
       "page": 1,
       "number": "3",
-      "text": "Finish: Sandblast Sa 2.5, then primer and powder coated (Black). Boss face and ID to be masked before coating",
+      "text": "Finish: Sandblast Sa 2.5, then primer and powder coated (Black). Boss face and ID to be masked before coating.",
       "confidence": 0.891,
       "bbox": [
         159.0,
@@ -1183,36 +1201,36 @@
     {
       "page": 1,
       "number": "4",
-      "text": "Heat treatment: Stress relieve fabrication after welding, before final machining. Welding to be performed by qualified welders per AWS D1.1. Weld size 6mm fillet unless otherwise noted",
-      "confidence": 0.9,
+      "text": "Heat treatment: Stress relieve fabrication after welding, before final machining. S. Welding to be performed by qualified welders per AWS D1.1. Weld size 6mm fillet unless otherwise noted.",
+      "confidence": 0.895,
       "bbox": [
         157.0,
         416.0,
-        2368.0,
+        2381.0,
         526.0
       ]
     },
     {
       "page": 1,
       "number": "6",
-      "text": "Remove mann all burrs and sharp edges, max 0.5mm LEE x 45°",
-      "confidence": 0.882,
+      "text": "Remove all burrs and sharp edges, max 0.5mm x 45°.",
+      "confidence": 0.884,
       "bbox": [
         159.0,
-        484.0,
-        1310.0,
-        629.0
+        531.0,
+        1321.0,
+        582.0
       ]
     },
     {
       "page": 1,
       "number": "7",
-      "text": "Alignment pins to be press-fitted after final machining",
-      "confidence": 0.911,
+      "text": "Alignment pins to be press-fitted after final machining.",
+      "confidence": 0.893,
       "bbox": [
         159.0,
         587.0,
-        1319.0,
+        1331.0,
         638.0
       ]
     }
@@ -1254,11 +1272,11 @@
       "context": "Heat treatment: Stress relieve fabrication after welding, before final machining",
       "source": "notes",
       "subtype": "softening",
-      "confidence": 0.8995,
+      "confidence": 0.8946,
       "bbox": [
         157.0,
         416.0,
-        2368.0,
+        2381.0,
         526.0
       ],
       "page": 1
@@ -1269,11 +1287,11 @@
       "context": "Welding to be performed by qualified welders per AWS D1.1",
       "source": "notes",
       "subtype": "standard",
-      "confidence": 0.8995,
+      "confidence": 0.8946,
       "bbox": [
         157.0,
         416.0,
-        2368.0,
+        2381.0,
         526.0
       ],
       "page": 1
@@ -2106,7 +2124,7 @@
       "dpi": 400.0,
       "skew_deg": -0.0,
       "rotation_deg": 0,
-      "overlay_path": "C:\\Users\\A30165\\Documents\\BOM-EXTRACTOR\\storage\\previews\\70cf445e\\overlays\\8_p1_overlay.png",
+      "overlay_path": "C:\\Users\\A30165\\Documents\\BOM-EXTRACTOR\\storage\\previews\\2245d6f7\\overlays\\8_p1_overlay.png",
       "kind": "dxf-traced",
       "layout": "Model",
       "source_format": "dxf",
@@ -2160,13 +2178,13 @@
             638.0
           ],
           "page": 0,
-          "confidence": 0.899
+          "confidence": 0.9
         }
       ],
       "page_number": 1,
-      "image_url": "/api/drawings/70cf445e/pages/1/image",
+      "image_url": "/api/drawings/2245d6f7/pages/1/image",
       "preview_status": "available",
-      "overlay_url": "/api/drawings/70cf445e/pages/1/overlay"
+      "overlay_url": "/api/drawings/2245d6f7/pages/1/overlay"
     }
   ],
   "warnings": [
@@ -2329,16 +2347,6 @@
       },
       {
         "severity": "warning",
-        "category": "missing_value",
-        "section": "title_block",
-        "field": "date",
-        "page": null,
-        "row": null,
-        "message": "title block 'date' not found",
-        "value": null
-      },
-      {
-        "severity": "warning",
         "category": "low_confidence",
         "section": "title_block",
         "field": "revision",
@@ -2370,13 +2378,13 @@
     ],
     "counts": {
       "error": 0,
-      "warning": 15,
+      "warning": 14,
       "info": 4
     },
     "review_required": true,
     "completeness": {
       "bom": 1.0,
-      "title_block": 0.5
+      "title_block": 0.75
     },
     "review_fields": {
       "bom": {
@@ -2411,13 +2419,12 @@
         ]
       },
       "title_block": [
-        "date",
         "drawing_number",
         "revision"
       ]
     }
   },
-  "processing_seconds": 117.82,
+  "processing_seconds": 95.45,
   "source_format": "dxf",
   "processing_status": "complete",
   "processing_warnings": [

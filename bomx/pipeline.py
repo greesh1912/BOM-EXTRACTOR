@@ -17,7 +17,7 @@ from .ingest import PARTIAL_TAG, RawPage, iter_pages
 from .layout import (Table, assign_words, complete_rows, detect_cells, find_grid_tables, find_notes,
                      find_text_tables, group_cells, split_numbered_notes, text_title_cells,
                      title_block_cells)
-from .models import (Dimension, DrawingResult, FieldValue, PageResult, Region, SpecCallout, TextLine,
+from .models import (Dimension, DrawingResult, FieldValue, PageResult, Region, SpecCallout,
                      Word, mean_conf, union_bbox)
 from .specs import find_specs, summarise
 from .textutil import fix_ocr_confusions, group_lines, split_segments
@@ -317,10 +317,7 @@ _NOTE_NUM = re.compile(r"^\s*\d{1,2}\s*[.)\]]\s")
 
 
 def _reread_notes(lines, bb, clean, dpi: float, cfg: dict, masks):
-    """Tesseract's sparse mode can skip list numbers set in their own column
-    ('1.', '2.' ...), which merges all notes into one. Re-read the block as a
-    uniform text block and keep that when it recovers more numbered items
-    without losing text."""
+    """Compare sparse and block OCR for numbering and technical-text quality."""
     from .layout import _NOTES_HEAD, _NOTES_HEAD_INLINE
     if clean is None:
         return lines, bb
@@ -335,34 +332,37 @@ def _reread_notes(lines, bb, clean, dpi: float, cfg: dict, masks):
         a1, b1 = min(int(m[2]) - x0, crop.shape[1]), min(int(m[3]) - y0, crop.shape[0])
         if a1 > a0 and b1 > b0:
             crop[b0:b1, a0:a1] = 255
-    ws = imaging.ocr_image(crop, dpi, cfg["ocr_lang"], psm=6, min_conf=cfg["min_word_conf"],
-                           offset=(x0, y0))
-    new = [l for l in group_lines(ws)
-           if not (_NOTES_HEAD.match(l.text) or _NOTES_HEAD_INLINE.match(l.text))]
-    new_num = sum(1 for l in new if _NOTE_NUM.match(l.text))
-    alnum = lambda ls: sum(ch.isalnum() for l in ls for ch in l.text)
-    if not (new_num > old_num and alnum(new) >= 0.9 * alnum(lines)):
+    candidates = [lines]
+    for psm in (6, 11):
+        ws = imaging.ocr_image(crop, dpi, cfg["ocr_lang"], psm=psm,
+                               min_conf=cfg["min_word_conf"], offset=(x0, y0))
+        candidate = [l for l in group_lines(ws)
+                     if not (_NOTES_HEAD.match(l.text) or _NOTES_HEAD_INLINE.match(l.text))]
+        if candidate:
+            candidates.append(candidate)
+
+    def quality(candidate):
+        words = [w for line in candidate for w in line.words]
+        if not words:
+            return -1.0
+        txt = " ".join(line.text for line in candidate)
+        count = sum(ch.isalnum() for ch in txt)
+        old_count = max(1, sum(ch.isalnum() for line in lines for ch in line.text))
+        coverage = min(1.0, count / old_count)
+        token_quality = sum(bool(re.search(r"[A-Za-z]{2,}|\d", w.text)) for w in words) / len(words)
+        num_count = sum(1 for line in candidate if _NOTE_NUM.match(line.text))
+        numbering = min(1.0, num_count / max(old_num, 1))
+        return (0.68 * sum(w.conf for w in words) / len(words) +
+                0.17 * coverage + 0.10 * token_quality + 0.05 * numbering)
+
+    old_alnum = sum(ch.isalnum() for line in lines for ch in line.text)
+    viable = [candidate for candidate in candidates
+              if sum(1 for line in candidate if _NOTE_NUM.match(line.text)) >= old_num and
+              sum(ch.isalnum() for line in candidate for ch in line.text) >= 0.85 * old_alnum]
+    if not viable:
         return lines, bb
-    # block mode gives the line structure and the numbers; keep the sparse-mode
-    # words (usually the better read) wherever they cover the same line
-    sparse = [w for l in lines for w in l.words]
-    merged = []
-    for l in new:
-        x0, y0, x1, y1 = l.bbox
-        mine = sorted((w for w in sparse if y0 <= w.cy <= y1 and x0 - 1 <= w.cx <= x1 + 1),
-                      key=lambda w: w.x0)
-        lead = []
-        for w in l.words:
-            if re.fullmatch(r"\d{1,2}\s*[.)\]]?", w.text) and not any(m.x0 <= w.cx <= m.x1 for m in mine):
-                lead.append(w)
-            else:
-                break
-        body_alnum = sum(ch.isalnum() for w in l.words[len(lead):] for ch in w.text)
-        if mine and sum(ch.isalnum() for w in mine for ch in w.text) >= 0.8 * body_alnum:
-            merged.append(TextLine(lead + mine))
-        else:
-            merged.append(l)
-    return merged, bb
+    best = max(viable, key=quality)
+    return best, bb
 
 
 def _extract_page_content(pa: PageAnalysis, raw: RawPage, cfg: dict, page_no: int,
@@ -379,9 +379,24 @@ def _extract_page_content(pa: PageAnalysis, raw: RawPage, cfg: dict, page_no: in
     page_text = "\n".join(l.text for l in group_lines(
         [w for w in pa.words if not any(_inside(w, b) for b in tbl_boxes)]))
     tb = parse_title_block(pa.tb_cells, cfg["title_labels"], raw.dpi, page_text, cfg["date_order"])
+    # Dates physically inside a detected revision-history table are history
+    # entries, not the drawing's title-block date. Preserve them as candidates
+    # but require review if region selection has included the integrated box.
+    for date_key in ("date", "drawn_date", "checked_date", "approved_date"):
+        fv = tb.get(date_key)
+        if not fv or not fv.bbox:
+            continue
+        x = (fv.bbox[0] + fv.bbox[2]) / 2
+        y = (fv.bbox[1] + fv.bbox[3]) / 2
+        if any(t.bbox[0] <= x <= t.bbox[2] and t.bbox[1] <= y <= t.bbox[3]
+               for t in pa.rev_tables):
+            fv.candidates.append(fv.to_dict())
+            fv.needs_review = True
+            fv.value = None
+            fv.normalized = None
     _merge_cad_fields(tb, raw.cad_fields, cfg, res.warnings, page_no)
     for k, v in tb.items():
-        if not v.value:
+        if not v.value and not v.needs_review:
             continue
         v.page = page_no
         current = title.get(k)
@@ -389,7 +404,11 @@ def _extract_page_content(pa: PageAnalysis, raw: RawPage, cfg: dict, page_no: in
             title[k] = v
             continue
         previous_value = current.value
-        current.candidates.append(v.to_dict())
+        previous_candidate = {name: getattr(current, name) for name in
+                              ("value", "raw", "source", "page", "confidence", "bbox")}
+        incoming_candidate = {name: getattr(v, name) for name in
+                              ("value", "raw", "source", "page", "confidence", "bbox")}
+        current.candidates.extend([previous_candidate, incoming_candidate])
         # A labelled cell or CAD attribute is stronger evidence than free page
         # text. Keep conflicts from independent title blocks visible for review.
         priority = {"title_block": 3, "cad_attribute": 3, "page_text": 1, "revision_table": 0}
@@ -397,10 +416,17 @@ def _extract_page_content(pa: PageAnalysis, raw: RawPage, cfg: dict, page_no: in
         new_rank = priority.get(v.source or ("title_block" if v.bbox else "page_text"), 1)
         if (new_rank, v.confidence) > (cur_rank, current.confidence):
             v.candidates = current.candidates + v.candidates
+            v.needs_review = v.needs_review or current.needs_review
             title[k] = v
             current = v
-        if previous_value and previous_value.strip().casefold() != v.value.strip().casefold():
+        if v.needs_review:
             current.needs_review = True
+            current.value = None
+            current.normalized = None
+        if previous_value and v.value and previous_value.strip().casefold() != v.value.strip().casefold():
+            current.needs_review = True
+            current.value = None
+            current.normalized = None
             res.warnings.append(f"page {page_no}: conflicting title-block candidates for {k}; review required")
 
     # ---------------- BOM
@@ -580,15 +606,21 @@ def _merge_cad_fields(tb: dict[str, FieldValue], cad_fields: dict, cfg: dict,
         val = (d.get("value") or "").strip()
         if not val:
             continue
-        if k in tb and tb[k].value:
-            a = re.sub(r"[^A-Z0-9]", "", tb[k].value.upper())
-            b = re.sub(r"[^A-Z0-9]", "", val.upper())
-            if a != b and b not in a:
-                warnings.append(f"page {page_no}: title block {k} '{tb[k].value}' differs from CAD "
-                                f"attribute {d.get('tag')}='{val}'")
-            continue
         bb = tuple(d["bbox"]) if d.get("bbox") else None
-        add[k] = FieldValue(val, 1.0, bb, raw=f"{d.get('tag')}={val}", source="cad_attribute")
+        cad_value = FieldValue(val, 1.0, bb, raw=f"{d.get('tag')}={val}",
+                               source="cad_attribute", page=page_no)
+        existing = tb.get(k)
+        if existing and (existing.value or existing.needs_review):
+            existing.candidates.append(cad_value.to_dict())
+            old = re.sub(r"[^A-Z0-9]", "", (existing.value or "").upper())
+            new = re.sub(r"[^A-Z0-9]", "", val.upper())
+            if existing.needs_review or (existing.value and old != new and new not in old):
+                existing.needs_review = True
+                existing.value = None
+                existing.normalized = None
+                warnings.append(f"page {page_no}: conflicting title-block and CAD candidates for {k}; review required")
+            continue
+        add[k] = cad_value
     normalise_title_fields(add, cfg["date_order"])
     tb.update(add)
 

@@ -67,6 +67,7 @@ export interface RevisionRow {
   confidence: number;
   bbox?: number[] | null;
   page: number;
+  flags?: string[];
 }
 
 export interface SpecCallout {

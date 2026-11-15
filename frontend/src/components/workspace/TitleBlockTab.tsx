@@ -20,9 +20,10 @@ const CORE_TITLE_FIELDS = [
   { key: 'date', label: 'Date' },
   { key: 'scale', label: 'Scale' },
   { key: 'projection', label: 'Projection Type' },
+  { key: 'units', label: 'Units' },
 ];
 
-// Shown only when extracted
+// Optional fields are shown when extracted; Units is always shown for the POC.
 const OPTIONAL_TITLE_FIELDS: Record<string, string> = {
   checked_by: 'Checked By',
   checked_date: 'Checked Date',
@@ -37,7 +38,6 @@ const OPTIONAL_TITLE_FIELDS: Record<string, string> = {
   heat_treatment: 'Heat Treatment',
   weight: 'Weight',
   tolerance: 'General Tolerance',
-  units: 'Units',
   company: 'Company',
 };
 
@@ -62,7 +62,8 @@ export const TitleBlockTab: React.FC<TitleBlockTabProps> = ({
 }) => {
   const coreKeys = new Set(CORE_TITLE_FIELDS.map((f) => f.key));
   const extraFields = Object.keys(titleBlock || {})
-    .filter((k) => !coreKeys.has(k) && !HIDDEN_KEYS.has(k) && titleBlock[k]?.value)
+    .filter((k) => !coreKeys.has(k) && !HIDDEN_KEYS.has(k) &&
+      (titleBlock[k]?.value || titleBlock[k]?.needs_review))
     .sort((a, b) => {
       const ia = Object.keys(OPTIONAL_TITLE_FIELDS).indexOf(a);
       const ib = Object.keys(OPTIONAL_TITLE_FIELDS).indexOf(b);
@@ -72,7 +73,7 @@ export const TitleBlockTab: React.FC<TitleBlockTabProps> = ({
   const targetFields = [...CORE_TITLE_FIELDS, ...extraFields];
 
   const getFieldObj = (key: string): FieldValue =>
-    titleBlock[key] || { value: '', confidence: 1.0, raw: '' };
+    titleBlock[key] || { value: '', confidence: 0, raw: '' };
 
   const handleFieldChange = (key: string, val: string) => onChangeField(key, val);
 
@@ -99,6 +100,13 @@ export const TitleBlockTab: React.FC<TitleBlockTabProps> = ({
         {targetFields.map(({ key, label }) => {
           const fieldObj = getFieldObj(key);
           const val = fieldObj.value ?? '';
+          const hasValue = Boolean(val.trim());
+          const collectCandidates = (items: Array<Record<string, any>>): string[] => items.flatMap((c) => [
+            String(c.value ?? c.raw ?? '').trim(),
+            ...collectCandidates(Array.isArray(c.candidates) ? c.candidates : []),
+          ]);
+          const candidates = [...new Set(collectCandidates(fieldObj.candidates || []))]
+            .filter((candidate) => candidate && candidate !== val);
           const hasBbox = fieldObj.bbox && fieldObj.bbox.length === 4;
           const isFocused = focusedFieldKey === key;
 
@@ -122,7 +130,9 @@ export const TitleBlockTab: React.FC<TitleBlockTabProps> = ({
                   )}
                 </label>
                 <div className="flex items-center gap-2">
-                  <ConfidenceBadge confidence={fieldObj.confidence} size="sm" />
+                  {hasValue ? <ConfidenceBadge confidence={fieldObj.confidence} size="sm" /> : (
+                    <span className="text-[10px] font-medium text-slate-500 border border-slate-200 bg-slate-50 rounded px-1.5 py-0.5">Missing</span>
+                  )}
                   {hasBbox && (
                     <button
                       type="button"
@@ -149,6 +159,12 @@ export const TitleBlockTab: React.FC<TitleBlockTabProps> = ({
               {fieldObj.source && SOURCE_NOTE[fieldObj.source] && (
                 <div className="mt-1 text-[10px] text-amber-700">
                   {SOURCE_NOTE[fieldObj.source]}
+                </div>
+              )}
+
+              {fieldObj.needs_review && candidates.length > 0 && (
+                <div className="mt-1 text-[10px] text-amber-800">
+                  Candidates to review: {candidates.join(' / ')}
                 </div>
               )}
 
