@@ -6,6 +6,7 @@ import os
 import shutil
 import uuid
 import logging
+from dataclasses import asdict
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, List, Optional
@@ -210,6 +211,16 @@ class StorageManager:
             for row in (res.get("bom") or []):
                 data = {name: value for name, value in row.items()
                         if name in {"item", "part_number", "description", "quantity", "material", "mass", "remarks", "extra", "quantity_value", "mass_kg", "confidence", "structural_confidence", "bbox", "page", "flags", "mass_verified", "mass_candidate", "table", "row_index", "field_confidence", "field_bbox"}}
+                stale_flags = {"mass_not_numeric", "mass_unit_assumed_kg", "unsupported_mass_unit",
+                               "malformed_mass_value", "quantity_not_numeric", "quantity_unit_unknown"}
+                data["flags"] = [flag for flag in data.get("flags", []) if flag not in stale_flags]
+                if "quantity" in data and not data.get("quantity"):
+                    data["quantity_value"] = None
+                    data["quantity_measurement"] = None
+                if "mass" in data and not data.get("mass"):
+                    data["mass_kg"] = None
+                    data["mass_measurement"] = None
+                    data["mass_verified"] = False
                 for key in ("quantity_measurement", "mass_measurement"):
                     if isinstance(row.get(key), dict):
                         data[key] = Measurement(**{k: v for k, v in row[key].items()
@@ -225,6 +236,9 @@ class StorageManager:
                     data.setdefault("flags", []).extend(f for f in mflags if f not in data["flags"])
                 bom_rows.append(BomRow(**data))
             model.bom = bom_rows
+            # Persist recalculated canonical values and evidence, not just the
+            # raw edited strings used to construct the validation model.
+            res["bom"] = [asdict(row) for row in model.bom]
             model.revisions = [RevisionRow(**{name: value for name, value in row.items()
                                               if name in {"rev", "description", "date", "approved", "extra", "confidence", "bbox", "page", "flags"}})
                                for row in (res.get("revisions") or [])]
@@ -248,7 +262,11 @@ class StorageManager:
                                   "counts": {"error": 1, "warning": 0, "info": 0},
                                   "review_required": True, "review_fields": {"bom": {}, "title_block": []},
                                   "completeness": {"bom": None, "title_block": None}}
-            res.setdefault("summary", {})["review_required"] = True
+            failed_summary = res.setdefault("summary", {})
+            failed_summary.update({"validation_errors": 1, "validation_warnings": 0,
+                                   "bom_completeness": None, "title_block_completeness": None,
+                                   "review_required": True,
+                                   "review_reasons": [f"Validation refresh failed: {exc}"]})
 
         self.save_result(drawing_id, res)
         return res

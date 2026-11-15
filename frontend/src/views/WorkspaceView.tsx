@@ -195,6 +195,10 @@ export const WorkspaceView: React.FC<WorkspaceViewProps> = ({ drawingId, onBack 
     if (!drawing) return;
     const newStatus = !drawing.metadata.verified;
     try {
+      if (newStatus && editableResult?.validation?.review_required) {
+        alert('Resolve validation findings before marking this drawing verified.');
+        return;
+      }
       // Verification is a document-level status. It must not erase unresolved
       // field review flags; those remain visible until explicitly corrected.
       await api.updateDrawing(drawingId, { verified: newStatus });
