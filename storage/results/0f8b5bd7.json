@@ -1,0 +1,2229 @@
+{
+  "source_file": "C:\\Users\\A30165\\Music\\BOM-EXTRACTOR-main\\storage\\uploads\\0f8b5bd7\\8.dxf",
+  "summary": {
+    "file": "8.dxf",
+    "pages": 1,
+    "input_type": "ocr",
+    "file_format": "DXF",
+    "page_kinds": "dxf-traced",
+    "drawing_number": null,
+    "drawing_title": "MOUNTING BRACKET ASSEMSLY",
+    "revision": "B",
+    "drawn_by": "J. Smith",
+    "date": null,
+    "scale": "1:5",
+    "projection": "THIRD ANGLE",
+    "sheet": null,
+    "checked_by": "A. Lee",
+    "approved_by": "R. Patel",
+    "revision_source": "page_text",
+    "author_date": "J. Smith",
+    "material_callout": "As indicated in BOM",
+    "surface_finish": "Sandblast Sa 2.5, then primer and powder coated (Black). Boss face and ID to be masked before coating",
+    "heat_treatment": "Stress relieve fabrication after welding, before final machining. Welding to be performed by qualified welders per AWS D1.1. Weld size 6mm fillet",
+    "standards": "AWS D1.1, IS 2062, ASTM A36",
+    "bom_items": 9,
+    "bom_total_quantity": 22,
+    "revisions": 2,
+    "notes": 6,
+    "text_confidence": 0.874,
+    "structural_confidence": 0.8,
+    "mean_confidence": 0.862,
+    "min_structural_confidence": 0.8,
+    "min_text_confidence": 0.51,
+    "review_required": true,
+    "review_reasons": "missing drawing_number; low-confidence title fields: revision; 2 BOM row(s) flagged; low text OCR confidence on row (min 0.55); validation: 0 error(s), 6 warning(s)",
+    "validation_errors": 0,
+    "validation_warnings": 6,
+    "bom_completeness": 1.0,
+    "title_block_completeness": 0.5
+  },
+  "title_block": {
+    "drawn_by": {
+      "value": "J. Smith",
+      "confidence": 0.894,
+      "bbox": [
+        3278.0,
+        2531.0,
+        3689.0,
+        2571.0
+      ],
+      "raw": "J. Smith",
+      "normalized": null,
+      "source": "title_block"
+    },
+    "drawing_title": {
+      "value": "MOUNTING BRACKET ASSEMSLY",
+      "confidence": 0.836,
+      "bbox": [
+        4213.0,
+        2523.0,
+        5060.0,
+        2637.0
+      ],
+      "raw": "MOUNTING BRACKET ASSEMSLY",
+      "normalized": null,
+      "source": "title_block"
+    },
+    "checked_by": {
+      "value": "A. Lee",
+      "confidence": 0.891,
+      "bbox": [
+        3277.0,
+        2612.0,
+        3659.0,
+        2651.0
+      ],
+      "raw": "A. Lee",
+      "normalized": null,
+      "source": "title_block"
+    },
+    "approved_by": {
+      "value": "R. Patel",
+      "confidence": 0.924,
+      "bbox": [
+        3277.0,
+        2692.0,
+        3681.0,
+        2731.0
+      ],
+      "raw": "R. Patel",
+      "normalized": null,
+      "source": "title_block"
+    },
+    "scale": {
+      "value": "1:5",
+      "confidence": 0.901,
+      "bbox": [
+        3822.0,
+        2690.0,
+        4045.0,
+        2796.0
+      ],
+      "raw": "1:5",
+      "normalized": "1:5",
+      "source": "title_block"
+    },
+    "revision": {
+      "value": "B",
+      "confidence": 0.6,
+      "bbox": null,
+      "raw": "REV. B",
+      "normalized": "B",
+      "source": "page_text"
+    },
+    "projection": {
+      "value": "THIRD ANGLE PROJECTION",
+      "confidence": 0.9,
+      "bbox": null,
+      "raw": "Third Angle Projection",
+      "normalized": "THIRD ANGLE",
+      "source": "page_text"
+    },
+    "author_date": {
+      "value": "J. Smith",
+      "confidence": 0.894,
+      "bbox": null,
+      "raw": "J. Smith",
+      "normalized": null,
+      "source": "derived"
+    }
+  },
+  "bom_columns": [
+    "item",
+    "part_number",
+    "description",
+    "quantity",
+    "material",
+    "mass",
+    "remarks"
+  ],
+  "bom": [
+    {
+      "item": "1",
+      "part_number": "MBA-BASE-101",
+      "description": "Base Plate",
+      "quantity": "1",
+      "material": "Mild Steel IS 2062 E250",
+      "mass": "18.4 kg",
+      "remarks": "Flame Cut",
+      "extra": {},
+      "quantity_value": 1,
+      "mass_kg": 18.4,
+      "confidence": 0.9,
+      "structural_confidence": 0.8,
+      "bbox": [
+        3268.0,
+        1855.0,
+        5088.0,
+        1907.0
+      ],
+      "page": 1,
+      "flags": [],
+      "quantity_measurement": {
+        "raw": "1",
+        "nominal": 1.0,
+        "unit": null,
+        "canonical_value": 1.0,
+        "canonical_unit": "count",
+        "measurement_type": "quantity",
+        "tolerance": null,
+        "confidence": 0.9
+      },
+      "mass_measurement": {
+        "raw": "18.4 kg",
+        "nominal": 18.4,
+        "unit": "kg",
+        "canonical_value": 18.4,
+        "canonical_unit": "kg",
+        "measurement_type": "mass",
+        "tolerance": null,
+        "confidence": 0.9
+      },
+      "mass_verified": true,
+      "mass_candidate": null,
+      "table": 0,
+      "row_index": 0,
+      "field_confidence": {
+        "item": 0.95,
+        "part_number": 0.91,
+        "description": 0.924,
+        "material": 0.905,
+        "mass": 0.9,
+        "remarks": 0.914,
+        "quantity": 0.94
+      },
+      "field_bbox": {
+        "item": [
+          3268.0,
+          1855.0,
+          3422.0,
+          1906.0
+        ],
+        "part_number": [
+          3429.0,
+          1856.0,
+          3728.0,
+          1906.0
+        ],
+        "description": [
+          3735.0,
+          1856.0,
+          4086.0,
+          1907.0
+        ],
+        "material": [
+          4196.0,
+          1857.0,
+          4648.0,
+          1905.0
+        ],
+        "mass": [
+          4655.0,
+          1857.0,
+          4805.0,
+          1905.0
+        ],
+        "remarks": [
+          4811.0,
+          1857.0,
+          5088.0,
+          1905.0
+        ],
+        "quantity": [
+          4093.0,
+          1856.0,
+          4191.0,
+          1906.0
+        ]
+      }
+    },
+    {
+      "item": "2",
+      "part_number": "MBA-GUST-102",
+      "description": "Vertical Gusset",
+      "quantity": "2",
+      "material": "Mild Steel IS 2062 E250",
+      "mass": "5.2 kg",
+      "remarks": "Beveled",
+      "extra": {},
+      "quantity_value": 2,
+      "mass_kg": 5.2,
+      "confidence": 0.824,
+      "structural_confidence": 0.8,
+      "bbox": [
+        3268.0,
+        1911.0,
+        5088.0,
+        1962.0
+      ],
+      "page": 1,
+      "flags": [],
+      "quantity_measurement": {
+        "raw": "2",
+        "nominal": 2.0,
+        "unit": null,
+        "canonical_value": 2.0,
+        "canonical_unit": "count",
+        "measurement_type": "quantity",
+        "tolerance": null,
+        "confidence": 0.824
+      },
+      "mass_measurement": {
+        "raw": "5.2 kg",
+        "nominal": 5.2,
+        "unit": "kg",
+        "canonical_value": 5.2,
+        "canonical_unit": "kg",
+        "measurement_type": "mass",
+        "tolerance": null,
+        "confidence": 0.824
+      },
+      "mass_verified": true,
+      "mass_candidate": null,
+      "table": 0,
+      "row_index": 1,
+      "field_confidence": {
+        "item": 0.96,
+        "part_number": 0.91,
+        "description": 0.914,
+        "material": 0.916,
+        "mass": 0.824,
+        "remarks": 0.91,
+        "quantity": 0.96
+      },
+      "field_bbox": {
+        "item": [
+          3268.0,
+          1912.0,
+          3422.0,
+          1961.0
+        ],
+        "part_number": [
+          3429.0,
+          1911.0,
+          3728.0,
+          1961.0
+        ],
+        "description": [
+          3735.0,
+          1911.0,
+          4085.0,
+          1961.0
+        ],
+        "material": [
+          4196.0,
+          1911.0,
+          4648.0,
+          1962.0
+        ],
+        "mass": [
+          4654.0,
+          1911.0,
+          4804.0,
+          1961.0
+        ],
+        "remarks": [
+          4811.0,
+          1911.0,
+          5088.0,
+          1961.0
+        ],
+        "quantity": [
+          4094.0,
+          1911.0,
+          4191.0,
+          1961.0
+        ]
+      }
+    },
+    {
+      "item": "3",
+      "part_number": "MBA-FLNG-103",
+      "description": "Mounting Flange",
+      "quantity": "1",
+      "material": "Structural Steel ASTM A36",
+      "mass": "11.5 kg",
+      "remarks": "Machined",
+      "extra": {},
+      "quantity_value": 1,
+      "mass_kg": 11.5,
+      "confidence": 0.899,
+      "structural_confidence": 0.8,
+      "bbox": [
+        3268.0,
+        1968.0,
+        5088.0,
+        2017.0
+      ],
+      "page": 1,
+      "flags": [],
+      "quantity_measurement": {
+        "raw": "1",
+        "nominal": 1.0,
+        "unit": null,
+        "canonical_value": 1.0,
+        "canonical_unit": "count",
+        "measurement_type": "quantity",
+        "tolerance": null,
+        "confidence": 0.899
+      },
+      "mass_measurement": {
+        "raw": "11.5 kg",
+        "nominal": 11.5,
+        "unit": "kg",
+        "canonical_value": 11.5,
+        "canonical_unit": "kg",
+        "measurement_type": "mass",
+        "tolerance": null,
+        "confidence": 0.899
+      },
+      "mass_verified": true,
+      "mass_candidate": null,
+      "table": 0,
+      "row_index": 2,
+      "field_confidence": {
+        "item": 0.96,
+        "part_number": 0.91,
+        "description": 0.919,
+        "material": 0.899,
+        "mass": 0.903,
+        "remarks": 0.92,
+        "quantity": 0.92
+      },
+      "field_bbox": {
+        "item": [
+          3268.0,
+          1968.0,
+          3422.0,
+          2017.0
+        ],
+        "part_number": [
+          3429.0,
+          1968.0,
+          3728.0,
+          2017.0
+        ],
+        "description": [
+          3735.0,
+          1968.0,
+          4085.0,
+          2017.0
+        ],
+        "material": [
+          4196.0,
+          1968.0,
+          4648.0,
+          2017.0
+        ],
+        "mass": [
+          4654.0,
+          1968.0,
+          4803.0,
+          2017.0
+        ],
+        "remarks": [
+          4812.0,
+          1968.0,
+          5088.0,
+          2017.0
+        ],
+        "quantity": [
+          4094.0,
+          1968.0,
+          4191.0,
+          2017.0
+        ]
+      }
+    },
+    {
+      "item": "4",
+      "part_number": "MBA-BOSS-104",
+      "description": "Mounting Boss",
+      "quantity": "1",
+      "material": "Carbon Steel ENB",
+      "mass": "3.8ka",
+      "remarks": "Turned",
+      "extra": {},
+      "quantity_value": 1,
+      "mass_kg": 3.0,
+      "confidence": 0.81,
+      "structural_confidence": 0.8,
+      "bbox": [
+        3268.0,
+        2024.0,
+        5088.0,
+        2073.0
+      ],
+      "page": 1,
+      "flags": [
+        "mass_unit_assumed_kg"
+      ],
+      "quantity_measurement": {
+        "raw": "1",
+        "nominal": 1.0,
+        "unit": null,
+        "canonical_value": 1.0,
+        "canonical_unit": "count",
+        "measurement_type": "quantity",
+        "tolerance": null,
+        "confidence": 0.81
+      },
+      "mass_measurement": {
+        "raw": "3.8ka",
+        "nominal": 3.0,
+        "unit": null,
+        "canonical_value": 3.0,
+        "canonical_unit": "kg",
+        "measurement_type": "mass",
+        "tolerance": null,
+        "confidence": 0.81
+      },
+      "mass_verified": true,
+      "mass_candidate": null,
+      "table": 0,
+      "row_index": 3,
+      "field_confidence": {
+        "item": 0.96,
+        "part_number": 0.81,
+        "description": 0.91,
+        "material": 0.911,
+        "mass": 0.83,
+        "remarks": 0.9,
+        "quantity": 0.93
+      },
+      "field_bbox": {
+        "item": [
+          3268.0,
+          2024.0,
+          3422.0,
+          2073.0
+        ],
+        "part_number": [
+          3429.0,
+          2024.0,
+          3728.0,
+          2073.0
+        ],
+        "description": [
+          3735.0,
+          2024.0,
+          4085.0,
+          2073.0
+        ],
+        "material": [
+          4196.0,
+          2024.0,
+          4648.0,
+          2072.0
+        ],
+        "mass": [
+          4654.0,
+          2024.0,
+          4803.0,
+          2073.0
+        ],
+        "remarks": [
+          4812.0,
+          2024.0,
+          5088.0,
+          2072.0
+        ],
+        "quantity": [
+          4094.0,
+          2024.0,
+          4190.0,
+          2073.0
+        ]
+      }
+    },
+    {
+      "item": "5",
+      "part_number": "MBA-RIBS-105",
+      "description": "Support Rib",
+      "quantity": "2",
+      "material": "Mild Steel IS 2062 E250",
+      "mass": "1.9",
+      "remarks": null,
+      "extra": {},
+      "quantity_value": 2,
+      "mass_kg": 1.9,
+      "confidence": 0.6,
+      "structural_confidence": 0.8,
+      "bbox": [
+        3268.0,
+        2078.0,
+        5087.0,
+        2130.0
+      ],
+      "page": 1,
+      "flags": [
+        "mass_unit_assumed_kg",
+        "low_confidence",
+        "needs_review"
+      ],
+      "quantity_measurement": {
+        "raw": "2",
+        "nominal": 2.0,
+        "unit": null,
+        "canonical_value": 2.0,
+        "canonical_unit": "count",
+        "measurement_type": "quantity",
+        "tolerance": null,
+        "confidence": 0.6
+      },
+      "mass_measurement": {
+        "raw": "1.9",
+        "nominal": 1.9,
+        "unit": null,
+        "canonical_value": 1.9,
+        "canonical_unit": "kg",
+        "measurement_type": "mass",
+        "tolerance": null,
+        "confidence": 0.6
+      },
+      "mass_verified": true,
+      "mass_candidate": null,
+      "table": 0,
+      "row_index": 4,
+      "field_confidence": {
+        "item": 0.96,
+        "part_number": 0.91,
+        "description": 0.914,
+        "material": 0.9,
+        "mass": 0.6,
+        "quantity": 0.96
+      },
+      "field_bbox": {
+        "item": [
+          3268.0,
+          2079.0,
+          3422.0,
+          2129.0
+        ],
+        "part_number": [
+          3429.0,
+          2079.0,
+          3728.0,
+          2129.0
+        ],
+        "description": [
+          3735.0,
+          2078.0,
+          4085.0,
+          2129.0
+        ],
+        "material": [
+          4196.0,
+          2079.0,
+          4648.0,
+          2129.0
+        ],
+        "mass": [
+          4655.0,
+          2080.0,
+          4803.0,
+          2130.0
+        ],
+        "quantity": [
+          4094.0,
+          2079.0,
+          4190.0,
+          2129.0
+        ]
+      }
+    },
+    {
+      "item": "6",
+      "part_number": "MBA-BKPL-106",
+      "description": "Backing Plate",
+      "quantity": "1",
+      "material": "Mild Steel IS 2062 E250",
+      "mass": "4.2kg x X",
+      "remarks": null,
+      "extra": {},
+      "quantity_value": 1,
+      "mass_kg": 4.2,
+      "confidence": 0.853,
+      "structural_confidence": 0.8,
+      "bbox": [
+        3268.0,
+        2134.0,
+        5088.0,
+        2186.0
+      ],
+      "page": 1,
+      "flags": [],
+      "quantity_measurement": {
+        "raw": "1",
+        "nominal": 1.0,
+        "unit": null,
+        "canonical_value": 1.0,
+        "canonical_unit": "count",
+        "measurement_type": "quantity",
+        "tolerance": null,
+        "confidence": 0.853
+      },
+      "mass_measurement": {
+        "raw": "4.2kg x X",
+        "nominal": 4.2,
+        "unit": "kg",
+        "canonical_value": 4.2,
+        "canonical_unit": "kg",
+        "measurement_type": "mass",
+        "tolerance": null,
+        "confidence": 0.853
+      },
+      "mass_verified": true,
+      "mass_candidate": null,
+      "table": 0,
+      "row_index": 5,
+      "field_confidence": {
+        "item": 0.96,
+        "part_number": 0.92,
+        "description": 0.92,
+        "material": 0.909,
+        "mass": 0.853,
+        "quantity": 0.95
+      },
+      "field_bbox": {
+        "item": [
+          3268.0,
+          2135.0,
+          3422.0,
+          2185.0
+        ],
+        "part_number": [
+          3429.0,
+          2135.0,
+          3728.0,
+          2185.0
+        ],
+        "description": [
+          3735.0,
+          2135.0,
+          4085.0,
+          2186.0
+        ],
+        "material": [
+          4196.0,
+          2135.0,
+          4648.0,
+          2186.0
+        ],
+        "mass": [
+          4655.0,
+          2135.0,
+          4804.0,
+          2186.0
+        ],
+        "quantity": [
+          4093.0,
+          2134.0,
+          4190.0,
+          2186.0
+        ]
+      }
+    },
+    {
+      "item": "7",
+      "part_number": "MBA-PIN-107",
+      "description": "Alignment Pin",
+      "quantity": "2",
+      "material": "Alloy Steel EN19",
+      "mass": "0.3 ka",
+      "remarks": "Case Hardened",
+      "extra": {},
+      "quantity_value": 2,
+      "mass_kg": 0.3,
+      "confidence": 0.898,
+      "structural_confidence": 0.8,
+      "bbox": [
+        3268.0,
+        2191.0,
+        5088.0,
+        2240.0
+      ],
+      "page": 1,
+      "flags": [
+        "mass_unit_assumed_kg"
+      ],
+      "quantity_measurement": {
+        "raw": "2",
+        "nominal": 2.0,
+        "unit": null,
+        "canonical_value": 2.0,
+        "canonical_unit": "count",
+        "measurement_type": "quantity",
+        "tolerance": null,
+        "confidence": 0.898
+      },
+      "mass_measurement": {
+        "raw": "0.3 ka",
+        "nominal": 0.3,
+        "unit": null,
+        "canonical_value": 0.3,
+        "canonical_unit": "kg",
+        "measurement_type": "mass",
+        "tolerance": null,
+        "confidence": 0.898
+      },
+      "mass_verified": true,
+      "mass_candidate": null,
+      "table": 0,
+      "row_index": 6,
+      "field_confidence": {
+        "item": 0.96,
+        "part_number": 0.91,
+        "description": 0.91,
+        "material": 0.909,
+        "mass": 0.898,
+        "remarks": 0.9,
+        "quantity": 0.96
+      },
+      "field_bbox": {
+        "item": [
+          3268.0,
+          2191.0,
+          3422.0,
+          2240.0
+        ],
+        "part_number": [
+          3429.0,
+          2191.0,
+          3728.0,
+          2240.0
+        ],
+        "description": [
+          3735.0,
+          2191.0,
+          4085.0,
+          2240.0
+        ],
+        "material": [
+          4196.0,
+          2192.0,
+          4648.0,
+          2240.0
+        ],
+        "mass": [
+          4655.0,
+          2191.0,
+          4804.0,
+          2240.0
+        ],
+        "remarks": [
+          4811.0,
+          2191.0,
+          5088.0,
+          2240.0
+        ],
+        "quantity": [
+          4094.0,
+          2191.0,
+          4190.0,
+          2240.0
+        ]
+      }
+    },
+    {
+      "item": "8",
+      "part_number": "1S0-4014-M16",
+      "description": "Hex Bolt M16 x 50",
+      "quantity": "6",
+      "material": "Grade 8.8 Steel",
+      "mass": "0.15 kg",
+      "remarks": "Zinc Plated",
+      "extra": {},
+      "quantity_value": 6,
+      "mass_kg": 0.15,
+      "confidence": 0.55,
+      "structural_confidence": 0.8,
+      "bbox": [
+        3268.0,
+        2247.0,
+        5088.0,
+        2297.0
+      ],
+      "page": 1,
+      "flags": [
+        "low_confidence",
+        "needs_review"
+      ],
+      "quantity_measurement": {
+        "raw": "6",
+        "nominal": 6.0,
+        "unit": null,
+        "canonical_value": 6.0,
+        "canonical_unit": "count",
+        "measurement_type": "quantity",
+        "tolerance": null,
+        "confidence": 0.55
+      },
+      "mass_measurement": {
+        "raw": "0.15 kg",
+        "nominal": 0.15,
+        "unit": "kg",
+        "canonical_value": 0.15,
+        "canonical_unit": "kg",
+        "measurement_type": "mass",
+        "tolerance": null,
+        "confidence": 0.55
+      },
+      "mass_verified": true,
+      "mass_candidate": null,
+      "table": 0,
+      "row_index": 7,
+      "field_confidence": {
+        "item": 0.96,
+        "part_number": 0.55,
+        "description": 0.923,
+        "material": 0.918,
+        "mass": 0.927,
+        "remarks": 0.92,
+        "quantity": 0.96
+      },
+      "field_bbox": {
+        "item": [
+          3268.0,
+          2247.0,
+          3422.0,
+          2297.0
+        ],
+        "part_number": [
+          3429.0,
+          2247.0,
+          3728.0,
+          2297.0
+        ],
+        "description": [
+          3735.0,
+          2247.0,
+          4085.0,
+          2297.0
+        ],
+        "material": [
+          4196.0,
+          2247.0,
+          4648.0,
+          2297.0
+        ],
+        "mass": [
+          4655.0,
+          2247.0,
+          4805.0,
+          2297.0
+        ],
+        "remarks": [
+          4811.0,
+          2247.0,
+          5088.0,
+          2297.0
+        ],
+        "quantity": [
+          4094.0,
+          2247.0,
+          4190.0,
+          2297.0
+        ]
+      }
+    },
+    {
+      "item": "9",
+      "part_number": "150-7089-16",
+      "description": "Plain Washer M16",
+      "quantity": "6",
+      "material": "Mild Steel",
+      "mass": "0.02 ka",
+      "remarks": "Zinc Plated",
+      "extra": {},
+      "quantity_value": 6,
+      "mass_kg": 0.02,
+      "confidence": 0.78,
+      "structural_confidence": 0.8,
+      "bbox": [
+        3268.0,
+        2303.0,
+        5088.0,
+        2351.0
+      ],
+      "page": 1,
+      "flags": [
+        "mass_unit_assumed_kg"
+      ],
+      "quantity_measurement": {
+        "raw": "6",
+        "nominal": 6.0,
+        "unit": null,
+        "canonical_value": 6.0,
+        "canonical_unit": "count",
+        "measurement_type": "quantity",
+        "tolerance": null,
+        "confidence": 0.78
+      },
+      "mass_measurement": {
+        "raw": "0.02 ka",
+        "nominal": 0.02,
+        "unit": null,
+        "canonical_value": 0.02,
+        "canonical_unit": "kg",
+        "measurement_type": "mass",
+        "tolerance": null,
+        "confidence": 0.78
+      },
+      "mass_verified": true,
+      "mass_candidate": null,
+      "table": 0,
+      "row_index": 8,
+      "field_confidence": {
+        "item": 0.96,
+        "part_number": 0.78,
+        "description": 0.906,
+        "material": 0.92,
+        "mass": 0.91,
+        "remarks": 0.884,
+        "quantity": 0.96
+      },
+      "field_bbox": {
+        "item": [
+          3268.0,
+          2303.0,
+          3422.0,
+          2351.0
+        ],
+        "part_number": [
+          3428.0,
+          2303.0,
+          3728.0,
+          2351.0
+        ],
+        "description": [
+          3735.0,
+          2303.0,
+          4085.0,
+          2351.0
+        ],
+        "material": [
+          4196.0,
+          2303.0,
+          4648.0,
+          2351.0
+        ],
+        "mass": [
+          4655.0,
+          2303.0,
+          4805.0,
+          2351.0
+        ],
+        "remarks": [
+          4811.0,
+          2303.0,
+          5088.0,
+          2351.0
+        ],
+        "quantity": [
+          4094.0,
+          2303.0,
+          4190.0,
+          2351.0
+        ]
+      }
+    }
+  ],
+  "revisions": [
+    {
+      "rev": "A",
+      "description": "Initial Release",
+      "date": "2023-09-01",
+      "approved": "J. Smith",
+      "extra": {
+        "approved_4": "R. Patel",
+        "date_iso": "2023-09-01"
+      },
+      "confidence": 0.794,
+      "bbox": [
+        1704.0,
+        244.0,
+        3520.0,
+        307.0
+      ],
+      "page": 1
+    },
+    {
+      "rev": "B",
+      "description": "Backing plate thickness and weld size revised",
+      "date": "2023-10-15",
+      "approved": "J. Smith",
+      "extra": {
+        "approved_4": "R. Patel",
+        "date_iso": "2023-10-15"
+      },
+      "confidence": 0.783,
+      "bbox": [
+        1704.0,
+        313.0,
+        3520.0,
+        376.0
+      ],
+      "page": 1
+    }
+  ],
+  "notes": [
+    {
+      "page": 1,
+      "number": null,
+      "text": "DJNHG) All dimensions are in mm unless otherwise specified",
+      "confidence": 0.874,
+      "bbox": [
+        159.0,
+        133.0,
+        1284.0,
+        347.0
+      ]
+    },
+    {
+      "page": 1,
+      "number": "2",
+      "text": "Material: As indicated in BOM.",
+      "confidence": 0.902,
+      "bbox": [
+        160.0,
+        247.0,
+        836.0,
+        290.0
+      ]
+    },
+    {
+      "page": 1,
+      "number": "3",
+      "text": "Finish: Sandblast Sa 2.5, then primer and powder coated (Black). Boss face and ID to be masked before coating",
+      "confidence": 0.891,
+      "bbox": [
+        159.0,
+        304.0,
+        1560.0,
+        413.0
+      ]
+    },
+    {
+      "page": 1,
+      "number": "4",
+      "text": "Heat treatment: Stress relieve fabrication after welding, before final machining. Welding to be performed by qualified welders per AWS D1.1. Weld size 6mm fillet unless otherwise noted",
+      "confidence": 0.9,
+      "bbox": [
+        157.0,
+        416.0,
+        2368.0,
+        526.0
+      ]
+    },
+    {
+      "page": 1,
+      "number": "6",
+      "text": "Remove mann all burrs and sharp edges, max 0.5mm LEE x 45°",
+      "confidence": 0.882,
+      "bbox": [
+        159.0,
+        484.0,
+        1310.0,
+        629.0
+      ]
+    },
+    {
+      "page": 1,
+      "number": "7",
+      "text": "Alignment pins to be press-fitted after final machining",
+      "confidence": 0.911,
+      "bbox": [
+        159.0,
+        587.0,
+        1319.0,
+        638.0
+      ]
+    }
+  ],
+  "specs": [
+    {
+      "category": "surface_finish",
+      "value": "POWDER COATED",
+      "context": "Finish: Sandblast Sa 2.5, then primer and powder coated (Black)",
+      "source": "notes",
+      "subtype": "coating",
+      "confidence": 0.8911,
+      "bbox": [
+        159.0,
+        304.0,
+        1560.0,
+        413.0
+      ],
+      "page": 1
+    },
+    {
+      "category": "surface_finish",
+      "value": "PRIMER",
+      "context": "Finish: Sandblast Sa 2.5, then primer and powder coated (Black)",
+      "source": "notes",
+      "subtype": "coating",
+      "confidence": 0.8911,
+      "bbox": [
+        159.0,
+        304.0,
+        1560.0,
+        413.0
+      ],
+      "page": 1
+    },
+    {
+      "category": "heat_treatment",
+      "value": "STRESS RELIEVE",
+      "context": "Heat treatment: Stress relieve fabrication after welding, before final machining",
+      "source": "notes",
+      "subtype": "softening",
+      "confidence": 0.8995,
+      "bbox": [
+        157.0,
+        416.0,
+        2368.0,
+        526.0
+      ],
+      "page": 1
+    },
+    {
+      "category": "standard",
+      "value": "AWS D1.1",
+      "context": "Welding to be performed by qualified welders per AWS D1.1",
+      "source": "notes",
+      "subtype": "standard",
+      "confidence": 0.8995,
+      "bbox": [
+        157.0,
+        416.0,
+        2368.0,
+        526.0
+      ],
+      "page": 1
+    },
+    {
+      "category": "material",
+      "value": "IS 2062 E250",
+      "context": "Mild Steel IS 2062 E250",
+      "source": "bom",
+      "subtype": "carbon_steel",
+      "confidence": 0.9,
+      "bbox": [
+        3268.0,
+        1855.0,
+        5088.0,
+        1907.0
+      ],
+      "page": 1
+    },
+    {
+      "category": "material",
+      "value": "MILD STEEL",
+      "context": "Mild Steel IS 2062 E250",
+      "source": "bom",
+      "subtype": "carbon_steel",
+      "confidence": 0.9,
+      "bbox": [
+        3268.0,
+        1855.0,
+        5088.0,
+        1907.0
+      ],
+      "page": 1
+    },
+    {
+      "category": "standard",
+      "value": "IS 2062",
+      "context": "Mild Steel IS 2062 E250",
+      "source": "bom",
+      "subtype": "standard",
+      "confidence": 0.9,
+      "bbox": [
+        3268.0,
+        1855.0,
+        5088.0,
+        1907.0
+      ],
+      "page": 1
+    },
+    {
+      "category": "material",
+      "value": "STRUCTURAL STEEL ASTM A36",
+      "context": "Structural Steel ASTM A36",
+      "source": "bom",
+      "subtype": "carbon_steel",
+      "confidence": 0.899,
+      "bbox": [
+        3268.0,
+        1968.0,
+        5088.0,
+        2017.0
+      ],
+      "page": 1
+    },
+    {
+      "category": "standard",
+      "value": "ASTM A36",
+      "context": "Structural Steel ASTM A36",
+      "source": "bom",
+      "subtype": "standard",
+      "confidence": 0.899,
+      "bbox": [
+        3268.0,
+        1968.0,
+        5088.0,
+        2017.0
+      ],
+      "page": 1
+    },
+    {
+      "category": "material",
+      "value": "CARBON STEEL ENB",
+      "context": "Carbon Steel ENB",
+      "source": "bom",
+      "subtype": "custom",
+      "confidence": 0.81,
+      "bbox": [
+        3268.0,
+        2024.0,
+        5088.0,
+        2073.0
+      ],
+      "page": 1
+    },
+    {
+      "category": "material",
+      "value": "EN19",
+      "context": "Alloy Steel EN19",
+      "source": "bom",
+      "subtype": "carbon_steel",
+      "confidence": 0.898,
+      "bbox": [
+        3268.0,
+        2191.0,
+        5088.0,
+        2240.0
+      ],
+      "page": 1
+    },
+    {
+      "category": "material",
+      "value": "GRADE 8.8 STEEL",
+      "context": "Grade 8.8 Steel",
+      "source": "bom",
+      "subtype": "custom",
+      "confidence": 0.55,
+      "bbox": [
+        3268.0,
+        2247.0,
+        5088.0,
+        2297.0
+      ],
+      "page": 1
+    },
+    {
+      "category": "surface_finish",
+      "value": "Ra 1.2 µm",
+      "context": "Ra 1.2 ym",
+      "source": "page_text",
+      "subtype": "roughness",
+      "confidence": 0.7543,
+      "bbox": [
+        740.0,
+        1018.0,
+        922.0,
+        1056.0
+      ],
+      "page": 1
+    },
+    {
+      "category": "surface_finish",
+      "value": "Ra 6.3 µm",
+      "context": "Ra 6.3 uym",
+      "source": "page_text",
+      "subtype": "roughness",
+      "confidence": 0.6788,
+      "bbox": [
+        3577.0,
+        847.0,
+        3756.0,
+        898.0
+      ],
+      "page": 1
+    },
+    {
+      "category": "surface_finish",
+      "value": "Ra 1.6 µm",
+      "context": "Ra 1.6 ym",
+      "source": "page_text",
+      "subtype": "roughness",
+      "confidence": 0.8529,
+      "bbox": [
+        3573.0,
+        1035.0,
+        3758.0,
+        1093.0
+      ],
+      "page": 1
+    },
+    {
+      "category": "surface_finish",
+      "value": "Ra 3.2 µm",
+      "context": "Ra 3.2 ym",
+      "source": "page_text",
+      "subtype": "roughness",
+      "confidence": 0.83,
+      "bbox": [
+        1901.0,
+        1805.0,
+        2081.0,
+        1855.0
+      ],
+      "page": 1
+    },
+    {
+      "category": "surface_finish",
+      "value": "Ra 63 µm",
+      "context": "Ra63um—[>>—/",
+      "source": "page_text",
+      "subtype": "roughness",
+      "confidence": 0.59,
+      "bbox": [
+        787.0,
+        2570.0,
+        1265.0,
+        2683.0
+      ],
+      "page": 1
+    }
+  ],
+  "dimensions": [
+    {
+      "text": "1",
+      "nominal": 1.0,
+      "tolerance": null,
+      "prefix": null,
+      "suffix": null,
+      "dim_type": "linear",
+      "raw": "1",
+      "bbox": [
+        335.0,
+        44.0,
+        353.0,
+        81.0
+      ],
+      "page": 1,
+      "confidence": 0.94,
+      "measurement": {
+        "raw": "1",
+        "nominal": 1.0,
+        "unit": "mm",
+        "canonical_value": 1.0,
+        "canonical_unit": "mm",
+        "measurement_type": "linear",
+        "tolerance": null,
+        "confidence": 0.94
+      }
+    },
+    {
+      "text": "2",
+      "nominal": 2.0,
+      "tolerance": null,
+      "prefix": null,
+      "suffix": null,
+      "dim_type": "linear",
+      "raw": "2",
+      "bbox": [
+        979.0,
+        43.0,
+        1000.0,
+        82.0
+      ],
+      "page": 1,
+      "confidence": 0.96,
+      "measurement": {
+        "raw": "2",
+        "nominal": 2.0,
+        "unit": "mm",
+        "canonical_value": 2.0,
+        "canonical_unit": "mm",
+        "measurement_type": "linear",
+        "tolerance": null,
+        "confidence": 0.96
+      }
+    },
+    {
+      "text": "3",
+      "nominal": 3.0,
+      "tolerance": null,
+      "prefix": null,
+      "suffix": null,
+      "dim_type": "linear",
+      "raw": "3",
+      "bbox": [
+        1624.0,
+        43.0,
+        1646.0,
+        83.0
+      ],
+      "page": 1,
+      "confidence": 0.97,
+      "measurement": {
+        "raw": "3",
+        "nominal": 3.0,
+        "unit": "mm",
+        "canonical_value": 3.0,
+        "canonical_unit": "mm",
+        "measurement_type": "linear",
+        "tolerance": null,
+        "confidence": 0.97
+      }
+    },
+    {
+      "text": "4",
+      "nominal": 4.0,
+      "tolerance": null,
+      "prefix": null,
+      "suffix": null,
+      "dim_type": "linear",
+      "raw": "4",
+      "bbox": [
+        2268.0,
+        43.0,
+        2290.0,
+        81.0
+      ],
+      "page": 1,
+      "confidence": 0.93,
+      "measurement": {
+        "raw": "4",
+        "nominal": 4.0,
+        "unit": "mm",
+        "canonical_value": 4.0,
+        "canonical_unit": "mm",
+        "measurement_type": "linear",
+        "tolerance": null,
+        "confidence": 0.93
+      }
+    },
+    {
+      "text": "5",
+      "nominal": 5.0,
+      "tolerance": null,
+      "prefix": null,
+      "suffix": null,
+      "dim_type": "linear",
+      "raw": "5",
+      "bbox": [
+        2915.0,
+        43.0,
+        2937.0,
+        83.0
+      ],
+      "page": 1,
+      "confidence": 0.96,
+      "measurement": {
+        "raw": "5",
+        "nominal": 5.0,
+        "unit": "mm",
+        "canonical_value": 5.0,
+        "canonical_unit": "mm",
+        "measurement_type": "linear",
+        "tolerance": null,
+        "confidence": 0.96
+      }
+    },
+    {
+      "text": "7",
+      "nominal": 7.0,
+      "tolerance": null,
+      "prefix": null,
+      "suffix": null,
+      "dim_type": "linear",
+      "raw": "7",
+      "bbox": [
+        4208.0,
+        43.0,
+        4230.0,
+        81.0
+      ],
+      "page": 1,
+      "confidence": 0.96,
+      "measurement": {
+        "raw": "7",
+        "nominal": 7.0,
+        "unit": "mm",
+        "canonical_value": 7.0,
+        "canonical_unit": "mm",
+        "measurement_type": "linear",
+        "tolerance": null,
+        "confidence": 0.96
+      }
+    },
+    {
+      "text": "8",
+      "nominal": 8.0,
+      "tolerance": null,
+      "prefix": null,
+      "suffix": null,
+      "dim_type": "linear",
+      "raw": "8",
+      "bbox": [
+        4851.0,
+        43.0,
+        4874.0,
+        83.0
+      ],
+      "page": 1,
+      "confidence": 0.96,
+      "measurement": {
+        "raw": "8",
+        "nominal": 8.0,
+        "unit": "mm",
+        "canonical_value": 8.0,
+        "canonical_unit": "mm",
+        "measurement_type": "linear",
+        "tolerance": null,
+        "confidence": 0.96
+      }
+    },
+    {
+      "text": "750",
+      "nominal": 750.0,
+      "tolerance": null,
+      "prefix": null,
+      "suffix": null,
+      "dim_type": "linear",
+      "raw": "750",
+      "bbox": [
+        1885.0,
+        677.0,
+        1950.0,
+        713.0
+      ],
+      "page": 1,
+      "confidence": 0.96,
+      "measurement": {
+        "raw": "750",
+        "nominal": 750.0,
+        "unit": "mm",
+        "canonical_value": 750.0,
+        "canonical_unit": "mm",
+        "measurement_type": "linear",
+        "tolerance": null,
+        "confidence": 0.96
+      }
+    },
+    {
+      "text": "880",
+      "nominal": 880.0,
+      "tolerance": null,
+      "prefix": null,
+      "suffix": null,
+      "dim_type": "linear",
+      "raw": "880",
+      "bbox": [
+        301.0,
+        1217.0,
+        337.0,
+        1286.0
+      ],
+      "page": 1,
+      "confidence": 0.96,
+      "measurement": {
+        "raw": "880",
+        "nominal": 880.0,
+        "unit": "mm",
+        "canonical_value": 880.0,
+        "canonical_unit": "mm",
+        "measurement_type": "linear",
+        "tolerance": null,
+        "confidence": 0.96
+      }
+    },
+    {
+      "text": "155",
+      "nominal": 155.0,
+      "tolerance": null,
+      "prefix": null,
+      "suffix": null,
+      "dim_type": "linear",
+      "raw": "155",
+      "bbox": [
+        3154.0,
+        1255.0,
+        3188.0,
+        1317.0
+      ],
+      "page": 1,
+      "confidence": 0.96,
+      "measurement": {
+        "raw": "155",
+        "nominal": 155.0,
+        "unit": "mm",
+        "canonical_value": 155.0,
+        "canonical_unit": "mm",
+        "measurement_type": "linear",
+        "tolerance": null,
+        "confidence": 0.96
+      }
+    },
+    {
+      "text": "990",
+      "nominal": 990.0,
+      "tolerance": null,
+      "prefix": null,
+      "suffix": null,
+      "dim_type": "linear",
+      "raw": "990",
+      "bbox": [
+        1684.0,
+        1628.0,
+        1749.0,
+        1663.0
+      ],
+      "page": 1,
+      "confidence": 0.83,
+      "measurement": {
+        "raw": "990",
+        "nominal": 990.0,
+        "unit": "mm",
+        "canonical_value": 990.0,
+        "canonical_unit": "mm",
+        "measurement_type": "linear",
+        "tolerance": null,
+        "confidence": 0.83
+      }
+    },
+    {
+      "text": "30",
+      "nominal": 30.0,
+      "tolerance": null,
+      "prefix": null,
+      "suffix": null,
+      "dim_type": "linear",
+      "raw": "30",
+      "bbox": [
+        2833.0,
+        1628.0,
+        2876.0,
+        1664.0
+      ],
+      "page": 1,
+      "confidence": 0.96,
+      "measurement": {
+        "raw": "30",
+        "nominal": 30.0,
+        "unit": "mm",
+        "canonical_value": 30.0,
+        "canonical_unit": "mm",
+        "measurement_type": "linear",
+        "tolerance": null,
+        "confidence": 0.96
+      }
+    },
+    {
+      "text": "15",
+      "nominal": 15.0,
+      "tolerance": null,
+      "prefix": null,
+      "suffix": null,
+      "dim_type": "linear",
+      "raw": "15",
+      "bbox": [
+        2952.0,
+        1628.0,
+        2992.0,
+        1664.0
+      ],
+      "page": 1,
+      "confidence": 0.96,
+      "measurement": {
+        "raw": "15",
+        "nominal": 15.0,
+        "unit": "mm",
+        "canonical_value": 15.0,
+        "canonical_unit": "mm",
+        "measurement_type": "linear",
+        "tolerance": null,
+        "confidence": 0.96
+      }
+    },
+    {
+      "text": "980",
+      "nominal": 980.0,
+      "tolerance": null,
+      "prefix": null,
+      "suffix": null,
+      "dim_type": "linear",
+      "raw": "980",
+      "bbox": [
+        4093.0,
+        1596.0,
+        4158.0,
+        1633.0
+      ],
+      "page": 1,
+      "confidence": 0.96,
+      "measurement": {
+        "raw": "980",
+        "nominal": 980.0,
+        "unit": "mm",
+        "canonical_value": 980.0,
+        "canonical_unit": "mm",
+        "measurement_type": "linear",
+        "tolerance": null,
+        "confidence": 0.96
+      }
+    },
+    {
+      "text": "1380",
+      "nominal": 1380.0,
+      "tolerance": null,
+      "prefix": null,
+      "suffix": null,
+      "dim_type": "linear",
+      "raw": "1380",
+      "bbox": [
+        1676.0,
+        1694.0,
+        1759.0,
+        1730.0
+      ],
+      "page": 1,
+      "confidence": 0.95,
+      "measurement": {
+        "raw": "1380",
+        "nominal": 1380.0,
+        "unit": "mm",
+        "canonical_value": 1380.0,
+        "canonical_unit": "mm",
+        "measurement_type": "linear",
+        "tolerance": null,
+        "confidence": 0.95
+      }
+    },
+    {
+      "text": "6",
+      "nominal": 6.0,
+      "tolerance": null,
+      "prefix": null,
+      "suffix": null,
+      "dim_type": "linear",
+      "raw": "6",
+      "bbox": [
+        3335.0,
+        2142.0,
+        3357.0,
+        2179.0
+      ],
+      "page": 1,
+      "confidence": 0.96,
+      "measurement": {
+        "raw": "6",
+        "nominal": 6.0,
+        "unit": "mm",
+        "canonical_value": 6.0,
+        "canonical_unit": "mm",
+        "measurement_type": "linear",
+        "tolerance": null,
+        "confidence": 0.96
+      }
+    },
+    {
+      "text": "2100",
+      "nominal": 2100.0,
+      "tolerance": null,
+      "prefix": null,
+      "suffix": null,
+      "dim_type": "linear",
+      "raw": "2100",
+      "bbox": [
+        429.0,
+        2182.0,
+        469.0,
+        2278.0
+      ],
+      "page": 1,
+      "confidence": 0.78,
+      "measurement": {
+        "raw": "2100",
+        "nominal": 2100.0,
+        "unit": "mm",
+        "canonical_value": 2100.0,
+        "canonical_unit": "mm",
+        "measurement_type": "linear",
+        "tolerance": null,
+        "confidence": 0.78
+      }
+    },
+    {
+      "text": "1S0-4014-M16 Hex Bolt M16 x 50 6 Grade 8.8 Steel",
+      "nominal": 16.0,
+      "tolerance": null,
+      "prefix": "M",
+      "suffix": null,
+      "dim_type": "thread",
+      "raw": "1S0-4014-M16 Hex Bolt M16 x 50 6 Grade 8.8 Steel",
+      "bbox": [
+        3436.0,
+        2253.0,
+        4477.0,
+        2291.0
+      ],
+      "page": 1,
+      "confidence": 0.8077,
+      "measurement": {
+        "raw": "1S0-4014-M16 Hex Bolt M16 x 50 6 Grade 8.8 Steel",
+        "nominal": 16.0,
+        "unit": null,
+        "canonical_value": 16.0,
+        "canonical_unit": null,
+        "measurement_type": "thread",
+        "tolerance": null,
+        "confidence": 0.8077
+      }
+    },
+    {
+      "text": "9",
+      "nominal": 9.0,
+      "tolerance": null,
+      "prefix": null,
+      "suffix": null,
+      "dim_type": "linear",
+      "raw": "9",
+      "bbox": [
+        3335.0,
+        2309.0,
+        3355.0,
+        2345.0
+      ],
+      "page": 1,
+      "confidence": 0.96,
+      "measurement": {
+        "raw": "9",
+        "nominal": 9.0,
+        "unit": "mm",
+        "canonical_value": 9.0,
+        "canonical_unit": "mm",
+        "measurement_type": "linear",
+        "tolerance": null,
+        "confidence": 0.96
+      }
+    },
+    {
+      "text": "Plain Washer M16",
+      "nominal": 16.0,
+      "tolerance": null,
+      "prefix": "M",
+      "suffix": null,
+      "dim_type": "thread",
+      "raw": "Plain Washer M16",
+      "bbox": [
+        3742.0,
+        2307.0,
+        4058.0,
+        2345.0
+      ],
+      "page": 1,
+      "confidence": 0.9057,
+      "measurement": {
+        "raw": "Plain Washer M16",
+        "nominal": 16.0,
+        "unit": null,
+        "canonical_value": 16.0,
+        "canonical_unit": null,
+        "measurement_type": "thread",
+        "tolerance": null,
+        "confidence": 0.9057
+      }
+    },
+    {
+      "text": "1.5",
+      "nominal": 1.5,
+      "tolerance": null,
+      "prefix": null,
+      "suffix": null,
+      "dim_type": "linear",
+      "raw": "1.5",
+      "bbox": [
+        2956.0,
+        2641.0,
+        3007.0,
+        2678.0
+      ],
+      "page": 1,
+      "confidence": 0.96,
+      "measurement": {
+        "raw": "1.5",
+        "nominal": 1.5,
+        "unit": "mm",
+        "canonical_value": 1.5,
+        "canonical_unit": "mm",
+        "measurement_type": "linear",
+        "tolerance": null,
+        "confidence": 0.96
+      }
+    },
+    {
+      "text": "1200",
+      "nominal": 1200.0,
+      "tolerance": null,
+      "prefix": null,
+      "suffix": null,
+      "dim_type": "linear",
+      "raw": "1200",
+      "bbox": [
+        1676.0,
+        2710.0,
+        1760.0,
+        2747.0
+      ],
+      "page": 1,
+      "confidence": 0.96,
+      "measurement": {
+        "raw": "1200",
+        "nominal": 1200.0,
+        "unit": "mm",
+        "canonical_value": 1200.0,
+        "canonical_unit": "mm",
+        "measurement_type": "linear",
+        "tolerance": null,
+        "confidence": 0.96
+      }
+    },
+    {
+      "text": "10f1",
+      "nominal": 10.0,
+      "tolerance": "F1",
+      "prefix": null,
+      "suffix": null,
+      "dim_type": "linear",
+      "raw": "10f1",
+      "bbox": [
+        4910.0,
+        2744.0,
+        5043.0,
+        2797.0
+      ],
+      "page": 1,
+      "confidence": 0.51,
+      "measurement": {
+        "raw": "10f1",
+        "nominal": 10.0,
+        "unit": "mm",
+        "canonical_value": 10.0,
+        "canonical_unit": "mm",
+        "measurement_type": "linear",
+        "tolerance": "F1",
+        "confidence": 0.51
+      }
+    }
+  ],
+  "pages": [
+    {
+      "index": 0,
+      "source": "ocr",
+      "width": 5202,
+      "height": 2930,
+      "dpi": 400.0,
+      "skew_deg": -0.0,
+      "rotation_deg": 0,
+      "overlay_path": "C:\\Users\\A30165\\Music\\BOM-EXTRACTOR-main\\storage\\previews\\0f8b5bd7\\overlays\\8_p1_overlay.png",
+      "kind": "dxf-traced",
+      "layout": "Model",
+      "source_format": "dxf",
+      "status": "complete",
+      "page_size": [
+        5202.0,
+        2930.0
+      ],
+      "regions": [
+        {
+          "kind": "title_block",
+          "bbox": [
+            3277.0,
+            2523.0,
+            5060.0,
+            2809.0
+          ],
+          "page": 0,
+          "confidence": 0.894
+        },
+        {
+          "kind": "bom",
+          "bbox": [
+            3268.0,
+            1798.0,
+            5088.0,
+            2351.0
+          ],
+          "page": 0,
+          "confidence": 0.907
+        },
+        {
+          "kind": "revision",
+          "bbox": [
+            1703.0,
+            103.0,
+            3521.0,
+            376.0
+          ],
+          "page": 0,
+          "confidence": 0.901
+        },
+        {
+          "kind": "notes",
+          "bbox": [
+            159.0,
+            133.0,
+            2368.0,
+            638.0
+          ],
+          "page": 0,
+          "confidence": 0.899
+        }
+      ],
+      "page_number": 1,
+      "image_url": "/api/drawings/0f8b5bd7/pages/1/image",
+      "preview_status": "available",
+      "overlay_url": "/api/drawings/0f8b5bd7/pages/1/overlay"
+    }
+  ],
+  "warnings": [
+    "page 1: empty paper-space layout(s) ignored: Layout1",
+    "page 1: no CAD text, attribute or dimension entities found - text may be exploded to lines",
+    "page 1: no CAD text entities - drawing is traced vector outlines; rendered filled and read with OCR",
+    "page 1: 30 vertical (rotated) text line(s) read"
+  ],
+  "validation": {
+    "issues": [
+      {
+        "severity": "info",
+        "category": "unrecognised_value",
+        "section": "bom",
+        "field": "material",
+        "page": 1,
+        "row": 3,
+        "message": "material 'Carbon Steel ENB' not in the material library",
+        "value": "Carbon Steel ENB"
+      },
+      {
+        "severity": "warning",
+        "category": "low_confidence",
+        "section": "bom",
+        "field": null,
+        "page": 1,
+        "row": 4,
+        "message": "low OCR confidence (0.60)",
+        "value": 0.6
+      },
+      {
+        "severity": "info",
+        "category": "unrecognised_value",
+        "section": "bom",
+        "field": "material",
+        "page": 1,
+        "row": 7,
+        "message": "material 'Grade 8.8 Steel' not in the material library",
+        "value": "Grade 8.8 Steel"
+      },
+      {
+        "severity": "warning",
+        "category": "low_confidence",
+        "section": "bom",
+        "field": null,
+        "page": 1,
+        "row": 7,
+        "message": "low OCR confidence (0.55)",
+        "value": 0.55
+      },
+      {
+        "severity": "warning",
+        "category": "missing_value",
+        "section": "title_block",
+        "field": "drawing_number",
+        "page": null,
+        "row": null,
+        "message": "title block 'drawing_number' not found",
+        "value": null
+      },
+      {
+        "severity": "warning",
+        "category": "missing_value",
+        "section": "title_block",
+        "field": "date",
+        "page": null,
+        "row": null,
+        "message": "title block 'date' not found",
+        "value": null
+      },
+      {
+        "severity": "warning",
+        "category": "low_confidence",
+        "section": "title_block",
+        "field": "revision",
+        "page": null,
+        "row": null,
+        "message": "'revision' read with low confidence (0.60)",
+        "value": "B"
+      },
+      {
+        "severity": "warning",
+        "category": "weak_source",
+        "section": "title_block",
+        "field": "revision",
+        "page": null,
+        "row": null,
+        "message": "'revision' was not read from a labelled title-block cell (source: page_text)",
+        "value": "B"
+      },
+      {
+        "severity": "info",
+        "category": "weak_source",
+        "section": "title_block",
+        "field": "projection",
+        "page": null,
+        "row": null,
+        "message": "'projection' was not read from a labelled title-block cell (source: page_text)",
+        "value": "THIRD ANGLE PROJECTION"
+      }
+    ],
+    "counts": {
+      "error": 0,
+      "warning": 6,
+      "info": 3
+    },
+    "review_required": true,
+    "completeness": {
+      "bom": 1.0,
+      "title_block": 0.5
+    },
+    "review_fields": {
+      "bom": {
+        "4": [
+          "row"
+        ],
+        "7": [
+          "row"
+        ]
+      },
+      "title_block": [
+        "date",
+        "drawing_number",
+        "revision"
+      ]
+    }
+  },
+  "processing_seconds": 163.7,
+  "source_format": "dxf",
+  "processing_status": "complete",
+  "processing_warnings": [
+    "page 1: empty paper-space layout(s) ignored: Layout1",
+    "page 1: no CAD text, attribute or dimension entities found - text may be exploded to lines",
+    "page 1: no CAD text entities - drawing is traced vector outlines; rendered filled and read with OCR",
+    "page 1: 30 vertical (rotated) text line(s) read"
+  ]
+}
