@@ -1,0 +1,1364 @@
+{
+  "source_file": "C:\\Users\\A30165\\Documents\\BOM-EXTRACTOR\\storage\\uploads\\4507a7b4\\legacy-drawing-2.pdf",
+  "summary": {
+    "file": "legacy-drawing-2.pdf",
+    "pages": 1,
+    "input_type": "ocr",
+    "file_format": "PDF",
+    "page_kinds": "pdf-scan",
+    "drawing_number": "DWG-2026-8892-R2",
+    "drawing_title": "PISTON & CONNECTING ROD ASSEMBLY",
+    "revision": "C",
+    "drawn_by": "J. DOE",
+    "date": "2024-08-15",
+    "scale": "1:1",
+    "projection": null,
+    "sheet": "1 0F 1",
+    "checked_by": null,
+    "approved_by": null,
+    "revision_source": "title_block",
+    "author_date": "J. DOE / 2024-08-15",
+    "material_callout": "REFER TO BOM FOR DETAILS",
+    "surface_finish": "ground on bearing surfaces / Ra 0.8 um",
+    "heat_treatment": "quenched and tempered on connecting rod 32-38 HRC",
+    "standards": null,
+    "bom_items": 6,
+    "bom_total_quantity": null,
+    "revisions": 0,
+    "notes": 5,
+    "text_confidence": 0.854,
+    "structural_confidence": 1.0,
+    "mean_confidence": 0.883,
+    "min_structural_confidence": 1.0,
+    "min_text_confidence": 0.46,
+    "review_required": true,
+    "review_reasons": "6 BOM row(s) flagged; validation: 0 error(s), 6 warning(s)",
+    "validation_errors": 0,
+    "validation_warnings": 6,
+    "bom_completeness": 1.0,
+    "title_block_completeness": 1.0
+  },
+  "title_block": {
+    "drawing_title": {
+      "value": "PISTON & CONNECTING ROD ASSEMBLY",
+      "confidence": 0.917,
+      "bbox": [
+        1676.0,
+        1384.0,
+        2345.0,
+        1486.0
+      ],
+      "raw": "PISTON & CONNECTING ROD ASSEMBLY",
+      "normalized": null,
+      "source": "title_block",
+      "page": 1,
+      "candidates": [
+        {
+          "value": "PISTON & CONNECTING ROD ASSEMBLY",
+          "confidence": 0.917,
+          "bbox": [
+            1676.0,
+            1384.0,
+            2345.0,
+            1486.0
+          ],
+          "raw": "PISTON & CONNECTING ROD ASSEMBLY",
+          "normalized": null,
+          "source": "title_block",
+          "page": null,
+          "candidates": [],
+          "needs_review": false
+        }
+      ],
+      "needs_review": false
+    },
+    "drawing_number": {
+      "value": "DWG-2026-8892-R2",
+      "confidence": 0.872,
+      "bbox": [
+        1677.0,
+        1490.0,
+        2242.0,
+        1577.0
+      ],
+      "raw": "DWG-2026-8892-R2",
+      "normalized": "DWG-2026-8892-R2",
+      "source": "title_block",
+      "page": 1,
+      "candidates": [
+        {
+          "value": "DWG-2026-8892-R2",
+          "confidence": 0.872,
+          "bbox": [
+            1677.0,
+            1490.0,
+            2242.0,
+            1577.0
+          ],
+          "raw": "DWG-2026-8892-R2",
+          "normalized": null,
+          "source": "title_block",
+          "page": null,
+          "candidates": [],
+          "needs_review": false
+        }
+      ],
+      "needs_review": false
+    },
+    "revision": {
+      "value": "C",
+      "confidence": 0.864,
+      "bbox": [
+        2247.0,
+        1490.0,
+        2345.0,
+        1577.0
+      ],
+      "raw": "C",
+      "normalized": "C",
+      "source": "title_block",
+      "page": 1,
+      "candidates": [
+        {
+          "value": "C",
+          "confidence": 0.864,
+          "bbox": [
+            2247.0,
+            1490.0,
+            2345.0,
+            1577.0
+          ],
+          "raw": "C",
+          "normalized": null,
+          "source": "title_block",
+          "page": null,
+          "candidates": [],
+          "needs_review": false
+        }
+      ],
+      "needs_review": false
+    },
+    "drawn_by": {
+      "value": "J. DOE",
+      "confidence": 0.899,
+      "bbox": [
+        1677.0,
+        1581.0,
+        1994.0,
+        1644.0
+      ],
+      "raw": "J. DOE / 2024-08-15",
+      "normalized": null,
+      "source": "title_block",
+      "page": 1,
+      "candidates": [],
+      "needs_review": false
+    },
+    "scale": {
+      "value": "1:1",
+      "confidence": 0.9,
+      "bbox": [
+        1999.0,
+        1581.0,
+        2160.0,
+        1643.0
+      ],
+      "raw": "1:1",
+      "normalized": "1:1",
+      "source": "title_block",
+      "page": 1,
+      "candidates": [
+        {
+          "value": "1:1",
+          "confidence": 0.9,
+          "bbox": [
+            1999.0,
+            1581.0,
+            2160.0,
+            1643.0
+          ],
+          "raw": "1:1",
+          "normalized": null,
+          "source": "title_block",
+          "page": null,
+          "candidates": [],
+          "needs_review": false
+        }
+      ],
+      "needs_review": false
+    },
+    "sheet": {
+      "value": "1 0F 1",
+      "confidence": 0.81,
+      "bbox": [
+        2165.0,
+        1581.0,
+        2346.0,
+        1644.0
+      ],
+      "raw": "1 0F 1",
+      "normalized": null,
+      "source": "title_block",
+      "page": 1,
+      "candidates": [
+        {
+          "value": "1 0F 1",
+          "confidence": 0.81,
+          "bbox": [
+            2165.0,
+            1581.0,
+            2346.0,
+            1644.0
+          ],
+          "raw": "1 0F 1",
+          "normalized": null,
+          "source": "title_block",
+          "page": null,
+          "candidates": [],
+          "needs_review": false
+        }
+      ],
+      "needs_review": false
+    },
+    "drawn_date": {
+      "value": "2024-08-15",
+      "confidence": 0.899,
+      "bbox": [
+        1677.0,
+        1581.0,
+        1994.0,
+        1644.0
+      ],
+      "raw": "J. DOE / 2024-08-15",
+      "normalized": "2024-08-15",
+      "source": "title_block",
+      "page": 1,
+      "candidates": [],
+      "needs_review": false
+    },
+    "date": {
+      "value": "2024-08-15",
+      "confidence": 0.899,
+      "bbox": [
+        1677.0,
+        1581.0,
+        1994.0,
+        1644.0
+      ],
+      "raw": "J. DOE / 2024-08-15",
+      "normalized": "2024-08-15",
+      "source": "title_block",
+      "page": 1,
+      "candidates": [],
+      "needs_review": false
+    },
+    "author_date": {
+      "value": "J. DOE / 2024-08-15",
+      "confidence": 0.899,
+      "bbox": null,
+      "raw": "J. DOE / 2024-08-15",
+      "normalized": null,
+      "source": "derived",
+      "page": null,
+      "candidates": [],
+      "needs_review": false
+    }
+  },
+  "bom_columns": [
+    "item",
+    "part_number",
+    "description",
+    "qryy",
+    "material",
+    "mass"
+  ],
+  "bom": [
+    {
+      "item": "01",
+      "part_number": "PN-5510-A",
+      "description": "PISTON HEAD",
+      "quantity": null,
+      "material": "Cast Aluminum",
+      "mass": "0.85 kg",
+      "remarks": null,
+      "extra": {
+        "qryy": "1",
+        "mass_basis": "unit"
+      },
+      "quantity_value": null,
+      "mass_kg": 0.85,
+      "confidence": 0.883,
+      "structural_confidence": 1.0,
+      "bbox": [
+        1338.0,
+        60.0,
+        2345.0,
+        104.0
+      ],
+      "page": 1,
+      "flags": [
+        "missing_quantity",
+        "needs_review"
+      ],
+      "quantity_measurement": null,
+      "mass_measurement": {
+        "raw": "0.85 kg",
+        "nominal": 0.85,
+        "unit": "kg",
+        "canonical_value": 0.85,
+        "canonical_unit": "kg",
+        "measurement_type": "mass",
+        "tolerance": null,
+        "confidence": 0.883
+      },
+      "mass_verified": false,
+      "mass_candidate": null,
+      "table": 0,
+      "row_index": 0,
+      "field_confidence": {
+        "item": 0.89,
+        "part_number": 0.89,
+        "description": 0.916,
+        "qryy": 0.96,
+        "material": 0.907,
+        "mass": 0.883
+      },
+      "field_bbox": {
+        "item": [
+          1338.0,
+          60.0,
+          1417.0,
+          104.0
+        ],
+        "part_number": [
+          1421.0,
+          60.0,
+          1630.0,
+          104.0
+        ],
+        "description": [
+          1634.0,
+          60.0,
+          1903.0,
+          104.0
+        ],
+        "qryy": [
+          1908.0,
+          60.0,
+          1979.0,
+          104.0
+        ],
+        "material": [
+          1983.0,
+          60.0,
+          2224.0,
+          104.0
+        ],
+        "mass": [
+          2228.0,
+          60.0,
+          2345.0,
+          104.0
+        ]
+      }
+    },
+    {
+      "item": "02",
+      "part_number": "PN-5510-B",
+      "description": "CONNECTING ROD",
+      "quantity": null,
+      "material": "Forged Steel 4340",
+      "mass": "1.20 kg",
+      "remarks": null,
+      "extra": {
+        "qryy": "1",
+        "mass_basis": "unit"
+      },
+      "quantity_value": null,
+      "mass_kg": 1.2,
+      "confidence": 0.92,
+      "structural_confidence": 1.0,
+      "bbox": [
+        1339.0,
+        108.0,
+        2345.0,
+        151.0
+      ],
+      "page": 1,
+      "flags": [
+        "missing_quantity",
+        "needs_review"
+      ],
+      "quantity_measurement": null,
+      "mass_measurement": {
+        "raw": "1.20 kg",
+        "nominal": 1.2,
+        "unit": "kg",
+        "canonical_value": 1.2,
+        "canonical_unit": "kg",
+        "measurement_type": "mass",
+        "tolerance": null,
+        "confidence": 0.92
+      },
+      "mass_verified": false,
+      "mass_candidate": null,
+      "table": 0,
+      "row_index": 1,
+      "field_confidence": {
+        "item": 0.96,
+        "part_number": 0.92,
+        "description": 0.92,
+        "qryy": 0.96,
+        "material": 0.931,
+        "mass": 0.923
+      },
+      "field_bbox": {
+        "item": [
+          1339.0,
+          108.0,
+          1417.0,
+          151.0
+        ],
+        "part_number": [
+          1421.0,
+          108.0,
+          1630.0,
+          151.0
+        ],
+        "description": [
+          1634.0,
+          108.0,
+          1903.0,
+          151.0
+        ],
+        "qryy": [
+          1908.0,
+          108.0,
+          1979.0,
+          151.0
+        ],
+        "material": [
+          1983.0,
+          108.0,
+          2224.0,
+          151.0
+        ],
+        "mass": [
+          2228.0,
+          108.0,
+          2345.0,
+          151.0
+        ]
+      }
+    },
+    {
+      "item": "03",
+      "part_number": "PN-5510-C",
+      "description": "WRIST PIN",
+      "quantity": null,
+      "material": "Alloy Steel",
+      "mass": "0.25 kg",
+      "remarks": null,
+      "extra": {
+        "qryy": "1",
+        "mass_basis": "unit"
+      },
+      "quantity_value": null,
+      "mass_kg": 0.25,
+      "confidence": 0.91,
+      "structural_confidence": 1.0,
+      "bbox": [
+        1338.0,
+        156.0,
+        2345.0,
+        200.0
+      ],
+      "page": 1,
+      "flags": [
+        "missing_quantity",
+        "needs_review"
+      ],
+      "quantity_measurement": null,
+      "mass_measurement": {
+        "raw": "0.25 kg",
+        "nominal": 0.25,
+        "unit": "kg",
+        "canonical_value": 0.25,
+        "canonical_unit": "kg",
+        "measurement_type": "mass",
+        "tolerance": null,
+        "confidence": 0.91
+      },
+      "mass_verified": false,
+      "mass_candidate": null,
+      "table": 0,
+      "row_index": 2,
+      "field_confidence": {
+        "item": 0.96,
+        "part_number": 0.91,
+        "description": 0.91,
+        "qryy": 0.96,
+        "material": 0.92,
+        "mass": 0.91
+      },
+      "field_bbox": {
+        "item": [
+          1338.0,
+          156.0,
+          1417.0,
+          200.0
+        ],
+        "part_number": [
+          1422.0,
+          156.0,
+          1630.0,
+          200.0
+        ],
+        "description": [
+          1634.0,
+          156.0,
+          1903.0,
+          200.0
+        ],
+        "qryy": [
+          1908.0,
+          156.0,
+          1979.0,
+          200.0
+        ],
+        "material": [
+          1983.0,
+          156.0,
+          2224.0,
+          200.0
+        ],
+        "mass": [
+          2228.0,
+          156.0,
+          2345.0,
+          200.0
+        ]
+      }
+    },
+    {
+      "item": "04",
+      "part_number": "PN-5510-D",
+      "description": "ROD CAP",
+      "quantity": null,
+      "material": "Forged Steel 4340",
+      "mass": "0.40 kg",
+      "remarks": null,
+      "extra": {
+        "qryy": "1",
+        "mass_basis": "unit"
+      },
+      "quantity_value": null,
+      "mass_kg": 0.4,
+      "confidence": 0.915,
+      "structural_confidence": 1.0,
+      "bbox": [
+        1338.0,
+        204.0,
+        2345.0,
+        247.0
+      ],
+      "page": 1,
+      "flags": [
+        "missing_quantity",
+        "needs_review"
+      ],
+      "quantity_measurement": null,
+      "mass_measurement": {
+        "raw": "0.40 kg",
+        "nominal": 0.4,
+        "unit": "kg",
+        "canonical_value": 0.4,
+        "canonical_unit": "kg",
+        "measurement_type": "mass",
+        "tolerance": null,
+        "confidence": 0.915
+      },
+      "mass_verified": false,
+      "mass_candidate": null,
+      "table": 0,
+      "row_index": 3,
+      "field_confidence": {
+        "item": 0.96,
+        "part_number": 0.92,
+        "description": 0.915,
+        "qryy": 0.96,
+        "material": 0.931,
+        "mass": 0.927
+      },
+      "field_bbox": {
+        "item": [
+          1338.0,
+          204.0,
+          1417.0,
+          247.0
+        ],
+        "part_number": [
+          1422.0,
+          204.0,
+          1630.0,
+          247.0
+        ],
+        "description": [
+          1634.0,
+          204.0,
+          1903.0,
+          247.0
+        ],
+        "qryy": [
+          1908.0,
+          204.0,
+          1979.0,
+          247.0
+        ],
+        "material": [
+          1983.0,
+          204.0,
+          2224.0,
+          247.0
+        ],
+        "mass": [
+          2228.0,
+          204.0,
+          2345.0,
+          247.0
+        ]
+      }
+    },
+    {
+      "item": "05",
+      "part_number": "PN-5510-E",
+      "description": "CAP BOLT M10x1.25",
+      "quantity": null,
+      "material": "High-Tensile Steel",
+      "mass": "0.08 kg",
+      "remarks": null,
+      "extra": {
+        "qryy": "2",
+        "mass_basis": "unit"
+      },
+      "quantity_value": null,
+      "mass_kg": 0.08,
+      "confidence": 0.87,
+      "structural_confidence": 1.0,
+      "bbox": [
+        1338.0,
+        252.0,
+        2344.0,
+        297.0
+      ],
+      "page": 1,
+      "flags": [
+        "missing_quantity",
+        "needs_review"
+      ],
+      "quantity_measurement": null,
+      "mass_measurement": {
+        "raw": "0.08 kg",
+        "nominal": 0.08,
+        "unit": "kg",
+        "canonical_value": 0.08,
+        "canonical_unit": "kg",
+        "measurement_type": "mass",
+        "tolerance": null,
+        "confidence": 0.87
+      },
+      "mass_verified": false,
+      "mass_candidate": null,
+      "table": 0,
+      "row_index": 4,
+      "field_confidence": {
+        "item": 0.96,
+        "part_number": 0.87,
+        "description": 0.913,
+        "qryy": 0.96,
+        "material": 0.889,
+        "mass": 0.9
+      },
+      "field_bbox": {
+        "item": [
+          1338.0,
+          252.0,
+          1417.0,
+          296.0
+        ],
+        "part_number": [
+          1421.0,
+          252.0,
+          1630.0,
+          296.0
+        ],
+        "description": [
+          1634.0,
+          252.0,
+          1903.0,
+          296.0
+        ],
+        "qryy": [
+          1935.9,
+          261.9,
+          1950.2,
+          285.6
+        ],
+        "material": [
+          1983.0,
+          252.0,
+          2224.0,
+          297.0
+        ],
+        "mass": [
+          2228.0,
+          252.0,
+          2344.0,
+          296.0
+        ]
+      }
+    },
+    {
+      "item": "06",
+      "part_number": "PN-5510-F",
+      "description": "COMPRESSION RING",
+      "quantity": null,
+      "material": "Cast Iron",
+      "mass": "0.02 kg",
+      "remarks": null,
+      "extra": {
+        "qryy": "3",
+        "mass_basis": "unit"
+      },
+      "quantity_value": null,
+      "mass_kg": 0.02,
+      "confidence": 0.91,
+      "structural_confidence": 1.0,
+      "bbox": [
+        1338.0,
+        296.0,
+        2345.0,
+        343.0
+      ],
+      "page": 1,
+      "flags": [
+        "missing_quantity",
+        "needs_review"
+      ],
+      "quantity_measurement": null,
+      "mass_measurement": {
+        "raw": "0.02 kg",
+        "nominal": 0.02,
+        "unit": "kg",
+        "canonical_value": 0.02,
+        "canonical_unit": "kg",
+        "measurement_type": "mass",
+        "tolerance": null,
+        "confidence": 0.91
+      },
+      "mass_verified": false,
+      "mass_candidate": null,
+      "table": 0,
+      "row_index": 5,
+      "field_confidence": {
+        "item": 0.96,
+        "part_number": 0.91,
+        "description": 0.913,
+        "qryy": 0.96,
+        "material": 0.91,
+        "mass": 0.933
+      },
+      "field_bbox": {
+        "item": [
+          1338.0,
+          299.0,
+          1417.0,
+          343.0
+        ],
+        "part_number": [
+          1422.0,
+          300.0,
+          1630.0,
+          343.0
+        ],
+        "description": [
+          1634.0,
+          300.0,
+          1903.0,
+          343.0
+        ],
+        "qryy": [
+          1935.9,
+          309.9,
+          1950.2,
+          333.6
+        ],
+        "material": [
+          1983.0,
+          300.0,
+          2224.0,
+          343.0
+        ],
+        "mass": [
+          2228.0,
+          300.0,
+          2345.0,
+          343.0
+        ]
+      }
+    }
+  ],
+  "revisions": [],
+  "notes": [
+    {
+      "page": 1,
+      "number": "1",
+      "text": "MATERIAL CALLOUT: REFER TO BOM FOR DETAILS",
+      "confidence": 0.909,
+      "bbox": [
+        101.9,
+        1413.2,
+        951.9,
+        1443.7
+      ]
+    },
+    {
+      "page": 1,
+      "number": "2",
+      "text": "SURFACE FINISH: ground on bearing surfaces / Ra 0.8 um",
+      "confidence": 0.916,
+      "bbox": [
+        102.7,
+        1453.9,
+        1072.1,
+        1494.5
+      ]
+    },
+    {
+      "page": 1,
+      "number": "3",
+      "text": "HEAT TREATMENT: quenched and tempered on connecting rod 32-38 HRC",
+      "confidence": 0.895,
+      "bbox": [
+        101.9,
+        1497.0,
+        1288.9,
+        1536.8
+      ]
+    },
+    {
+      "page": 1,
+      "number": null,
+      "text": "UNLESS OTHERWISE SPECIFIED, DIMENSIONS ARE IN MM",
+      "confidence": 0.914,
+      "bbox": [
+        102.7,
+        1549.5,
+        1017.9,
+        1583.4
+      ]
+    },
+    {
+      "page": 1,
+      "number": null,
+      "text": "REMOVE ALL BURRS AND SHARP EDGES",
+      "confidence": 0.917,
+      "bbox": [
+        102.7,
+        1591.0,
+        752.1,
+        1621.5
+      ]
+    }
+  ],
+  "specs": [
+    {
+      "category": "surface_finish",
+      "value": "Ra 0.8 µm",
+      "context": "SURFACE FINISH: ground on bearing surfaces / Ra 0.8 um",
+      "source": "notes",
+      "subtype": "roughness",
+      "confidence": 0.9164,
+      "bbox": [
+        102.7,
+        1453.9,
+        1072.1,
+        1494.5
+      ],
+      "page": 1
+    },
+    {
+      "category": "heat_treatment",
+      "value": "QUENCHED & TEMPERED",
+      "context": "HEAT TREATMENT: quenched and tempered on connecting rod 32-38 HRC",
+      "source": "notes",
+      "subtype": "quench_temper",
+      "confidence": 0.8953,
+      "bbox": [
+        101.9,
+        1497.0,
+        1288.9,
+        1536.8
+      ],
+      "page": 1
+    },
+    {
+      "category": "heat_treatment",
+      "value": "32-38 HRC",
+      "context": "HEAT TREATMENT: quenched and tempered on connecting rod 32-38 HRC",
+      "source": "notes",
+      "subtype": "hardness",
+      "confidence": 0.8953,
+      "bbox": [
+        101.9,
+        1497.0,
+        1288.9,
+        1536.8
+      ],
+      "page": 1
+    },
+    {
+      "category": "material",
+      "value": "CAST ALUMINUM",
+      "context": "Cast Aluminum",
+      "source": "bom",
+      "subtype": "custom",
+      "confidence": 0.883,
+      "bbox": [
+        1338.0,
+        60.0,
+        2345.0,
+        104.0
+      ],
+      "page": 1
+    },
+    {
+      "category": "material",
+      "value": "FORGED STEEL 4340",
+      "context": "Forged Steel 4340",
+      "source": "bom",
+      "subtype": "custom",
+      "confidence": 0.92,
+      "bbox": [
+        1339.0,
+        108.0,
+        2345.0,
+        151.0
+      ],
+      "page": 1
+    },
+    {
+      "category": "material",
+      "value": "ALLOY STEEL",
+      "context": "Alloy Steel",
+      "source": "bom",
+      "subtype": "custom",
+      "confidence": 0.91,
+      "bbox": [
+        1338.0,
+        156.0,
+        2345.0,
+        200.0
+      ],
+      "page": 1
+    },
+    {
+      "category": "material",
+      "value": "HIGH-TENSILE STEEL",
+      "context": "High-Tensile Steel",
+      "source": "bom",
+      "subtype": "custom",
+      "confidence": 0.87,
+      "bbox": [
+        1338.0,
+        252.0,
+        2344.0,
+        297.0
+      ],
+      "page": 1
+    },
+    {
+      "category": "material",
+      "value": "CAST IRON",
+      "context": "Cast Iron",
+      "source": "bom",
+      "subtype": "cast_iron",
+      "confidence": 0.91,
+      "bbox": [
+        1338.0,
+        296.0,
+        2345.0,
+        343.0
+      ],
+      "page": 1
+    }
+  ],
+  "dimensions": [
+    {
+      "text": "1",
+      "nominal": 1.0,
+      "tolerance": null,
+      "prefix": null,
+      "suffix": null,
+      "dim_type": "linear",
+      "raw": "{1",
+      "bbox": [
+        227.8,
+        193.9,
+        286.2,
+        210.8
+      ],
+      "page": 1,
+      "confidence": 0.46,
+      "measurement": {
+        "raw": "{1",
+        "nominal": 1.0,
+        "unit": "mm",
+        "canonical_value": 1.0,
+        "canonical_unit": "mm",
+        "measurement_type": "linear",
+        "tolerance": null,
+        "confidence": 0.46
+      }
+    },
+    {
+      "text": "4",
+      "nominal": 4.0,
+      "tolerance": null,
+      "prefix": null,
+      "suffix": null,
+      "dim_type": "linear",
+      "raw": "4",
+      "bbox": [
+        312.4,
+        259.9,
+        324.3,
+        262.5
+      ],
+      "page": 1,
+      "confidence": 0.75,
+      "measurement": {
+        "raw": "4",
+        "nominal": 4.0,
+        "unit": "mm",
+        "canonical_value": 4.0,
+        "canonical_unit": "mm",
+        "measurement_type": "linear",
+        "tolerance": null,
+        "confidence": 0.75
+      }
+    },
+    {
+      "text": "CAP BOLT M10x1.25 2 High-Tensile Steel 0.08 kg",
+      "nominal": 10.0,
+      "tolerance": null,
+      "prefix": "M",
+      "suffix": null,
+      "dim_type": "thread",
+      "raw": "CAP BOLT M10x1.25 2 High-Tensile Steel 0.08 kg",
+      "bbox": [
+        1642.7,
+        261.6,
+        2331.8,
+        293.2
+      ],
+      "page": 1,
+      "confidence": 0.9013,
+      "measurement": {
+        "raw": "CAP BOLT M10x1.25 2 High-Tensile Steel 0.08 kg",
+        "nominal": 10.0,
+        "unit": null,
+        "canonical_value": 10.0,
+        "canonical_unit": null,
+        "measurement_type": "thread",
+        "tolerance": null,
+        "confidence": 0.9013
+      }
+    },
+    {
+      "text": "7",
+      "nominal": 7.0,
+      "tolerance": null,
+      "prefix": null,
+      "suffix": null,
+      "dim_type": "linear",
+      "raw": "7",
+      "bbox": [
+        797.6,
+        1070.2,
+        808.6,
+        1090.5
+      ],
+      "page": 1,
+      "confidence": 0.81,
+      "measurement": {
+        "raw": "7",
+        "nominal": 7.0,
+        "unit": "mm",
+        "canonical_value": 7.0,
+        "canonical_unit": "mm",
+        "measurement_type": "linear",
+        "tolerance": null,
+        "confidence": 0.81
+      }
+    },
+    {
+      "text": "20",
+      "nominal": 20.0,
+      "tolerance": null,
+      "prefix": null,
+      "suffix": null,
+      "dim_type": "linear",
+      "raw": "20",
+      "bbox": [
+        597.7,
+        1292.9,
+        635.0,
+        1318.3
+      ],
+      "page": 1,
+      "confidence": 0.52,
+      "measurement": {
+        "raw": "20",
+        "nominal": 20.0,
+        "unit": "mm",
+        "canonical_value": 20.0,
+        "canonical_unit": "mm",
+        "measurement_type": "linear",
+        "tolerance": null,
+        "confidence": 0.52
+      }
+    }
+  ],
+  "pages": [
+    {
+      "index": 0,
+      "source": "ocr",
+      "width": 2400,
+      "height": 1692,
+      "dpi": 254.0,
+      "skew_deg": -0.0,
+      "rotation_deg": 270,
+      "overlay_path": "C:\\Users\\A30165\\Documents\\BOM-EXTRACTOR\\storage\\previews\\4507a7b4\\overlays\\legacy-drawing-2_p1_overlay.png",
+      "kind": "pdf-scan",
+      "layout": "",
+      "source_format": "pdf",
+      "status": "complete",
+      "page_size": [
+        1800.19,
+        1269.13
+      ],
+      "source_width": 2400,
+      "source_height": 1692,
+      "regions": [
+        {
+          "kind": "title_block",
+          "bbox": [
+            1378.0,
+            1383.0,
+            2346.0,
+            1644.0
+          ],
+          "page": 0,
+          "confidence": 0.877
+        },
+        {
+          "kind": "bom",
+          "bbox": [
+            1338.0,
+            12.0,
+            2345.0,
+            343.0
+          ],
+          "page": 0,
+          "confidence": 0.926
+        },
+        {
+          "kind": "notes",
+          "bbox": [
+            100.8,
+            1325.9,
+            1289.5,
+            1622.2
+          ],
+          "page": 0,
+          "confidence": 0.911
+        }
+      ],
+      "page_number": 1,
+      "image_url": "/api/drawings/4507a7b4/pages/1/image",
+      "preview_status": "available",
+      "overlay_url": "/api/drawings/4507a7b4/pages/1/overlay"
+    }
+  ],
+  "warnings": [
+    "page 1: image resolution 96 dpi does not match the lettering size - using estimated 254 dpi",
+    "page 1: low-quality scan (contrast 101, sharpness 1575) - enhanced contrast before OCR",
+    "page 1: 6 vertical (rotated) text line(s) read"
+  ],
+  "validation": {
+    "issues": [
+      {
+        "severity": "info",
+        "category": "missing_column",
+        "section": "bom",
+        "field": "quantity",
+        "page": null,
+        "row": null,
+        "message": "BOM has no 'quantity' column",
+        "value": null
+      },
+      {
+        "severity": "info",
+        "category": "unrecognised_value",
+        "section": "bom",
+        "field": "material",
+        "page": 1,
+        "row": 0,
+        "message": "material 'Cast Aluminum' not in the material library",
+        "value": "Cast Aluminum"
+      },
+      {
+        "severity": "warning",
+        "category": "unverified_value",
+        "section": "bom",
+        "field": "mass",
+        "page": 1,
+        "row": 0,
+        "message": "parsed mass has not been reviewed",
+        "value": "0.85 kg"
+      },
+      {
+        "severity": "info",
+        "category": "unrecognised_value",
+        "section": "bom",
+        "field": "material",
+        "page": 1,
+        "row": 1,
+        "message": "material 'Forged Steel 4340' not in the material library",
+        "value": "Forged Steel 4340"
+      },
+      {
+        "severity": "warning",
+        "category": "unverified_value",
+        "section": "bom",
+        "field": "mass",
+        "page": 1,
+        "row": 1,
+        "message": "parsed mass has not been reviewed",
+        "value": "1.20 kg"
+      },
+      {
+        "severity": "info",
+        "category": "unrecognised_value",
+        "section": "bom",
+        "field": "material",
+        "page": 1,
+        "row": 2,
+        "message": "material 'Alloy Steel' not in the material library",
+        "value": "Alloy Steel"
+      },
+      {
+        "severity": "warning",
+        "category": "unverified_value",
+        "section": "bom",
+        "field": "mass",
+        "page": 1,
+        "row": 2,
+        "message": "parsed mass has not been reviewed",
+        "value": "0.25 kg"
+      },
+      {
+        "severity": "info",
+        "category": "unrecognised_value",
+        "section": "bom",
+        "field": "material",
+        "page": 1,
+        "row": 3,
+        "message": "material 'Forged Steel 4340' not in the material library",
+        "value": "Forged Steel 4340"
+      },
+      {
+        "severity": "warning",
+        "category": "unverified_value",
+        "section": "bom",
+        "field": "mass",
+        "page": 1,
+        "row": 3,
+        "message": "parsed mass has not been reviewed",
+        "value": "0.40 kg"
+      },
+      {
+        "severity": "info",
+        "category": "unrecognised_value",
+        "section": "bom",
+        "field": "material",
+        "page": 1,
+        "row": 4,
+        "message": "material 'High-Tensile Steel' not in the material library",
+        "value": "High-Tensile Steel"
+      },
+      {
+        "severity": "warning",
+        "category": "unverified_value",
+        "section": "bom",
+        "field": "mass",
+        "page": 1,
+        "row": 4,
+        "message": "parsed mass has not been reviewed",
+        "value": "0.08 kg"
+      },
+      {
+        "severity": "warning",
+        "category": "unverified_value",
+        "section": "bom",
+        "field": "mass",
+        "page": 1,
+        "row": 5,
+        "message": "parsed mass has not been reviewed",
+        "value": "0.02 kg"
+      }
+    ],
+    "counts": {
+      "error": 0,
+      "warning": 6,
+      "info": 6
+    },
+    "review_required": true,
+    "completeness": {
+      "bom": 1.0,
+      "title_block": 1.0
+    },
+    "review_fields": {
+      "bom": {
+        "0": [
+          "mass"
+        ],
+        "1": [
+          "mass"
+        ],
+        "2": [
+          "mass"
+        ],
+        "3": [
+          "mass"
+        ],
+        "4": [
+          "mass"
+        ],
+        "5": [
+          "mass"
+        ]
+      },
+      "title_block": []
+    }
+  },
+  "processing_seconds": 28.88,
+  "source_format": "pdf",
+  "processing_status": "complete",
+  "processing_warnings": [
+    "page 1: image resolution 96 dpi does not match the lettering size - using estimated 254 dpi",
+    "page 1: low-quality scan (contrast 101, sharpness 1575) - enhanced contrast before OCR",
+    "page 1: 6 vertical (rotated) text line(s) read"
+  ]
+}

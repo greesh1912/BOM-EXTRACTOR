@@ -301,9 +301,6 @@ export const DrawingViewer: React.FC<DrawingViewerProps> = ({
                       >
                         <Crosshair className="w-2.5 h-2.5" />
                         <span>{box.label}</span>
-                        <span className="font-mono text-[9px] opacity-90">
-                          ({Math.round(box.confidence * 100)}%)
-                        </span>
                       </div>
                     )}
                   </div>
@@ -318,9 +315,6 @@ export const DrawingViewer: React.FC<DrawingViewerProps> = ({
           <div className="absolute bottom-4 left-4 z-40 bg-slate-900/90 backdrop-blur-xs text-white border border-slate-700 px-3.5 py-2 rounded-lg shadow-xl text-xs max-w-sm pointer-events-none animate-in fade-in">
             <div className="flex items-center justify-between gap-3">
               <span className="font-semibold text-blue-400">{hoveredOverlay.label}</span>
-              <span className="font-mono text-[11px] text-emerald-400 font-medium">
-                {Math.round(hoveredOverlay.confidence * 100)}% Conf
-              </span>
             </div>
             {hoveredOverlay.value && (
               <p className="mt-1 text-slate-200 font-mono text-[11px] line-clamp-2">

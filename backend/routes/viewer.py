@@ -72,6 +72,8 @@ async def get_drawing_overlays(drawing_id: str):
         page_num = int(page.get("index", p_idx)) + 1  # the document's own page number
         page_w = page.get("source_width") or page.get("width") or 2000
         page_h = page.get("source_height") or page.get("height") or 1400
+        proc_w = page.get("width") or page_w
+        proc_h = page.get("height") or page_h
         def source_bbox(bb):
             if not bb or len(bb) != 4:
                 return bb
@@ -81,10 +83,16 @@ async def get_drawing_overlays(drawing_id: str):
             if abs(skew) >= 0.05:
                 a = math.radians(skew)
                 c, s = math.cos(a), math.sin(a)
-                cx, cy = (page.get("width") or page_w) / 2, (page.get("height") or page_h) / 2
+                cx, cy = proc_w / 2, proc_h / 2
                 pts = [(c * (x-cx) - s * (y-cy) + cx,
                         s * (x-cx) + c * (y-cy) + cy) for x, y in pts]
             rot = int(page.get("rotation_deg") or 0) % 360
+            # Extraction boxes are in processed-image pixels. Normalize them
+            # to the expected rotated source dimensions before inversion.
+            expected_w, expected_h = ((page_h, page_w) if rot in (90, 270)
+                                      else (page_w, page_h))
+            sx, sy = expected_w / max(proc_w, 1), expected_h / max(proc_h, 1)
+            pts = [(x * sx, y * sy) for x, y in pts]
             if rot == 90:
                 pts = [(y, page_h-x) for x, y in pts]
             elif rot == 180:

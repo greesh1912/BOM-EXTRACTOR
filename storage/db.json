@@ -44,27 +44,27 @@
       "error_message": null,
       "source_path": "C:\\Users\\A30165\\Documents\\BOM-EXTRACTOR\\storage\\uploads\\f0b0055a\\6.dxf"
     },
-    "ce43d170": {
-      "id": "ce43d170",
-      "filename": "3.pdf",
+    "4507a7b4": {
+      "id": "4507a7b4",
+      "filename": "legacy-drawing-2.pdf",
       "file_format": "PDF",
-      "file_size_bytes": 979575,
-      "uploaded_at": "2026-11-15T18:38:50.721951+00:00",
-      "status": "processing",
+      "file_size_bytes": 6113134,
+      "uploaded_at": "2026-11-15T18:51:20.115536+00:00",
+      "status": "completed",
       "verified": false,
-      "review_required": false,
-      "review_reasons": null,
-      "mean_confidence": null,
-      "text_confidence": null,
-      "structural_confidence": null,
-      "drawing_number": null,
-      "drawing_title": null,
-      "revision": null,
-      "bom_items_count": 0,
+      "review_required": true,
+      "review_reasons": "6 BOM row(s) flagged; validation: 0 error(s), 6 warning(s)",
+      "mean_confidence": 0.883,
+      "text_confidence": 0.854,
+      "structural_confidence": 1.0,
+      "drawing_number": "DWG-2026-8892-R2",
+      "drawing_title": "PISTON & CONNECTING ROD ASSEMBLY",
+      "revision": "C",
+      "bom_items_count": 6,
       "page_count": 1,
-      "processing_seconds": null,
+      "processing_seconds": 28.88,
       "error_message": null,
-      "source_path": "C:\\Users\\A30165\\Documents\\BOM-EXTRACTOR\\storage\\uploads\\ce43d170\\3.pdf"
+      "source_path": "C:\\Users\\A30165\\Documents\\BOM-EXTRACTOR\\storage\\uploads\\4507a7b4\\legacy-drawing-2.pdf"
     }
   }
 }
